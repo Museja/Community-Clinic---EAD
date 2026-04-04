@@ -40,7 +40,7 @@ namespace Communityclinic
             try
             {
                 PatientDAL dal = new PatientDAL();
-                PatientModels.Patient patient = dal.GetPatientByEmail(Email);
+                PatientModels.Patient patient = dal.GetPatientByEmail(txtEmail.Text);
 
                 if (patient == null)
                 {
@@ -174,6 +174,5 @@ namespace Communityclinic
                 this.Close();
             }
         }
-    }
     }
 }

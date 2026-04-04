@@ -1,3 +1,4 @@
 <Solution>
   <Project Path="Communityclinic/MOLLHealthcareManagementSystem.csproj" Id="d55952e1-1fc0-48b7-94a8-463a94380481" />
+  <Project Path="FrmBooking/FrmBooking.csproj" Id="02322d56-9bc2-471b-a4c3-4c22a10edfcd" />
 </Solution>
