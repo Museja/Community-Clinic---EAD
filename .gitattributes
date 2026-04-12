@@ -61,3 +61,10 @@
 #*.PDF   diff=astextplain
 #*.rtf   diff=astextplain
 #*.RTF   diff=astextplain
+
+# Reduce merge marker conflicts for Visual Studio project/resource files.
+# Using the built-in 'union' merge driver will combine both sides which
+# often avoids leftover conflict markers; always review merged files after.
+*.csproj merge=union
+*.resx merge=union
+*.sln merge=union
