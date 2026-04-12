@@ -12,6 +12,7 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+<<<<<<< HEAD
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -27,6 +28,8 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+=======
+>>>>>>> 02878b01d19387891c8b18f22d124f170b00c6d4
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -49,8 +52,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+<<<<<<< HEAD
     <Reference Include="System.Configuration" />
     <Reference Include="System.Configuration.Install" />
+=======
+>>>>>>> 02878b01d19387891c8b18f22d124f170b00c6d4
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -69,6 +75,7 @@
     <Compile Include="Booking.Designer.cs">
       <DependentUpon>Booking.cs</DependentUpon>
     </Compile>
+<<<<<<< HEAD
     <Compile Include="FrmEditUsers.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -93,11 +100,14 @@
     <Compile Include="FrmViewUsers.Designer.cs">
       <DependentUpon>FrmViewUsers.cs</DependentUpon>
     </Compile>
+=======
+>>>>>>> 02878b01d19387891c8b18f22d124f170b00c6d4
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Booking.resx">
       <DependentUpon>Booking.cs</DependentUpon>
     </EmbeddedResource>
+<<<<<<< HEAD
     <EmbeddedResource Include="FrmEditUsers.resx">
       <DependentUpon>FrmEditUsers.cs</DependentUpon>
     </EmbeddedResource>
@@ -110,6 +120,8 @@
     <EmbeddedResource Include="FrmViewUsers.resx">
       <DependentUpon>FrmViewUsers.cs</DependentUpon>
     </EmbeddedResource>
+=======
+>>>>>>> 02878b01d19387891c8b18f22d124f170b00c6d4
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -130,6 +142,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <None Include="App.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -154,6 +167,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+=======
+    <None Include="App.config" />
+>>>>>>> 02878b01d19387891c8b18f22d124f170b00c6d4
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
