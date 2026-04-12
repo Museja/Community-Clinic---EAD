@@ -7,11 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
+using System.Configuration;
 
 namespace FrmBooking
 {
     public partial class Booking : Form
     {
+
+
         public Booking()
         {
             InitializeComponent();
@@ -136,16 +140,25 @@ namespace FrmBooking
         private void Booking_Load(object sender, EventArgs e)
         {
             txtPhone.Text = "(876)555-5555";
+            txtPhone.Text = " ";
             txtPhone.ForeColor = Color.Gray;
         }
-
+        //Book button
         private void btnNewUser_Click(object sender, EventArgs e)
         {
             if (!ValidateForm()) return;
             string first = txtFirstName.Text;
             string last = txtLastName.Text;
 
-            MessageBox.Show("User Created: " + first + " " + last, "Welcome", MessageBoxButtons.OK,MessageBoxIcon.Information);
+            try
+            {
+                SaveUser();
+                MessageBox.Show("User Created: " + first + " " + last, "Welcome", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error creating user: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         private void txtPhone_Enter(object sender, EventArgs e)
         {
@@ -176,7 +189,31 @@ namespace FrmBooking
             {
                 e.Handled = true;
             }
+
         }
-    }
-    
-}
+
+        private void SaveUser()
+        {
+            string connString = ConfigurationManager.ConnectionStrings["MyDB"].ConnectionString;
+
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                string query = "INSERT INTO Users (FirstName, LastName, Email, Phone, DateOfBirth, IsNewPatient) " +
+                               "VALUES (@FirstName, @LastName, @Email, @Phone, @DOB, @IsNew)";
+
+                SqlCommand cmd = new SqlCommand(query, conn);
+
+                cmd.Parameters.AddWithValue("@FirstName", txtFirstName.Text);
+                cmd.Parameters.AddWithValue("@LastName", txtLastName.Text);
+                cmd.Parameters.AddWithValue("@Email", txtEmail.Text);
+                cmd.Parameters.AddWithValue("@Phone", txtPhone.Text);
+                cmd.Parameters.AddWithValue("@DOB", dtpDob.Value);
+                cmd.Parameters.AddWithValue("@IsNew", radioYes.Checked);
+
+                conn.Open();
+                cmd.ExecuteNonQuery();
+                conn.Close();
+            }
+        }
+    } // end class Booking
+} // end namespace FrmBooking

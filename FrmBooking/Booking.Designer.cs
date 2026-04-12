@@ -145,6 +145,7 @@ namespace FrmBooking
             this.txtPhone.Size = new System.Drawing.Size(200, 20);
             this.txtPhone.TabIndex = 10;
             this.txtPhone.TextChanged += new System.EventHandler(this.txtPhone_TextChanged);
+            this.txtPhone.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPhone_KeyPress);
             // 
             // radioYes
             // 
