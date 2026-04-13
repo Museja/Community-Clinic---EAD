@@ -38,6 +38,10 @@
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.txtConfirmpassword = new System.Windows.Forms.TextBox();
             this.Register = new System.Windows.Forms.Button();
+            this.radioPatient = new System.Windows.Forms.RadioButton();
+            this.radioAdmin = new System.Windows.Forms.RadioButton();
+            this.lblAdminId = new System.Windows.Forms.Label();
+            this.txtAdminId = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -117,7 +121,7 @@
             // Register
             // 
             this.Register.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.Register.Location = new System.Drawing.Point(327, 229);
+            this.Register.Location = new System.Drawing.Point(332, 281);
             this.Register.Name = "Register";
             this.Register.Size = new System.Drawing.Size(75, 23);
             this.Register.TabIndex = 9;
@@ -125,12 +129,58 @@
             this.Register.UseVisualStyleBackColor = false;
             this.Register.Click += new System.EventHandler(this.btnRegister_Click);
             // 
+            // radioPatient
+            // 
+            this.radioPatient.AutoSize = true;
+            this.radioPatient.Location = new System.Drawing.Point(251, 209);
+            this.radioPatient.Name = "radioPatient";
+            this.radioPatient.Size = new System.Drawing.Size(58, 17);
+            this.radioPatient.TabIndex = 10;
+            this.radioPatient.TabStop = true;
+            this.radioPatient.Text = "Patient";
+            this.radioPatient.UseVisualStyleBackColor = true;
+            this.radioPatient.CheckedChanged += new System.EventHandler(this.radioPatient_CheckedChanged);
+            // 
+            // radioAdmin
+            // 
+            this.radioAdmin.AutoSize = true;
+            this.radioAdmin.Location = new System.Drawing.Point(368, 209);
+            this.radioAdmin.Name = "radioAdmin";
+            this.radioAdmin.Size = new System.Drawing.Size(83, 17);
+            this.radioAdmin.TabIndex = 11;
+            this.radioAdmin.TabStop = true;
+            this.radioAdmin.Text = "Admnistrator";
+            this.radioAdmin.UseVisualStyleBackColor = true;
+            this.radioAdmin.CheckedChanged += new System.EventHandler(this.radioAdmin_CheckedChanged);
+            // 
+            // lblAdminId
+            // 
+            this.lblAdminId.AutoSize = true;
+            this.lblAdminId.Location = new System.Drawing.Point(251, 248);
+            this.lblAdminId.Name = "lblAdminId";
+            this.lblAdminId.Size = new System.Drawing.Size(84, 13);
+            this.lblAdminId.TabIndex = 12;
+            this.lblAdminId.Text = "Administrator ID:";
+            this.lblAdminId.Click += new System.EventHandler(this.label6_Click);
+            // 
+            // txtAdminId
+            // 
+            this.txtAdminId.Location = new System.Drawing.Point(368, 248);
+            this.txtAdminId.Name = "txtAdminId";
+            this.txtAdminId.Size = new System.Drawing.Size(100, 20);
+            this.txtAdminId.TabIndex = 13;
+            this.txtAdminId.TextChanged += new System.EventHandler(this.AdminID_TextChanged);
+            // 
             // RegistrationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.txtAdminId);
+            this.Controls.Add(this.lblAdminId);
+            this.Controls.Add(this.radioAdmin);
+            this.Controls.Add(this.radioPatient);
             this.Controls.Add(this.Register);
             this.Controls.Add(this.txtConfirmpassword);
             this.Controls.Add(this.txtPassword);
@@ -160,5 +210,9 @@
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.TextBox txtConfirmpassword;
         private System.Windows.Forms.Button Register;
+        private System.Windows.Forms.RadioButton radioPatient;
+        private System.Windows.Forms.RadioButton radioAdmin;
+        private System.Windows.Forms.Label lblAdminId;
+        private System.Windows.Forms.TextBox txtAdminId;
     }
 }

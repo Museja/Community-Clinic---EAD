@@ -29,16 +29,25 @@ namespace Communityclinic
         }
             private void btnRegister_Click(object sender, EventArgs e)
         {
-            // Trims input
+            // trims input
             string fullName = txtFullname.Text.Trim();
             string email = txtEmail.Text.Trim();
             string password = txtPassword.Text;
             string confirmPassword = txtConfirmpassword.Text;
+            string adminId = txtAdminId.Text.Trim(); // new field
 
-            // Validates fields
+            // Determines role
+            string role = "";
+            if (radioPatient.Checked)
+                role = "Patient";
+            else if (radioAdmin.Checked)
+                role = "Admin";
+
+            // Validation
             List<string> errors = new List<string>();
 
-            if (string.IsNullOrWhiteSpace(fullName)) errors.Add("Full Name is required");
+            if (string.IsNullOrWhiteSpace(fullName))
+                errors.Add("Full Name is required");
 
             if (string.IsNullOrWhiteSpace(email))
                 errors.Add("Email is required");
@@ -46,7 +55,7 @@ namespace Communityclinic
             {
                 try
                 {
-                    var addr = new MailAddress(email);
+                    var addr = new System.Net.Mail.MailAddress(email);
                 }
                 catch
                 {
@@ -54,10 +63,28 @@ namespace Communityclinic
                 }
             }
 
-            if (string.IsNullOrWhiteSpace(password)) errors.Add("Password is required");
-            else if (password.Length < 6) errors.Add("Password must be at least 6 characters");
+            if (string.IsNullOrWhiteSpace(password))
+                errors.Add("Password is required");
+            else if (password.Length < 6)
+                errors.Add("Password must be at least 6 characters");
 
-            if (password != confirmPassword) errors.Add("Passwords do not match");
+            if (password != confirmPassword)
+                errors.Add("Passwords do not match");
+
+            // Role validation
+            if (string.IsNullOrEmpty(role))
+                errors.Add("Please select Patient or Admin");
+
+            // Admin-specific validation
+            if (role == "Admin")
+            {
+                if (string.IsNullOrWhiteSpace(adminId))
+                    errors.Add("Admin ID is required");
+
+                // Example check (replace with real validation or DB check)
+                if (adminId != "12345")
+                    errors.Add("Invalid Admin ID");
+            }
 
             if (errors.Count > 0)
             {
@@ -65,12 +92,13 @@ namespace Communityclinic
                 return;
             }
 
-            // Hashes password
+            // Hash password
             string passwordHash = HashPassword(password);
 
+            // SQL (UPDATED)
             // Saves to SQL Server
-            string connectionString = "Data Source=23.95.235.16;Initial Catalog=CommunityClinicLLOMDB;Integrated Security=True";
-            string query = "INSERT INTO Users (FullName, Email, PasswordHash) VALUES (@FullName, @Email, @PasswordHash)";
+            string connectionString = "Data Source=23.95.235.16;Initial Catalog=CommunityClinicLLOMDB;User ID=vtdi_student;Password=P@ssword1;";
+            string query = "INSERT INTO Users (FullName, Email, PasswordHash, Role, AdminID) VALUES (@FullName, @Email, @PasswordHash, @Role, @AdminID)";
 
             try
             {
@@ -80,21 +108,22 @@ namespace Communityclinic
                     cmd.Parameters.AddWithValue("@FullName", fullName);
                     cmd.Parameters.AddWithValue("@Email", email);
                     cmd.Parameters.AddWithValue("@PasswordHash", passwordHash);
+                    cmd.Parameters.AddWithValue("@Role", role);
+
+                    // AdminID only if Admin, else NULL
+                    if (role == "Admin")
+                        cmd.Parameters.AddWithValue("@AdminID", adminId);
+                    else
+                        cmd.Parameters.AddWithValue("@AdminID", DBNull.Value);
 
                     conn.Open();
                     int rows = cmd.ExecuteNonQuery();
 
                     if (rows > 0)
                     {
-                        // 5. Open Success form
                         SuccessForm successForm = new SuccessForm();
-
-                        // Optional: pass user info to next form
-                        // successForm.FullName = fullName;
-                        // successForm.Email = email;
-
                         successForm.Show();
-                        this.Hide(); // hide registration form
+                        this.Hide();
                     }
                     else
                     {
@@ -108,5 +137,41 @@ namespace Communityclinic
             }
 
         }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+            lblAdminId.Visible = false;
+        }
+
+        private void AdminID_TextChanged(object sender, EventArgs e)
+        {
+            txtAdminId.Visible = false;
+        }
+
+        private void radioPatient_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void radioAdmin_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioAdmin.Checked)
+            {
+                lblAdminId.Visible = true;
+                txtAdminId.Visible = true;
+            }
+            else
+            {
+                lblAdminId.Visible = false;
+                txtAdminId.Visible = false;
+                txtAdminId.Clear();
+            }
+        }
+    
     }
 }
