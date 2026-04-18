@@ -1,8 +1,10 @@
-﻿using Communityclinic.Models;
+﻿using Communityclinic;
+using Communityclinic.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Net.Mail;
@@ -12,168 +14,167 @@ using System.Windows.Forms;
 using System.Xml.Linq;
 using static Communityclinic.Models.PatientModels;
 
-namespace Communityclinic
+namespace CommunityClinic
 {
     public partial class PatientPortalForm : Form
     {
-        private int patientId; // Store logged-in patient's ID
+        private int patientId;
 
         public PatientPortalForm(int id)
         {
             InitializeComponent();
             patientId = id;
-
-            // Wire up button events
-            Update.Click += BtnUpdate_Click;
-            Logout.Click += BtnLogout_Click;
+        }
+        public PatientPortalForm()
+        {
+            InitializeComponent();
         }
 
-        // this is a Form Load event
+        // =========================
+        // FORM LOAD
+        // =========================
         private void PatientPortalForm_Load(object sender, EventArgs e)
         {
-            LoadPatientData();
+            if (patientId > 0)
+            {
+                LoadPatientProfile();
+            }
         }
 
-        // Load patient info from database
-        private void LoadPatientData()
+        // =========================
+        // LOAD PROFILE (Tab 1)
+        // Uses YOUR textBox1 - textBox5
+        // =========================
+        private void LoadPatientProfile()
         {
-            try
+            using (SqlConnection conn = DatabaseHelper.GetConnection())
             {
-                PatientDAL dal = new PatientDAL();
-               // PatientModels.Patient patient = dal.GetPatientByEmail(Email);
+                string query = "SELECT * FROM Patients WHERE Id = @Id";
 
-               // if (patient == null)
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@Id", patientId);
+
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                if (reader.Read())
                 {
-                    MessageBox.Show("Patient record not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    this.Close();
-                    return;
+                    txtFullName.Text = reader["FullName"].ToString();
+                    txtPhone.Text = reader["Phone"].ToString();
+                    txtEmail.Text = reader["Email"].ToString();
+                    txtAddress.Text = reader["Address"].ToString();
+                    txtDOB.Text = Convert.ToDateTime(reader["DOB"]).ToShortDateString();
                 }
-
-
-                // Fill textboxes with patient info
-               // txtName.Text = patient.Name;
-                //txtDOB.Text = patient.DateOfBirth.ToShortDateString();
-                //txtAge.Text = patient.Age.ToString();
-               // txtAddress.Text = patient.Address;
-               // txtPhonenumber.Text = patient.PhoneNumber;
-               // txtEmail.Text = patient.EmailAddress;
-               // txtGender.Text = patient.Gender;
-               // txtAllergies.Text = patient.Allergies;
-                //txtHistory.Text = patient.History;
-                //txtMedications.Text = patient.Medications;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error loading patient data: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        // Update button click
-        private void BtnUpdate_Click(object sender, EventArgs e)
+        // Load button (Profile tab)
+        private void btnLoadProfile_Click(object sender, EventArgs e)
         {
-            if (!ValidateForm())
-                return;
-
-            try
-            {
-                Patient patient = new Patient
-                {
-                   // Id = patientId, // important: keep the same patient ID
-                    Name = txtName.Text.Trim(),
-                    DateOfBirth = DateTime.Parse(txtDOB.Text),
-                    Age = int.Parse(txtAge.Text),
-                    Address = txtAddress.Text.Trim(),
-                    PhoneNumber = txtPhonenumber.Text.Trim(),
-                    EmailAddress = txtEmail.Text.Trim(),
-                    Gender = txtGender.Text.Trim(),
-                    Allergies = txtAllergies.Text.Trim(),
-                    History = txtHistory.Text.Trim(),
-                    Medications = txtMedications.Text.Trim()
-                };
-
-                PatientDAL dal = new PatientDAL();
-                bool success = dal.UpdatePatient(patient);
-
-                if (success)
-                    MessageBox.Show("Your information has been updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                else
-                    MessageBox.Show("Update failed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error updating data: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            LoadPatientProfile();
         }
 
-        // Logout button click
-        private void BtnLogout_Click(object sender, EventArgs e)
+        // =========================
+        // UPDATE PROFILE
+        // =========================
+        private void btnUpdateProfile_Click(object sender, EventArgs e)
         {
-            this.Close(); // closes portal and returns to login form
+            using (SqlConnection conn = DatabaseHelper.GetConnection())
+            {
+                string query = @"UPDATE Patients SET
+                                FullName=@FullName,
+                                Phone=@Phone,
+                                Email=@Email,
+                                Address=@Address,
+                                DOB=@DOB
+                                WHERE Id=@Id";
+
+                SqlCommand cmd = new SqlCommand(query, conn);
+
+                cmd.Parameters.AddWithValue("@FullName", txtFullName.Text);
+                cmd.Parameters.AddWithValue("@Phone", txtPhone.Text);
+                cmd.Parameters.AddWithValue("@Email", txtEmail.Text);
+                cmd.Parameters.AddWithValue("@Address", txtAddress.Text);
+                cmd.Parameters.AddWithValue("@DOB", txtDOB.Text);
+                cmd.Parameters.AddWithValue("@Id", patientId);
+
+                conn.Open();
+                cmd.ExecuteNonQuery();
+
+                MessageBox.Show("Profile updated successfully!");
+            }
         }
 
-        // Simple form validation
-        private bool ValidateForm()
+        // =========================
+        // APPOINTMENTS TAB
+        // =========================
+        private void btnRefreshAppointments_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtName.Text))
+            using (SqlConnection conn = DatabaseHelper.GetConnection())
             {
-                MessageBox.Show("Name is required.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtName.Focus();
-                return false;
+                string query = "SELECT * FROM Appointments WHERE PatientId=@Id";
+
+                SqlDataAdapter da = new SqlDataAdapter(query, conn);
+                da.SelectCommand.Parameters.AddWithValue("@Id", patientId);
+
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                dgvappointments1.DataSource = dt;
             }
-
-            if (!DateTime.TryParse(txtDOB.Text, out DateTime dob))
-            {
-                MessageBox.Show("Date of Birth must be valid.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtDOB.Focus();
-                return false;
-            }
-
-            if (!int.TryParse(txtAge.Text, out int age) || age <= 0)
-            {
-                MessageBox.Show("Age must be a positive number.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtAge.Focus();
-                return false;
-            }
-
-            if (string.IsNullOrWhiteSpace(txtPhonenumber.Text))
-            {
-                MessageBox.Show("Phone number is required.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtPhonenumber.Focus();
-                return false;
-            }
-
-            if (!txtEmail.Text.Contains("@"))
-            {
-                MessageBox.Show("Enter a valid email address.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtEmail.Focus();
-                return false;
-            }
-
-            return true;
-
         }
 
-        private void toolStripStatusLabel1_Click(object sender, EventArgs e)
+        private void btnBookAppointment_Click(object sender, EventArgs e)
         {
-
+            MessageBox.Show("Booking feature will be added here.");
         }
-        //links to logout page
+
+        // =========================
+        // MEDICAL HISTORY TAB
+        // =========================
+        private void btnLoadHistory_Click(object sender, EventArgs e)
+        {
+            using (SqlConnection conn = DatabaseHelper.GetConnection())
+            {
+                string query = "SELECT * FROM MedicalHistory WHERE PatientId=@Id";
+
+                SqlDataAdapter da = new SqlDataAdapter(query, conn);
+                da.SelectCommand.Parameters.AddWithValue("@Id", patientId);
+
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                dgvHistory1.DataSource = dt;
+            }
+        }
+
+        // =========================
+        // PRESCRIPTIONS TAB
+        // =========================
+        private void btnLoadPrescriptions_Click(object sender, EventArgs e)
+        {
+            using (SqlConnection conn = DatabaseHelper.GetConnection())
+            {
+                string query = "SELECT * FROM Prescriptions WHERE PatientId=@Id";
+
+                SqlDataAdapter da = new SqlDataAdapter(query, conn);
+                da.SelectCommand.Parameters.AddWithValue("@Id", patientId);
+
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                dgvPrescriptions1.DataSource = dt;
+            }
+        }
+
+        // =========================
+        // LOGOUT
+        // =========================
         private void Logout_Click(object sender, EventArgs e)
-        { 
-            var result = MessageBox.Show(
-                "Are you sure you want to logout?",
-                "Confirm Logout",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question
-            );
-
-            if (result == DialogResult.Yes)
-            {
-                LogoutForm loginForm = new LogoutForm();
-                loginForm.Show();
-                this.Close();
-            }
+        {
+            LogoutForm form = new LogoutForm(); // or LoginForm if that's what you use
+            form.Show();
+            this.Close();
         }
     }
-    
 }

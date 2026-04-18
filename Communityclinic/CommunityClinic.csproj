@@ -57,6 +57,7 @@
     </Compile>
     <Compile Include="DatabaseHelper.cs" />
     <Compile Include="Data\InventoryDAL.cs" />
+    <Compile Include="Data\RegistrationDAL.cs" />
     <Compile Include="InventoryItem.cs" />
     <Compile Include="InventoryItemForm.cs">
       <SubType>Form</SubType>
@@ -73,6 +74,7 @@
     <Compile Include="Models\Inventoryitems.cs" />
     <Compile Include="Models\PatientModels.cs" />
     <Compile Include="Data\PatientDAL.cs" />
+    <Compile Include="Models\Registrationclass.cs" />
     <Compile Include="PatientdataForm.cs">
       <SubType>Form</SubType>
     </Compile>

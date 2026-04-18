@@ -27,7 +27,7 @@ namespace Communityclinic
                 return Convert.ToBase64String(bytes);
             }
         }
-            private void btnRegister_Click(object sender, EventArgs e)
+        private void btnRegister_Click(object sender, EventArgs e)
         {
             // trims input
             string fullName = txtFullname.Text.Trim();
@@ -94,50 +94,50 @@ namespace Communityclinic
 
             // Hash password
             string passwordHash = HashPassword(password);
-
-            // SQL (UPDATED)
-            // Saves to SQL Server
-            string connectionString = "Data Source=23.95.235.16;Initial Catalog=CommunityClinicLLOMDB;User ID=vtdi_student;Password=P@ssword1;";
-            string query = "INSERT INTO Users (FullName, Email, PasswordHash, Role, AdminID) VALUES (@FullName, @Email, @PasswordHash, @Role, @AdminID)";
-
-            try
+            if (passwordHash != null)
             {
-                using (SqlConnection conn = new SqlConnection(connectionString))
-                using (SqlCommand cmd = new SqlCommand(query, conn))
+                // Saves to SQL Server
+                string connectionString = "Data Source=23.95.235.16;Initial Catalog=CommunityClinicLLOMDB;User ID=vtdi_student;Password=P@ssword1;";
+                string query = "INSERT INTO Users (FullName, Email, PasswordHash, Role, AdminID) VALUES (@FullName, @Email, @PasswordHash, @Role, @AdminID)";
+
+                try
                 {
-                    cmd.Parameters.AddWithValue("@FullName", fullName);
-                    cmd.Parameters.AddWithValue("@Email", email);
-                    cmd.Parameters.AddWithValue("@PasswordHash", passwordHash);
-                    cmd.Parameters.AddWithValue("@Role", role);
-
-                    // AdminID only if Admin, else NULL
-                    if (role == "Admin")
-                        cmd.Parameters.AddWithValue("@AdminID", adminId);
-                    else
-                        cmd.Parameters.AddWithValue("@AdminID", DBNull.Value);
-
-                    conn.Open();
-                    int rows = cmd.ExecuteNonQuery();
-
-                    if (rows > 0)
+                    using (SqlConnection conn = new SqlConnection(connectionString))
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
-                        SuccessForm successForm = new SuccessForm();
-                        successForm.Show();
-                        this.Hide();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Error saving registration.");
+                        cmd.Parameters.AddWithValue("@FullName", fullName);
+                        cmd.Parameters.AddWithValue("@Email", email);
+                        cmd.Parameters.AddWithValue("@PasswordHash", passwordHash);
+                        cmd.Parameters.AddWithValue("@Role", role);
+
+                        // AdminID only if Admin, else NULL
+                        if (role == "Admin")
+                            cmd.Parameters.AddWithValue("@AdminID", adminId);
+                        else
+                            cmd.Parameters.AddWithValue("@AdminID", DBNull.Value);
+
+                        conn.Open();
+                        int rows = cmd.ExecuteNonQuery();
+
+                        if (rows > 0)
+                        {
+                            SuccessForm successForm = new SuccessForm();
+                            successForm.Show();
+                            this.Hide();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Error saving registration.");
+                        }
                     }
                 }
-            }
-            catch (SqlException ex)
-            {
-                MessageBox.Show("SQL Error: " + ex.Message);
-            }
+                catch (SqlException ex)
+                {
+                    MessageBox.Show("SQL Error: " + ex.Message);
+                }
 
+            }
         }
-
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
 
