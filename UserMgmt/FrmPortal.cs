@@ -157,22 +157,42 @@ namespace UserMgmt
             FrmNewAppt newAppointmentForm = new FrmNewAppt();
             newAppointmentForm.ShowDialog();
         }
+        private void btnViewUsers_Click(object sender, EventArgs e)
+        {
+            FrmViewUsers viewUsersForm = new FrmViewUsers();
+            viewUsersForm.ShowDialog();
+        }
+        private void btnEditUsers_Click(object sender, EventArgs e)
+        {
+            FrmEditUsers editUsersForm = new FrmEditUsers();
+            editUsersForm.ShowDialog();
+        }
+        private void btnDeleteUsers_Click(object sender, EventArgs e)
+        {
+            FrmDeleteUsers deleteUsersForm = new FrmDeleteUsers();
+            deleteUsersForm.ShowDialog();
+        }
 
         private void btnNewUser_Click(object sender, EventArgs e)
         {
             if (!ValidateForm()) return;
+
             string first = txtFirstName.Text;
             string last = txtLastName.Text;
 
             try
             {
                 SaveUser();
-                MessageBox.Show("User Created: " + first + " " + last, "Welcome", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error creating user: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error creating user: " + ex.Message,
+                                "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
+
+            MessageBox.Show("User Created: " + first + " " + last,
+                            "Welcome", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void txtCell_KeyPress(object sender, KeyPressEventArgs e)
@@ -219,7 +239,47 @@ namespace UserMgmt
         }
         private void SaveUser()
         {
-            //todo: add database logic here
+            var connSettings = ConfigurationManager.ConnectionStrings["HealthcareDB"];
+            if (connSettings == null)
+            {
+                MessageBox.Show("Connection string 'HealthcareDB' not found in App.config.", "Config Error");
+                return;
+            }
+            string connStr = connSettings.ConnectionString;
+
+            // Re-evaluate phone fields here since hasCell/hasMobile are local to ValidateForm()
+            bool hasCell = !string.IsNullOrWhiteSpace(txtCell.Text)
+                             && txtCell.Text != "(876)555-5555";
+            bool hasMobile = !string.IsNullOrWhiteSpace(txtMobile.Text)
+                             && txtMobile.Text != "(876)555-5555";
+
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+
+                string query = @"INSERT INTO Users 
+                            (FirstName, LastName, Email, Gender, DateOfBirth,
+                             CellPhone, MobilePhone, Address, Town, Parish)
+                         VALUES 
+                            (@FirstName, @LastName, @Email, @Gender, @DateOfBirth,
+                             @CellPhone, @MobilePhone, @Address, @Town, @Parish)";
+
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@FirstName", txtFirstName.Text.Trim());
+                    cmd.Parameters.AddWithValue("@LastName", txtLastName.Text.Trim());
+                    cmd.Parameters.AddWithValue("@Email", txtEmail.Text.Trim());
+                    cmd.Parameters.AddWithValue("@Gender", radioMale.Checked ? "Male" : "Female");
+                    cmd.Parameters.AddWithValue("@DateOfBirth", dtpDob.Value.Date);
+                    cmd.Parameters.AddWithValue("@CellPhone", hasCell ? (object)txtCell.Text : DBNull.Value);
+                    cmd.Parameters.AddWithValue("@MobilePhone", hasMobile ? (object)txtMobile.Text : DBNull.Value);
+                    cmd.Parameters.AddWithValue("@Address", txtAddress.Text.Trim());
+                    cmd.Parameters.AddWithValue("@Town", txtTown.Text.Trim());
+                    cmd.Parameters.AddWithValue("@Parish", cmbParish.SelectedItem.ToString());
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
 
         private void FrmPortal_Load(object sender, EventArgs e)
@@ -236,5 +296,5 @@ namespace UserMgmt
             txtMobile.ForeColor = Color.FromArgb(220, 220, 220);
         }
     }
-    
+
 }

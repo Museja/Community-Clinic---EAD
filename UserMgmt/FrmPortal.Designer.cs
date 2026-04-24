@@ -93,6 +93,7 @@
             this.btnDeleteUsers.TabIndex = 3;
             this.btnDeleteUsers.Text = "Delete Users";
             this.btnDeleteUsers.UseVisualStyleBackColor = true;
+            this.btnDeleteUsers.Click += new System.EventHandler(this.btnDeleteUsers_Click);
             // 
             // btnEditUsers
             // 
@@ -102,6 +103,7 @@
             this.btnEditUsers.TabIndex = 2;
             this.btnEditUsers.Text = "Edit Users";
             this.btnEditUsers.UseVisualStyleBackColor = true;
+            this.btnEditUsers.Click += new System.EventHandler(this.btnEditUsers_Click);
             // 
             // btnViewUsers
             // 
@@ -111,6 +113,7 @@
             this.btnViewUsers.TabIndex = 1;
             this.btnViewUsers.Text = "View Users";
             this.btnViewUsers.UseVisualStyleBackColor = true;
+            this.btnViewUsers.Click += new System.EventHandler(this.btnViewUsers_Click);
             // 
             // btnNewAppt
             // 

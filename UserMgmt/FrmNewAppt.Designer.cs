@@ -532,7 +532,7 @@
             "General Consultation",
             "Laboratory Work",
             "Follow-Up",
-            "Specialist RReferral",
+            "Specialist Referral",
             "Routine Check-up",
             "Emergency"});
             this.cmbApptType.Location = new System.Drawing.Point(194, 71);
