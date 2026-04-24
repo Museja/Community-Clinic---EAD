@@ -7,12 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
+using System.Configuration;
+
 
 namespace UserMgmt
 {
-    public partial class FrmDeleteUsers : Form
+    public partial class FrmViewAppt : Form
     {
-        public FrmDeleteUsers()
+        public FrmViewAppt()
         {
             InitializeComponent();
         }

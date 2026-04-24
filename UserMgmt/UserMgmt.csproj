@@ -62,11 +62,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FrmDeleteUsers.cs">
+    <Compile Include="FrmViewAppt.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmDeleteUsers.Designer.cs">
-      <DependentUpon>FrmDeleteUsers.cs</DependentUpon>
+    <Compile Include="FrmViewAppt.Designer.cs">
+      <DependentUpon>FrmViewAppt.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmEditUsers.cs">
       <SubType>Form</SubType>
@@ -94,8 +94,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="FrmDeleteUsers.resx">
-      <DependentUpon>FrmDeleteUsers.cs</DependentUpon>
+    <EmbeddedResource Include="FrmViewAppt.resx">
+      <DependentUpon>FrmViewAppt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmEditUsers.resx">
       <DependentUpon>FrmEditUsers.cs</DependentUpon>

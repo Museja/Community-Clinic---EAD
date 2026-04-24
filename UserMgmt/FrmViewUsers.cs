@@ -81,5 +81,61 @@ namespace UserMgmt
             editForm.ShowDialog();
             LoadUsers(); // refresh the grid after editing
         }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (dgvViewUsers.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Please select a user to delete.", "No Selection",
+                                MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                return;
+            }
+
+            string firstName = dgvViewUsers.SelectedRows[0].Cells["FirstName"].Value.ToString();
+            string lastName = dgvViewUsers.SelectedRows[0].Cells["LastName"].Value.ToString();
+            int userID = Convert.ToInt32(dgvViewUsers.SelectedRows[0].Cells["UserID"].Value);
+
+            // Confirm before deleting
+            DialogResult confirm = MessageBox.Show(
+                "Are you sure you want to delete " + firstName + " " + lastName + "?\nThis cannot be undone.",
+                "Confirm Delete",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
+
+            if (confirm != DialogResult.Yes) return;
+
+            try
+            {
+                DeleteUser(userID);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error deleting user: " + ex.Message,
+                                "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            MessageBox.Show(firstName + " " + lastName + " has been deleted.",
+                            "Deleted", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            LoadUsers(); // refresh the grid
+        }
+
+        private void DeleteUser(int userID)
+        {
+            string connStr = ConfigurationManager.ConnectionStrings["HealthcareDB"].ConnectionString;
+
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+
+                string query = "DELETE FROM Users WHERE UserID = @UserID";
+
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@UserID", userID);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }

@@ -30,7 +30,6 @@
         {
             this.lblHeading = new System.Windows.Forms.Label();
             this.pnlLeft = new System.Windows.Forms.Panel();
-            this.btnDeleteUsers = new System.Windows.Forms.Button();
             this.btnEditUsers = new System.Windows.Forms.Button();
             this.btnViewUsers = new System.Windows.Forms.Button();
             this.btnNewAppt = new System.Windows.Forms.Button();
@@ -75,7 +74,6 @@
             // pnlLeft
             // 
             this.pnlLeft.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.pnlLeft.Controls.Add(this.btnDeleteUsers);
             this.pnlLeft.Controls.Add(this.btnEditUsers);
             this.pnlLeft.Controls.Add(this.btnViewUsers);
             this.pnlLeft.Controls.Add(this.btnNewAppt);
@@ -85,29 +83,19 @@
             this.pnlLeft.Size = new System.Drawing.Size(126, 450);
             this.pnlLeft.TabIndex = 1;
             // 
-            // btnDeleteUsers
+            // btnEditUsers(btnViewAppt)
             // 
-            this.btnDeleteUsers.Location = new System.Drawing.Point(12, 297);
-            this.btnDeleteUsers.Name = "btnDeleteUsers";
-            this.btnDeleteUsers.Size = new System.Drawing.Size(93, 38);
-            this.btnDeleteUsers.TabIndex = 3;
-            this.btnDeleteUsers.Text = "Delete Users";
-            this.btnDeleteUsers.UseVisualStyleBackColor = true;
-            this.btnDeleteUsers.Click += new System.EventHandler(this.btnDeleteUsers_Click);
-            // 
-            // btnEditUsers
-            // 
-            this.btnEditUsers.Location = new System.Drawing.Point(12, 236);
-            this.btnEditUsers.Name = "btnEditUsers";
+            this.btnEditUsers.Location = new System.Drawing.Point(12, 215);
+            this.btnEditUsers.Name = "btnViewAppt";
             this.btnEditUsers.Size = new System.Drawing.Size(93, 38);
             this.btnEditUsers.TabIndex = 2;
-            this.btnEditUsers.Text = "Edit Users";
+            this.btnEditUsers.Text = "View Appointments";
             this.btnEditUsers.UseVisualStyleBackColor = true;
-            this.btnEditUsers.Click += new System.EventHandler(this.btnEditUsers_Click);
+            this.btnEditUsers.Click += new System.EventHandler(this.btnViewAppt_Click);
             // 
             // btnViewUsers
             // 
-            this.btnViewUsers.Location = new System.Drawing.Point(12, 176);
+            this.btnViewUsers.Location = new System.Drawing.Point(12, 155);
             this.btnViewUsers.Name = "btnViewUsers";
             this.btnViewUsers.Size = new System.Drawing.Size(93, 38);
             this.btnViewUsers.TabIndex = 1;
@@ -117,7 +105,7 @@
             // 
             // btnNewAppt
             // 
-            this.btnNewAppt.Location = new System.Drawing.Point(12, 118);
+            this.btnNewAppt.Location = new System.Drawing.Point(12, 97);
             this.btnNewAppt.Name = "btnNewAppt";
             this.btnNewAppt.Size = new System.Drawing.Size(93, 38);
             this.btnNewAppt.TabIndex = 0;
@@ -411,7 +399,6 @@
         private System.Windows.Forms.Panel pnlLeft;
         private System.Windows.Forms.Button btnViewUsers;
         private System.Windows.Forms.Button btnNewAppt;
-        private System.Windows.Forms.Button btnDeleteUsers;
         private System.Windows.Forms.Button btnEditUsers;
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.Label lblPhone;

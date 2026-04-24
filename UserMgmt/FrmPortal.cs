@@ -162,15 +162,11 @@ namespace UserMgmt
             FrmViewUsers viewUsersForm = new FrmViewUsers();
             viewUsersForm.ShowDialog();
         }
-        private void btnEditUsers_Click(object sender, EventArgs e)
+        
+        private void btnViewAppt_Click(object sender, EventArgs e)
         {
-            FrmEditUsers editUsersForm = new FrmEditUsers();
-            editUsersForm.ShowDialog();
-        }
-        private void btnDeleteUsers_Click(object sender, EventArgs e)
-        {
-            FrmDeleteUsers deleteUsersForm = new FrmDeleteUsers();
-            deleteUsersForm.ShowDialog();
+            FrmViewAppt viewApptForm = new FrmViewAppt();
+            viewApptForm.ShowDialog();
         }
 
         private void btnNewUser_Click(object sender, EventArgs e)

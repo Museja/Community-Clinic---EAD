@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -17,6 +19,9 @@ namespace UserMgmt
             InitializeComponent();
         }
 
+        // ─────────────────────────────────────────────
+        //  VALIDATION
+        // ─────────────────────────────────────────────
         private bool ValidateForm()
         {
             // First Name
@@ -100,35 +105,19 @@ namespace UserMgmt
                 return false;
             }
 
+            // Date of Birth 
+            if (dtpDob.Value >= DateTime.Now)
+            {
+                MessageBox.Show("Date of Birth must be in the past.", "Check", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                dtpDob.Focus();
+                return false;
+            }
+
             // Parish validation
             if (cmbParish.SelectedIndex == 0)
             {
                 MessageBox.Show("Please select a parish.", "Required", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 cmbParish.Focus();
-                return false;
-            }
-
-            // Day validation
-            if (cmbDay.SelectedIndex == 0)
-            {
-                MessageBox.Show("Please select a day.", "Required", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                cmbDay.Focus();
-                return false;
-            }
-
-            // Month validation
-            if (cmbMonth.SelectedIndex == 0)
-            {
-                MessageBox.Show("Please select a Month.", "Required", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                cmbMonth.Focus();
-                return false;
-            }
-
-            // Year validation
-            if (cmbYear.SelectedIndex == 0)
-            {
-                MessageBox.Show("Please select a year.", "Required", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                cmbYear.Focus();
                 return false;
             }
 
@@ -172,37 +161,23 @@ namespace UserMgmt
                 return false;
             }
 
-            // Appointment Time
-            if (cmbTime.SelectedIndex == 0)
-            {
-                MessageBox.Show("Please select an appointment time.", "Required", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                cmbTime.Focus();
-                return false;
-            }
-
-            // Appointment Date — combined parse + must be today or future
-            int day = int.Parse(cmbDay.Text);
-            int month = cmbMonth.SelectedIndex;   // Items: index 0 = placeholder, 1 = January ... 12 = December
-            int year = int.Parse(cmbYear.Text);
-
-            DateTime apptDate;
-            if (!DateTime.TryParse($"{year}-{month}-{day}", out apptDate))
-            {
-                MessageBox.Show("The selected date is not valid (e.g. February 30 does not exist).",
-                                "Invalid Date", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                cmbDay.Focus();
-                return false;
-            }
-
-            if (apptDate.Date < DateTime.Today)
+            // Appointment Date
+            if (dtpApptDate.Value.Date < DateTime.Today)
             {
                 MessageBox.Show("Appointment date must be today or a future date.",
                                 "Invalid Date", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                cmbDay.Focus();
                 return false;
             }
 
-            return true; // ✅ everything passed
+            if (dtpApptDate.Value.Date < DateTime.Today)
+            {
+                MessageBox.Show("Appointment date must be today or a future date.",
+                                "Invalid Date", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                dtpApptDate.Focus();
+                return false;
+            }
+
+            return true; // ✅ end of validation - everything passed
 
         }
 
@@ -223,9 +198,7 @@ namespace UserMgmt
             txtAddress.Clear();
             txtTown.Clear();
             cmbParish.SelectedIndex = 0;
-            cmbDay.SelectedIndex = 0;
-            cmbMonth.SelectedIndex = 0;
-            cmbYear.SelectedIndex = 0;
+            dtpApptDate.Value = DateTime.Today;
             cmbApptType.SelectedIndex = 0;
             cmbTime.SelectedIndex = 0;
             cmbDocName.SelectedIndex = 0;
@@ -233,24 +206,74 @@ namespace UserMgmt
 
         private void SaveAppointment()
         {
-            // todo: add database logic here
+            bool hasCell = !string.IsNullOrWhiteSpace(txtCell.Text)
+                             && txtCell.Text != "(876)555-5555";
+            bool hasMobile = !string.IsNullOrWhiteSpace(txtMobile.Text)
+                             && txtMobile.Text != "(876)555-5555";
+
+            string connStr = ConfigurationManager.ConnectionStrings["HealthcareDB"].ConnectionString;
+
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+
+                string query = @"INSERT INTO Appointments
+                            (FirstName, LastName, Email, Gender,
+                             CellPhone, MobilePhone, Address, Town, Parish,
+                             IsNewPatient, AppointmentType, AppointmentDate,
+                             AppointmentTime, DoctorName, Notes)
+                         VALUES
+                            (@FirstName, @LastName, @Email, @Gender,
+                             @CellPhone, @MobilePhone, @Address, @Town, @Parish,
+                             @IsNewPatient, @AppointmentType, @AppointmentDate,
+                             @AppointmentTime, @DoctorName, @Notes)";
+
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@FirstName", txtFirstName.Text.Trim());
+                    cmd.Parameters.AddWithValue("@LastName", txtLastName.Text.Trim());
+                    cmd.Parameters.AddWithValue("@Email", txtEmail.Text.Trim());
+                    cmd.Parameters.AddWithValue("@Gender", radioMale.Checked ? "Male" : "Female");
+                    cmd.Parameters.AddWithValue("@CellPhone", hasCell ? (object)txtCell.Text : DBNull.Value);
+                    cmd.Parameters.AddWithValue("@MobilePhone", hasMobile ? (object)txtMobile.Text : DBNull.Value);
+                    cmd.Parameters.AddWithValue("@Dob", dtpDob.Value.Date);
+                    cmd.Parameters.AddWithValue("@Address", txtAddress.Text.Trim());
+                    cmd.Parameters.AddWithValue("@Town", txtTown.Text.Trim());
+                    cmd.Parameters.AddWithValue("@Parish", cmbParish.SelectedItem.ToString());
+                    cmd.Parameters.AddWithValue("@IsNewPatient", radioYes.Checked ? "Yes" : "No");
+                    cmd.Parameters.AddWithValue("@AppointmentType", cmbApptType.SelectedItem.ToString());
+                    cmd.Parameters.AddWithValue("@AppointmentDate", dtpApptDate.Value.Date);
+                    cmd.Parameters.AddWithValue("@AppointmentTime", cmbTime.SelectedItem.ToString());
+                    cmd.Parameters.AddWithValue("@DoctorName", cmbDocName.SelectedItem.ToString());
+                    cmd.Parameters.AddWithValue("@Notes", string.IsNullOrWhiteSpace(txtNotes.Text)
+                                                                        ? (object)DBNull.Value
+                                                                        : txtNotes.Text.Trim());
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
 
         private void btnNewAppt_Click(object sender, EventArgs e)
         {
             if (!ValidateForm()) return;
+
             string first = txtFirstName.Text;
             string last = txtLastName.Text;
 
             try
             {
                 SaveAppointment();
-                MessageBox.Show("Appointment Created: " + first + " " + last, "Welcome", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error creating appointment: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error creating appointment: " + ex.Message,
+                                "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
+
+            MessageBox.Show("Appointment created for: " + first + " " + last,
+                            "Appointment Confirmed", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         private void txtMobile_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -299,42 +322,51 @@ namespace UserMgmt
                 txtCell.ForeColor = Color.FromArgb(220, 220, 220);
             }
         }
+
+        // ─────────────────────────────────────────────
+        //  FORM LOAD
+        // ─────────────────────────────────────────────
         private void FrmNewAppt_Load(object sender, EventArgs e)
         {
-            if (cmbDay.Items.Count == 0)
-            {
-                for (int d = 1; d <= 31; d++)
-                    cmbDay.Items.Add(d.ToString());
-            }
-
-            if (cmbMonth.Items.Count == 0)
-            {
-                cmbMonth.Items.Add("Month");
-                cmbMonth.Items.AddRange(new object[]
-                {
-                    "January", "February", "March", "April",
-                    "May", "June", "July", "August",
-                    "September", "October", "November", "December"
-                });
-            }
-            cmbDay.Items.Insert(0, "Day");
-            cmbDay.SelectedIndex = 0;
-            cmbMonth.Items.Insert(0, "Month");
-            cmbMonth.SelectedIndex = 0;
-            cmbYear.Items.Insert(0, "Year");
-            cmbYear.SelectedIndex = 0;
-            cmbParish.Items.Insert(0, "Select a Parish");
+            // ── Parish ──────────────────────────────
+            if (!cmbParish.Items.Contains("Select a Parish"))
+                cmbParish.Items.Insert(0, "Select a Parish");
             cmbParish.SelectedIndex = 0;
+
+            // ── Appointment Type ────────────────────
+            if (!cmbApptType.Items.Contains("-- Select Appointment Type --"))
+                cmbApptType.Items.Insert(0, "-- Select Appointment Type --");
+            cmbApptType.SelectedIndex = 0;
+
+            // ── Time slots (8:00 AM – 5:00 PM, 30-min intervals) ──
+            if (cmbTime.Items.Count == 0)
+            {
+                cmbTime.Items.Add("-- Select Time --");
+                DateTime slot = DateTime.Today.AddHours(8);
+                DateTime end = DateTime.Today.AddHours(17);
+                while (slot <= end)
+                {
+                    cmbTime.Items.Add(slot.ToString("hh:mm tt"));
+                    slot = slot.AddMinutes(30);
+                }
+            }
+            cmbTime.SelectedIndex = 0;
+
+            // ── Doctor ──────────────────────────────
+            if (!cmbDocName.Items.Contains("-- Select Doctor --"))
+                cmbDocName.Items.Insert(0, "-- Select Doctor --");
+            cmbDocName.SelectedIndex = 0;
+
+            // ── Appointment Date ────────────────────
+            // MinDate locks the picker to today or later — past dates impossible
+            dtpApptDate.MinDate = DateTime.Today;
+            dtpApptDate.Value = DateTime.Today;
+
+            // ── Phone placeholders ──────────────────
             txtCell.Text = "(876)555-5555";
             txtCell.ForeColor = Color.FromArgb(220, 220, 220);
             txtMobile.Text = "(876)555-5555";
             txtMobile.ForeColor = Color.FromArgb(220, 220, 220);
-            cmbTime.Items.Insert(0, "-- Select Time --");
-            cmbTime.SelectedIndex = 0;
-            cmbApptType.Items.Insert(0, "-- Select Appointment Type --");
-            cmbApptType.SelectedIndex = 0;
-            cmbDocName.Items.Insert(0, "-- Select Doctor --");
-            cmbDocName.SelectedIndex = 0;
         }
     }
 }

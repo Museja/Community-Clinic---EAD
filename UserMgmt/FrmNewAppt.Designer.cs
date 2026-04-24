@@ -52,12 +52,6 @@
             this.lblPhone = new System.Windows.Forms.Label();
             this.lblName = new System.Windows.Forms.Label();
             this.lblHeadingNewAppt = new System.Windows.Forms.Label();
-            this.cmbDay = new System.Windows.Forms.ComboBox();
-            this.cmbMonth = new System.Windows.Forms.ComboBox();
-            this.cmbYear = new System.Windows.Forms.ComboBox();
-            this.lblDay = new System.Windows.Forms.Label();
-            this.lblMonth = new System.Windows.Forms.Label();
-            this.lblYear = new System.Windows.Forms.Label();
             this.cmbParish = new System.Windows.Forms.ComboBox();
             this.radioNo = new System.Windows.Forms.RadioButton();
             this.radioYes = new System.Windows.Forms.RadioButton();
@@ -74,6 +68,7 @@
             this.cmbDocName = new System.Windows.Forms.ComboBox();
             this.pnlGender = new System.Windows.Forms.Panel();
             this.pnlNewPatient = new System.Windows.Forms.Panel();
+            this.dtpDob = new System.Windows.Forms.DateTimePicker();
             this.pnlGender.SuspendLayout();
             this.pnlNewPatient.SuspendLayout();
             this.SuspendLayout();
@@ -123,14 +118,14 @@
             this.txtTown.Location = new System.Drawing.Point(194, 346);
             this.txtTown.Name = "txtTown";
             this.txtTown.Size = new System.Drawing.Size(182, 20);
-            this.txtTown.TabIndex = 47;
+            this.txtTown.TabIndex = 12;
             // 
             // txtAddress
             // 
             this.txtAddress.Location = new System.Drawing.Point(194, 305);
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(374, 20);
-            this.txtAddress.TabIndex = 46;
+            this.txtAddress.TabIndex = 11;
             // 
             // lblLastN
             // 
@@ -158,7 +153,7 @@
             this.radioFemale.Location = new System.Drawing.Point(76, 11);
             this.radioFemale.Name = "radioFemale";
             this.radioFemale.Size = new System.Drawing.Size(59, 17);
-            this.radioFemale.TabIndex = 42;
+            this.radioFemale.TabIndex = 9;
             this.radioFemale.TabStop = true;
             this.radioFemale.Text = "Female";
             this.radioFemale.UseVisualStyleBackColor = true;
@@ -169,7 +164,7 @@
             this.radioMale.Location = new System.Drawing.Point(0, 11);
             this.radioMale.Name = "radioMale";
             this.radioMale.Size = new System.Drawing.Size(48, 17);
-            this.radioMale.TabIndex = 41;
+            this.radioMale.TabIndex = 8;
             this.radioMale.TabStop = true;
             this.radioMale.Text = "Male";
             this.radioMale.UseVisualStyleBackColor = true;
@@ -179,7 +174,7 @@
             this.txtEmail.Location = new System.Drawing.Point(194, 194);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(229, 20);
-            this.txtEmail.TabIndex = 40;
+            this.txtEmail.TabIndex = 7;
             // 
             // lblMobile
             // 
@@ -204,7 +199,7 @@
             this.txtMobile.Location = new System.Drawing.Point(430, 158);
             this.txtMobile.Name = "txtMobile";
             this.txtMobile.Size = new System.Drawing.Size(124, 20);
-            this.txtMobile.TabIndex = 37;
+            this.txtMobile.TabIndex = 6;
             this.txtMobile.Enter += new System.EventHandler(this.txtMobile_Enter);
             this.txtMobile.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMobile_KeyPress);
             this.txtMobile.Leave += new System.EventHandler(this.txtMobile_Leave);
@@ -214,7 +209,7 @@
             this.txtCell.Location = new System.Drawing.Point(221, 158);
             this.txtCell.Name = "txtCell";
             this.txtCell.Size = new System.Drawing.Size(124, 20);
-            this.txtCell.TabIndex = 36;
+            this.txtCell.TabIndex = 5;
             this.txtCell.Enter += new System.EventHandler(this.txtCell_Enter);
             this.txtCell.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCell_KeyPress);
             this.txtCell.Leave += new System.EventHandler(this.txtCell_Leave);
@@ -224,14 +219,14 @@
             this.txtLastName.Location = new System.Drawing.Point(386, 122);
             this.txtLastName.Name = "txtLastName";
             this.txtLastName.Size = new System.Drawing.Size(182, 20);
-            this.txtLastName.TabIndex = 35;
+            this.txtLastName.TabIndex = 3;
             // 
             // txtFirstName
             // 
             this.txtFirstName.Location = new System.Drawing.Point(194, 122);
             this.txtFirstName.Name = "txtFirstName";
             this.txtFirstName.Size = new System.Drawing.Size(182, 20);
-            this.txtFirstName.TabIndex = 34;
+            this.txtFirstName.TabIndex = 2;
             // 
             // lblAddress
             // 
@@ -297,193 +292,28 @@
             this.lblHeadingNewAppt.TabIndex = 27;
             this.lblHeadingNewAppt.Text = "Request an Appointment";
             // 
-            // cmbDay
-            // 
-            this.cmbDay.FormattingEnabled = true;
-            this.cmbDay.Location = new System.Drawing.Point(194, 265);
-            this.cmbDay.Name = "cmbDay";
-            this.cmbDay.Size = new System.Drawing.Size(98, 21);
-            this.cmbDay.TabIndex = 53;
-            // 
-            // cmbMonth
-            // 
-            this.cmbMonth.FormattingEnabled = true;
-            this.cmbMonth.Items.AddRange(new object[] {
-            "January",
-            "February",
-            "March",
-            "April",
-            "May",
-            "June",
-            "July",
-            "August",
-            "September",
-            "October",
-            "November",
-            "Decembe"});
-            this.cmbMonth.Location = new System.Drawing.Point(316, 265);
-            this.cmbMonth.Name = "cmbMonth";
-            this.cmbMonth.Size = new System.Drawing.Size(98, 21);
-            this.cmbMonth.TabIndex = 54;
-            // 
-            // cmbYear
-            // 
-            this.cmbYear.FormattingEnabled = true;
-            this.cmbYear.Items.AddRange(new object[] {
-            "1930",
-            "1931",
-            "1932",
-            "1933",
-            "1934",
-            "1935",
-            "1936",
-            "1937",
-            "1938",
-            "1939",
-            "1940",
-            "1941",
-            "1942",
-            "1943",
-            "1944",
-            "1945",
-            "1946",
-            "1947",
-            "1948",
-            "1949",
-            "1950",
-            "1951",
-            "1952",
-            "1953",
-            "1954",
-            "1955",
-            "1956",
-            "1957",
-            "1958",
-            "1959",
-            "1960",
-            "1961",
-            "1962",
-            "1963",
-            "1964",
-            "1965",
-            "1966",
-            "1967",
-            "1968",
-            "1969",
-            "1970",
-            "1971",
-            "1972",
-            "1973",
-            "1974",
-            "1975",
-            "1976",
-            "1977",
-            "1978",
-            "1979",
-            "1980",
-            "1981",
-            "1982",
-            "1983",
-            "1984",
-            "1985",
-            "1986",
-            "1987",
-            "1988",
-            "1989",
-            "1990",
-            "1991",
-            "1992",
-            "1993",
-            "1994",
-            "1995",
-            "1996",
-            "1997",
-            "1998",
-            "1999",
-            "2000",
-            "2001",
-            "2002",
-            "2003",
-            "2004",
-            "2005",
-            "2006",
-            "2007",
-            "2008",
-            "2009",
-            "2010",
-            "2011",
-            "2012",
-            "2013",
-            "2014",
-            "2015",
-            "2016",
-            "2017",
-            "2018",
-            "2019",
-            "2020",
-            "2021",
-            "2022",
-            "2023",
-            "2024",
-            "2025",
-            "2026"});
-            this.cmbYear.Location = new System.Drawing.Point(439, 265);
-            this.cmbYear.Name = "cmbYear";
-            this.cmbYear.Size = new System.Drawing.Size(98, 21);
-            this.cmbYear.TabIndex = 55;
-            // 
-            // lblDay
-            // 
-            this.lblDay.AutoSize = true;
-            this.lblDay.Font = new System.Drawing.Font("Segoe Print", 6F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDay.Location = new System.Drawing.Point(198, 251);
-            this.lblDay.Name = "lblDay";
-            this.lblDay.Size = new System.Drawing.Size(23, 14);
-            this.lblDay.TabIndex = 56;
-            this.lblDay.Text = "Day";
-            // 
-            // lblMonth
-            // 
-            this.lblMonth.AutoSize = true;
-            this.lblMonth.Font = new System.Drawing.Font("Segoe Print", 6F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMonth.Location = new System.Drawing.Point(322, 251);
-            this.lblMonth.Name = "lblMonth";
-            this.lblMonth.Size = new System.Drawing.Size(34, 14);
-            this.lblMonth.TabIndex = 57;
-            this.lblMonth.Text = "Month";
-            // 
-            // lblYear
-            // 
-            this.lblYear.AutoSize = true;
-            this.lblYear.Font = new System.Drawing.Font("Segoe Print", 6F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblYear.Location = new System.Drawing.Point(446, 251);
-            this.lblYear.Name = "lblYear";
-            this.lblYear.Size = new System.Drawing.Size(25, 14);
-            this.lblYear.TabIndex = 58;
-            this.lblYear.Text = "Year";
-            // 
             // cmbParish
             // 
             this.cmbParish.FormattingEnabled = true;
             this.cmbParish.Items.AddRange(new object[] {
-            "Kingston",
-            "St. Andrew",
-            "Portland",
-            "St. Thomas",
-            "St. Catherine",
-            "St. Mary",
-            "St. Ann",
-            "Manchester",
             "Clarendon",
             "Hanover",
-            "Westmoreland",
+            "Kingston",
+            "Manchester",
+            "Portland",
+            "St. Andrew",
+            "St. Ann",
+            "St. Catherine",
+            "St. Elizabeth",
             "St. James",
+            "St. Mary",
+            "St. Thomas",
             "Trelawny",
-            "St. Elizabeth"});
+            "Westmoreland"});
             this.cmbParish.Location = new System.Drawing.Point(386, 346);
             this.cmbParish.Name = "cmbParish";
             this.cmbParish.Size = new System.Drawing.Size(182, 21);
-            this.cmbParish.TabIndex = 59;
+            this.cmbParish.TabIndex = 13;
             // 
             // radioNo
             // 
@@ -491,7 +321,7 @@
             this.radioNo.Location = new System.Drawing.Point(76, 10);
             this.radioNo.Name = "radioNo";
             this.radioNo.Size = new System.Drawing.Size(39, 17);
-            this.radioNo.TabIndex = 62;
+            this.radioNo.TabIndex = 15;
             this.radioNo.TabStop = true;
             this.radioNo.Text = "No";
             this.radioNo.UseVisualStyleBackColor = true;
@@ -502,7 +332,7 @@
             this.radioYes.Location = new System.Drawing.Point(0, 10);
             this.radioYes.Name = "radioYes";
             this.radioYes.Size = new System.Drawing.Size(43, 17);
-            this.radioYes.TabIndex = 61;
+            this.radioYes.TabIndex = 14;
             this.radioYes.TabStop = true;
             this.radioYes.Text = "Yes";
             this.radioYes.UseVisualStyleBackColor = true;
@@ -538,7 +368,7 @@
             this.cmbApptType.Location = new System.Drawing.Point(194, 71);
             this.cmbApptType.Name = "cmbApptType";
             this.cmbApptType.Size = new System.Drawing.Size(182, 21);
-            this.cmbApptType.TabIndex = 64;
+            this.cmbApptType.TabIndex = 1;
             // 
             // lblNotes
             // 
@@ -555,7 +385,7 @@
             this.txtNotes.Multiline = true;
             this.txtNotes.Name = "txtNotes";
             this.txtNotes.Size = new System.Drawing.Size(374, 200);
-            this.txtNotes.TabIndex = 66;
+            this.txtNotes.TabIndex = 19;
             // 
             // lblApptTime
             // 
@@ -569,19 +399,10 @@
             // cmbTime
             // 
             this.cmbTime.FormattingEnabled = true;
-            this.cmbTime.Items.AddRange(new object[] {
-            "09:00 AM",
-            "10:00 AM",
-            "11:00 AM",
-            "12:00 PM",
-            "01:00 PM",
-            "02:00 PM",
-            "03:00 PM",
-            "04:00 PM"});
             this.cmbTime.Location = new System.Drawing.Point(193, 454);
             this.cmbTime.Name = "cmbTime";
             this.cmbTime.Size = new System.Drawing.Size(121, 21);
-            this.cmbTime.TabIndex = 68;
+            this.cmbTime.TabIndex = 17;
             // 
             // lblApptDate
             // 
@@ -606,17 +427,18 @@
             this.dtpApptDate.Location = new System.Drawing.Point(194, 416);
             this.dtpApptDate.Name = "dtpApptDate";
             this.dtpApptDate.Size = new System.Drawing.Size(200, 20);
-            this.dtpApptDate.TabIndex = 72;
+            this.dtpApptDate.TabIndex = 16;
             // 
             // cmbDocName
             // 
             this.cmbDocName.FormattingEnabled = true;
             this.cmbDocName.Items.AddRange(new object[] {
-            "Docter Miller"});
+            "Docter Miller",
+            "Doctor Beckford"});
             this.cmbDocName.Location = new System.Drawing.Point(194, 494);
             this.cmbDocName.Name = "cmbDocName";
             this.cmbDocName.Size = new System.Drawing.Size(121, 21);
-            this.cmbDocName.TabIndex = 73;
+            this.cmbDocName.TabIndex = 18;
             // 
             // pnlGender
             // 
@@ -625,7 +447,7 @@
             this.pnlGender.Location = new System.Drawing.Point(194, 220);
             this.pnlGender.Name = "pnlGender";
             this.pnlGender.Size = new System.Drawing.Size(178, 32);
-            this.pnlGender.TabIndex = 74;
+            this.pnlGender.TabIndex = 8;
             // 
             // pnlNewPatient
             // 
@@ -634,13 +456,21 @@
             this.pnlNewPatient.Location = new System.Drawing.Point(194, 372);
             this.pnlNewPatient.Name = "pnlNewPatient";
             this.pnlNewPatient.Size = new System.Drawing.Size(178, 32);
-            this.pnlNewPatient.TabIndex = 75;
+            this.pnlNewPatient.TabIndex = 14;
+            // 
+            // dtpDob
+            // 
+            this.dtpDob.Location = new System.Drawing.Point(193, 268);
+            this.dtpDob.Name = "dtpDob";
+            this.dtpDob.Size = new System.Drawing.Size(200, 20);
+            this.dtpDob.TabIndex = 10;
             // 
             // FrmNewAppt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(615, 866);
+            this.Controls.Add(this.dtpDob);
             this.Controls.Add(this.pnlNewPatient);
             this.Controls.Add(this.pnlGender);
             this.Controls.Add(this.cmbDocName);
@@ -655,12 +485,6 @@
             this.Controls.Add(this.lblApptType);
             this.Controls.Add(this.lblNewPatient);
             this.Controls.Add(this.cmbParish);
-            this.Controls.Add(this.lblYear);
-            this.Controls.Add(this.lblMonth);
-            this.Controls.Add(this.lblDay);
-            this.Controls.Add(this.cmbYear);
-            this.Controls.Add(this.cmbMonth);
-            this.Controls.Add(this.cmbDay);
             this.Controls.Add(this.btnNewAppt);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.lblParish);
@@ -721,12 +545,6 @@
         private System.Windows.Forms.Label lblPhone;
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.Label lblHeadingNewAppt;
-        private System.Windows.Forms.ComboBox cmbDay;
-        private System.Windows.Forms.ComboBox cmbMonth;
-        private System.Windows.Forms.ComboBox cmbYear;
-        private System.Windows.Forms.Label lblDay;
-        private System.Windows.Forms.Label lblMonth;
-        private System.Windows.Forms.Label lblYear;
         private System.Windows.Forms.ComboBox cmbParish;
         private System.Windows.Forms.RadioButton radioNo;
         private System.Windows.Forms.RadioButton radioYes;
@@ -743,5 +561,6 @@
         private System.Windows.Forms.ComboBox cmbDocName;
         private System.Windows.Forms.Panel pnlGender;
         private System.Windows.Forms.Panel pnlNewPatient;
+        private System.Windows.Forms.DateTimePicker dtpDob;
     }
 }
