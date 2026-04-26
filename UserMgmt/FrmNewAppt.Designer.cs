@@ -508,7 +508,7 @@
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.lblHeadingNewAppt);
             this.Name = "FrmNewAppt";
-            this.Text = "FrmNewAppt";
+            this.Text = "New Appointment";
             this.Load += new System.EventHandler(this.FrmNewAppt_Load);
             this.pnlGender.ResumeLayout(false);
             this.pnlGender.PerformLayout();

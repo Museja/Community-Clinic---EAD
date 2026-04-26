@@ -243,7 +243,7 @@ namespace UserMgmt
             }
             string connStr = connSettings.ConnectionString;
 
-            // Re-evaluate phone fields here since hasCell/hasMobile are local to ValidateForm()
+            // Re-evaluating phone fields due to hasCell/hasMobile being local
             bool hasCell = !string.IsNullOrWhiteSpace(txtCell.Text)
                              && txtCell.Text != "(876)555-5555";
             bool hasMobile = !string.IsNullOrWhiteSpace(txtMobile.Text)

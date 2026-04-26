@@ -16,19 +16,34 @@ namespace UserMgmt
     {
         private int _userID;
 
-        public FrmEditUsers()
-        {
-            InitializeComponent();
-        }
         public FrmEditUsers(int userID)
         {
             InitializeComponent();
             _userID = userID;
         }
 
-        private void FrmEditUser_Load(object sender, EventArgs e)
+        private void FrmEditUsers_Load(object sender, EventArgs e)
         {
-            LoadUser();
+            if (cmbParish.Items.Count == 0)
+            {
+                cmbParish.Items.AddRange(new object[]
+                {
+            "Select a Parish",
+            "Clarendon", "Hanover", "Kingston",
+            "Manchester", "Portland", "Saint Andrew",
+            "Saint Ann", "Saint Catherine", "Saint Elizabeth",
+            "Saint James", "Saint Mary", "Saint Thomas",
+            "Trelawny", "Westmoreland"
+                });
+            }
+
+            // Phone placeholders as fallback
+            txtCell.Text = "(876)555-5555";
+            txtCell.ForeColor = Color.FromArgb(220, 220, 220);
+            txtMobile.Text = "(876)555-5555";
+            txtMobile.ForeColor = Color.FromArgb(220, 220, 220);
+
+            LoadUser(); // now cmbParish has items so SelectedItem will match correctly
         }
 
         private void LoadUser()

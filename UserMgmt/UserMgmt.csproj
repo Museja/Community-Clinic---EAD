@@ -62,6 +62,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FrmEditAppt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmEditAppt.Designer.cs">
+      <DependentUpon>FrmEditAppt.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmViewAppt.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -94,6 +100,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FrmEditAppt.resx">
+      <DependentUpon>FrmEditAppt.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmViewAppt.resx">
       <DependentUpon>FrmViewAppt.cs</DependentUpon>
     </EmbeddedResource>

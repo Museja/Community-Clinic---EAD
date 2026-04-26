@@ -59,21 +59,6 @@
             // 
             this.cmbParish.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbParish.FormattingEnabled = true;
-            this.cmbParish.Items.AddRange(new object[] {
-            "Clarendon",
-            "Hanover",
-            "Kingston",
-            "Manchester",
-            "Portland",
-            "St. Andrew",
-            "St. Ann",
-            "St. Catherine",
-            "St. Elizabeth",
-            "St. James",
-            "St. Mary",
-            "St. Thomas",
-            "Trelawny",
-            "Westmoreland "});
             this.cmbParish.Location = new System.Drawing.Point(375, 332);
             this.cmbParish.Name = "cmbParish";
             this.cmbParish.Size = new System.Drawing.Size(182, 21);
@@ -321,6 +306,7 @@
             this.Controls.Add(this.lblHeading);
             this.Name = "FrmEditUsers";
             this.Text = "Edit Users";
+            this.Load += new System.EventHandler(this.FrmEditUsers_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
