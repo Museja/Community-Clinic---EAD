@@ -8,9 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static Communityclinic.Models.PatientModels;
+using static CommunityClinic.Models.PatientModels;
 
-namespace Communityclinic
+namespace CommunityClinic
 {
     public partial class PatientdataForm : Form
     {

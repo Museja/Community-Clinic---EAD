@@ -38,6 +38,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -54,6 +55,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CommunityClinicLLOMDBDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="CommunityClinicLLOMDBDataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CommunityClinicLLOMDBDataSet1.xsd</DependentUpon>
     </Compile>
     <Compile Include="DatabaseHelper.cs" />
     <Compile Include="Data\InventoryDAL.cs" />
@@ -156,6 +162,17 @@
     </None>
     <None Include="CommunityClinicLLOMDBDataSet.xss">
       <DependentUpon>CommunityClinicLLOMDBDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="CommunityClinicLLOMDBDataSet1.xsc">
+      <DependentUpon>CommunityClinicLLOMDBDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="CommunityClinicLLOMDBDataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CommunityClinicLLOMDBDataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="CommunityClinicLLOMDBDataSet1.xss">
+      <DependentUpon>CommunityClinicLLOMDBDataSet1.xsd</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

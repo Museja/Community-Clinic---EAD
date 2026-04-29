@@ -11,7 +11,7 @@ using System.Data.SqlClient;
 using System.Security.Cryptography;
 using System.Net.Mail;
 
-namespace Communityclinic
+namespace CommunityClinic
 {
     public partial class RegistrationForm : Form
     {
@@ -172,6 +172,31 @@ namespace Communityclinic
                 txtAdminId.Clear();
             }
         }
-    
+
+        private void lblMedStaff_Click(object sender, EventArgs e)
+        {
+            lblMedStaff.Visible = false;
+
+        }
+
+        private void txtMedStaff_TextChanged(object sender, EventArgs e)
+        {
+            txtMedStaff.Visible = false;
+        }
+
+        private void radioMedicalstaff_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioMedicalstaff.Checked)
+            {
+                lblMedStaff.Visible = true;
+                txtAdminId.Visible = true;
+            }
+            else
+            {
+                lblMedStaff.Visible = false;
+                txtMedStaff.Visible = false;
+                txtMedStaff.Clear();
+            }
+        }
     }
 }

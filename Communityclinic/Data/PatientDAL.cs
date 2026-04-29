@@ -1,10 +1,10 @@
-﻿using Communityclinic.Models;
+﻿using CommunityClinic.Models;
 using System;
 using System.Data;
 using System.Data.SqlClient;
-using static Communityclinic.Models.PatientModels;
+using static CommunityClinic.Models.PatientModels;
 
-namespace Communityclinic
+namespace CommunityClinic
 {
     public class PatientDAL
     {

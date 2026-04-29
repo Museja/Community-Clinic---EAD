@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Communityclinic
+namespace CommunityClinic
 {
     public partial class SuccessForm : Form
     {

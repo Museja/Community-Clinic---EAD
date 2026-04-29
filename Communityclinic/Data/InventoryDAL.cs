@@ -2,9 +2,9 @@
 using System;
 using System.Data;
 using System.Data.SqlClient;
-using Communityclinic.Models;
+using CommunityClinic.Models;
 
-namespace Communityclinic
+namespace CommunityClinic
 {
     public class InventoryDAL
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data.SqlClient;
 
-namespace Communityclinic
+namespace CommunityClinic
 {
     public static class DatabaseHelper
     {

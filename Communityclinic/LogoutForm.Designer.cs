@@ -1,4 +1,4 @@
-﻿namespace Communityclinic
+﻿namespace CommunityClinic
 {
     partial class LogoutForm
     {

@@ -1,9 +1,9 @@
-﻿using Communityclinic.Models;
+﻿using CommunityClinic.Models;
 using System;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Communityclinic
+namespace CommunityClinic
 {
     public partial class InventoryItemForm : Form
     {

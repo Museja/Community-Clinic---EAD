@@ -1,4 +1,4 @@
-﻿namespace Communityclinic
+﻿namespace CommunityClinic
 {
     partial class RegistrationForm
     {
@@ -42,6 +42,9 @@
             this.radioAdmin = new System.Windows.Forms.RadioButton();
             this.lblAdminId = new System.Windows.Forms.Label();
             this.txtAdminId = new System.Windows.Forms.TextBox();
+            this.radioMedicalstaff = new System.Windows.Forms.RadioButton();
+            this.lblMedStaff = new System.Windows.Forms.Label();
+            this.txtMedStaff = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -121,7 +124,7 @@
             // Register
             // 
             this.Register.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.Register.Location = new System.Drawing.Point(332, 281);
+            this.Register.Location = new System.Drawing.Point(328, 328);
             this.Register.Name = "Register";
             this.Register.Size = new System.Drawing.Size(75, 23);
             this.Register.TabIndex = 9;
@@ -156,7 +159,7 @@
             // lblAdminId
             // 
             this.lblAdminId.AutoSize = true;
-            this.lblAdminId.Location = new System.Drawing.Point(251, 248);
+            this.lblAdminId.Location = new System.Drawing.Point(248, 251);
             this.lblAdminId.Name = "lblAdminId";
             this.lblAdminId.Size = new System.Drawing.Size(84, 13);
             this.lblAdminId.TabIndex = 12;
@@ -171,12 +174,45 @@
             this.txtAdminId.TabIndex = 13;
             this.txtAdminId.TextChanged += new System.EventHandler(this.AdminID_TextChanged);
             // 
+            // radioMedicalstaff
+            // 
+            this.radioMedicalstaff.AutoSize = true;
+            this.radioMedicalstaff.Location = new System.Drawing.Point(484, 209);
+            this.radioMedicalstaff.Name = "radioMedicalstaff";
+            this.radioMedicalstaff.Size = new System.Drawing.Size(87, 17);
+            this.radioMedicalstaff.TabIndex = 14;
+            this.radioMedicalstaff.TabStop = true;
+            this.radioMedicalstaff.Text = "Medical Staff";
+            this.radioMedicalstaff.UseVisualStyleBackColor = true;
+            this.radioMedicalstaff.CheckedChanged += new System.EventHandler(this.radioMedicalstaff_CheckedChanged);
+            // 
+            // lblMedStaff
+            // 
+            this.lblMedStaff.AutoSize = true;
+            this.lblMedStaff.Location = new System.Drawing.Point(248, 286);
+            this.lblMedStaff.Name = "lblMedStaff";
+            this.lblMedStaff.Size = new System.Drawing.Size(86, 13);
+            this.lblMedStaff.TabIndex = 15;
+            this.lblMedStaff.Text = "Medical Staff ID:";
+            this.lblMedStaff.Click += new System.EventHandler(this.lblMedStaff_Click);
+            // 
+            // txtMedStaff
+            // 
+            this.txtMedStaff.Location = new System.Drawing.Point(368, 283);
+            this.txtMedStaff.Name = "txtMedStaff";
+            this.txtMedStaff.Size = new System.Drawing.Size(100, 20);
+            this.txtMedStaff.TabIndex = 16;
+            this.txtMedStaff.TextChanged += new System.EventHandler(this.txtMedStaff_TextChanged);
+            // 
             // RegistrationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.txtMedStaff);
+            this.Controls.Add(this.lblMedStaff);
+            this.Controls.Add(this.radioMedicalstaff);
             this.Controls.Add(this.txtAdminId);
             this.Controls.Add(this.lblAdminId);
             this.Controls.Add(this.radioAdmin);
@@ -214,5 +250,8 @@
         private System.Windows.Forms.RadioButton radioAdmin;
         private System.Windows.Forms.Label lblAdminId;
         private System.Windows.Forms.TextBox txtAdminId;
+        private System.Windows.Forms.RadioButton radioMedicalstaff;
+        private System.Windows.Forms.Label lblMedStaff;
+        private System.Windows.Forms.TextBox txtMedStaff;
     }
 }

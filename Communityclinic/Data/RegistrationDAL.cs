@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
-using Communityclinic.Models;
+using CommunityClinic.Models;
 
-namespace Communityclinic
+namespace CommunityClinic
 {
     public class RegistrationDAL
     {
@@ -61,6 +61,7 @@ namespace Communityclinic
                     Password=@Password,
                     Role=@Role,
                     AdminID=@AdminID
+                    MedStaffID=@MedStaffID
                     WHERE Id=@Id";
 
                 SqlCommand cmd = new SqlCommand(query, conn);

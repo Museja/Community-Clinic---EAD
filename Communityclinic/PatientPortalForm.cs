@@ -1,5 +1,4 @@
-﻿using Communityclinic;
-using Communityclinic.Models;
+﻿using CommunityClinic;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,19 +19,30 @@ namespace CommunityClinic
     {
         private int patientId;
 
+        // CONSTRUCTOR (MAIN)
         public PatientPortalForm(int id)
         {
             InitializeComponent();
+
             patientId = id;
+
+            // Ensure Load event always runs
+            this.Load += PatientPortalForm_Load;
         }
+
+        //DEFAULT CONSTRUCTOR 
         public PatientPortalForm()
         {
             InitializeComponent();
+
+            patientId = -1;
+
+            this.Load += PatientPortalForm_Load;
         }
 
-        // =========================
+
         // FORM LOAD
-        // =========================
+
         private void PatientPortalForm_Load(object sender, EventArgs e)
         {
             if (patientId > 0)
@@ -41,15 +51,14 @@ namespace CommunityClinic
             }
         }
 
-        // =========================
-        // LOAD PROFILE (Tab 1)
-        // Uses YOUR textBox1 - textBox5
-        // =========================
+        // LOAD PROFILE
         private void LoadPatientProfile()
         {
             using (SqlConnection conn = DatabaseHelper.GetConnection())
             {
-                string query = "SELECT * FROM Patients WHERE Id = @Id";
+                string query = @"SELECT FullName, Phone, Email, Address, DOB 
+                                 FROM Patients 
+                                 WHERE Id = @Id";
 
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@Id", patientId);
@@ -63,31 +72,25 @@ namespace CommunityClinic
                     txtPhone.Text = reader["Phone"].ToString();
                     txtEmail.Text = reader["Email"].ToString();
                     txtAddress.Text = reader["Address"].ToString();
-                    DateTime dob = DateTimePicker.Value
+                    dtDOB.Value = Convert.ToDateTime(column["DOB"]);
                 }
             }
         }
 
-        // Load button (Profile tab)
-        private void btnLoadProfile_Click(object sender, EventArgs e)
-        {
-            LoadPatientProfile();
-        }
-
-        // =========================
         // UPDATE PROFILE
-        // =========================
+
+
         private void btnUpdateProfile_Click(object sender, EventArgs e)
         {
             using (SqlConnection conn = DatabaseHelper.GetConnection())
             {
-                string query = @"UPDATE Patients SET
-                                FullName=@FullName,
-                                Phone=@Phone,
-                                Email=@Email,
-                                Address=@Address,
-                                DOB=@DOB
-                                WHERE Id=@Id";
+                string query = @"UPDATE Patients 
+                                 SET FullName=@FullName,
+                                     Phone=@Phone,
+                                     Email=@Email,
+                                     Address=@Address,
+                                     DOB=@DOB
+                                 WHERE Id=@Id";
 
                 SqlCommand cmd = new SqlCommand(query, conn);
 
@@ -95,7 +98,7 @@ namespace CommunityClinic
                 cmd.Parameters.AddWithValue("@Phone", txtPhone.Text);
                 cmd.Parameters.AddWithValue("@Email", txtEmail.Text);
                 cmd.Parameters.AddWithValue("@Address", txtAddress.Text);
-                cmd.Parameters.AddWithValue("@DOB", txtDOB.Text);
+                DateTime dob = dtDOB.Value;
                 cmd.Parameters.AddWithValue("@Id", patientId);
 
                 conn.Open();
@@ -105,9 +108,7 @@ namespace CommunityClinic
             }
         }
 
-        // =========================
         // APPOINTMENTS TAB
-        // =========================
         private void btnRefreshAppointments_Click(object sender, EventArgs e)
         {
             using (SqlConnection conn = DatabaseHelper.GetConnection())
@@ -120,18 +121,16 @@ namespace CommunityClinic
                 DataTable dt = new DataTable();
                 da.Fill(dt);
 
-                dgvappointments1.DataSource = dt;
+              dgvappointments1.DataSource = dt;
             }
         }
 
         private void btnBookAppointment_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Booking feature will be added here.");
+            MessageBox.Show("Booking feature will be implemented here.");
         }
 
-        // =========================
         // MEDICAL HISTORY TAB
-        // =========================
         private void btnLoadHistory_Click(object sender, EventArgs e)
         {
             using (SqlConnection conn = DatabaseHelper.GetConnection())
@@ -144,13 +143,11 @@ namespace CommunityClinic
                 DataTable dt = new DataTable();
                 da.Fill(dt);
 
-                dgvHistory1.DataSource = dt;
+               dgvHistory1.DataSource = dt;
             }
         }
 
-        // =========================
         // PRESCRIPTIONS TAB
-        // =========================
         private void btnLoadPrescriptions_Click(object sender, EventArgs e)
         {
             using (SqlConnection conn = DatabaseHelper.GetConnection())
@@ -163,18 +160,21 @@ namespace CommunityClinic
                 DataTable dt = new DataTable();
                 da.Fill(dt);
 
-                dgvPrescriptions1.DataSource = dt;
+               dgvPrescriptions1.DataSource = dt;
             }
         }
 
-        // =========================
         // LOGOUT
-        // =========================
         private void Logout_Click(object sender, EventArgs e)
         {
-            LogoutForm form = new LogoutForm(); // or LoginForm if that's what you use
+          LogoutForm form = new LogoutForm();
             form.Show();
             this.Close();
+        }
+
+        private void btnLoadProfile_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

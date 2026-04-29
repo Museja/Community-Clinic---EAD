@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Communityclinic.Models
+namespace CommunityClinic.Models
 {
     public class UserRegistration
     {
