@@ -63,7 +63,7 @@ namespace CommunityClinic
                     txtPhone.Text = reader["Phone"].ToString();
                     txtEmail.Text = reader["Email"].ToString();
                     txtAddress.Text = reader["Address"].ToString();
-                    txtDOB.Text = Convert.ToDateTime(reader["DOB"]).ToShortDateString();
+                    DateTime dob = DateTimePicker.Value
                 }
             }
         }
