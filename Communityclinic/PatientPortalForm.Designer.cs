@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabProfile = new System.Windows.Forms.TabPage();
+            this.dtDOB = new System.Windows.Forms.DateTimePicker();
+            this.btnLoadProfile = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -54,8 +56,7 @@
             this.btnLoadPrescriptions = new System.Windows.Forms.Button();
             this.dgvPrescriptions1 = new System.Windows.Forms.DataGridView();
             this.Logout = new System.Windows.Forms.Button();
-            this.btnLoadProfile = new System.Windows.Forms.Button();
-            this.dtDOB = new System.Windows.Forms.DateTimePicker();
+            this.button1 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabProfile.SuspendLayout();
             this.tabAppointments.SuspendLayout();
@@ -102,6 +103,24 @@
             this.tabProfile.Text = "Profile";
             this.tabProfile.UseVisualStyleBackColor = true;
             this.tabProfile.Click += new System.EventHandler(this.PatientPortalForm_Load);
+            // 
+            // dtDOB
+            // 
+            this.dtDOB.Location = new System.Drawing.Point(104, 227);
+            this.dtDOB.Name = "dtDOB";
+            this.dtDOB.Size = new System.Drawing.Size(200, 20);
+            this.dtDOB.TabIndex = 13;
+            // 
+            // btnLoadProfile
+            // 
+            this.btnLoadProfile.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.btnLoadProfile.Location = new System.Drawing.Point(20, 328);
+            this.btnLoadProfile.Name = "btnLoadProfile";
+            this.btnLoadProfile.Size = new System.Drawing.Size(75, 23);
+            this.btnLoadProfile.TabIndex = 12;
+            this.btnLoadProfile.Text = "Load";
+            this.btnLoadProfile.UseVisualStyleBackColor = false;
+            this.btnLoadProfile.Click += new System.EventHandler(this.btnLoadProfile_Click);
             // 
             // label5
             // 
@@ -310,7 +329,7 @@
             // 
             // Logout
             // 
-            this.Logout.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.Logout.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.Logout.Location = new System.Drawing.Point(703, 415);
             this.Logout.Name = "Logout";
             this.Logout.Size = new System.Drawing.Size(75, 23);
@@ -319,29 +338,23 @@
             this.Logout.UseVisualStyleBackColor = false;
             this.Logout.Click += new System.EventHandler(this.Logout_Click);
             // 
-            // btnLoadProfile
+            // button1
             // 
-            this.btnLoadProfile.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.btnLoadProfile.Location = new System.Drawing.Point(20, 328);
-            this.btnLoadProfile.Name = "btnLoadProfile";
-            this.btnLoadProfile.Size = new System.Drawing.Size(75, 23);
-            this.btnLoadProfile.TabIndex = 12;
-            this.btnLoadProfile.Text = "Load";
-            this.btnLoadProfile.UseVisualStyleBackColor = false;
-            this.btnLoadProfile.Click += new System.EventHandler(this.btnLoadProfile_Click);
-            // 
-            // dtDOB
-            // 
-            this.dtDOB.Location = new System.Drawing.Point(104, 227);
-            this.dtDOB.Name = "dtDOB";
-            this.dtDOB.Size = new System.Drawing.Size(200, 20);
-            this.dtDOB.TabIndex = 13;
+            this.button1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.button1.Location = new System.Drawing.Point(622, 415);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "Back";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // PatientPortalForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.Logout);
             this.Controls.Add(this.tabControl1);
             this.Name = "PatientPortalForm";
@@ -391,5 +404,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnLoadProfile;
         private System.Windows.Forms.DateTimePicker dtDOB;
+        private System.Windows.Forms.Button button1;
     }
 }

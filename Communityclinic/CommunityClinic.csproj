@@ -77,9 +77,12 @@
     <Compile Include="LogoutForm.Designer.cs">
       <DependentUpon>LogoutForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\AppointmentsModels.cs" />
     <Compile Include="Models\Inventoryitems.cs" />
+    <Compile Include="Models\MedicalHistoryModels.cs" />
     <Compile Include="Models\PatientModels.cs" />
     <Compile Include="Data\PatientDAL.cs" />
+    <Compile Include="Models\PrescriptionsModels.cs" />
     <Compile Include="Models\Registrationclass.cs" />
     <Compile Include="PatientdataForm.cs">
       <SubType>Form</SubType>
