@@ -40,36 +40,40 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Save
             // 
-            this.Save.Location = new System.Drawing.Point(387, 413);
+            this.Save.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.Save.Location = new System.Drawing.Point(316, 413);
             this.Save.Name = "Save";
             this.Save.Size = new System.Drawing.Size(75, 23);
             this.Save.TabIndex = 0;
             this.Save.Text = "Save";
-            this.Save.UseVisualStyleBackColor = true;
+            this.Save.UseVisualStyleBackColor = false;
             this.Save.Click += new System.EventHandler(this.Save_Click);
             // 
             // Clear
             // 
-            this.Clear.Location = new System.Drawing.Point(506, 413);
+            this.Clear.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.Clear.Location = new System.Drawing.Point(429, 413);
             this.Clear.Name = "Clear";
             this.Clear.Size = new System.Drawing.Size(75, 23);
             this.Clear.TabIndex = 1;
             this.Clear.Text = "Clear";
-            this.Clear.UseVisualStyleBackColor = true;
+            this.Clear.UseVisualStyleBackColor = false;
             this.Clear.Click += new System.EventHandler(this.Clear_Click);
             // 
             // Update
             // 
-            this.Update.Location = new System.Drawing.Point(273, 413);
+            this.Update.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.Update.Location = new System.Drawing.Point(206, 413);
             this.Update.Name = "Update";
             this.Update.Size = new System.Drawing.Size(75, 23);
             this.Update.TabIndex = 2;
             this.Update.Text = "Update";
-            this.Update.UseVisualStyleBackColor = true;
+            this.Update.UseVisualStyleBackColor = false;
             this.Update.Click += new System.EventHandler(this.Update_Click);
             // 
             // txtName
@@ -232,12 +236,24 @@
             this.label10.TabIndex = 22;
             this.label10.Text = "Medications";
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.button1.Location = new System.Drawing.Point(545, 413);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 23;
+            this.button1.Text = "Next";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // PatientdataForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.Save);
             this.Controls.Add(this.Clear);
             this.Controls.Add(this.Update);
@@ -295,5 +311,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button button1;
     }
 }

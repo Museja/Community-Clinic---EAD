@@ -132,5 +132,12 @@ namespace CommunityClinic
             txtHistory.Clear();
             txtMedications.Clear();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            MainFormMDI login = new MainFormMDI();
+            login.Show();
+            this.Close();
+        }
     }
 }

@@ -57,6 +57,7 @@
             this.txtStatus = new System.Windows.Forms.TextBox();
             this.txtNotes = new System.Windows.Forms.TextBox();
             this.txtItem = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -181,30 +182,33 @@
             // 
             // Save
             // 
+            this.Save.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.Save.Location = new System.Drawing.Point(13, 413);
             this.Save.Name = "Save";
             this.Save.Size = new System.Drawing.Size(75, 23);
             this.Save.TabIndex = 13;
             this.Save.Text = "Save";
-            this.Save.UseVisualStyleBackColor = true;
+            this.Save.UseVisualStyleBackColor = false;
             // 
             // Clear
             // 
+            this.Clear.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.Clear.Location = new System.Drawing.Point(127, 412);
             this.Clear.Name = "Clear";
             this.Clear.Size = new System.Drawing.Size(75, 23);
             this.Clear.TabIndex = 14;
             this.Clear.Text = "Clear";
-            this.Clear.UseVisualStyleBackColor = true;
+            this.Clear.UseVisualStyleBackColor = false;
             // 
             // Update
             // 
+            this.Update.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.Update.Location = new System.Drawing.Point(240, 411);
             this.Update.Name = "Update";
             this.Update.Size = new System.Drawing.Size(75, 23);
             this.Update.TabIndex = 15;
             this.Update.Text = "Update";
-            this.Update.UseVisualStyleBackColor = true;
+            this.Update.UseVisualStyleBackColor = false;
             // 
             // txtDateAdded
             // 
@@ -298,12 +302,24 @@
             this.txtItem.Size = new System.Drawing.Size(100, 20);
             this.txtItem.TabIndex = 28;
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.button1.Location = new System.Drawing.Point(351, 410);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 29;
+            this.button1.Text = "Back";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // InventoryItemForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.txtItem);
             this.Controls.Add(this.txtNotes);
             this.Controls.Add(this.txtStatus);
@@ -371,5 +387,6 @@
         private System.Windows.Forms.TextBox txtStatus;
         private System.Windows.Forms.TextBox txtNotes;
         private System.Windows.Forms.TextBox txtItem;
+        private System.Windows.Forms.Button button1;
     }
 }

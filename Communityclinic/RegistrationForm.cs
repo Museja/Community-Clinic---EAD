@@ -75,13 +75,13 @@ namespace CommunityClinic
             if (string.IsNullOrEmpty(role))
                 errors.Add("Please select Patient or Admin");
 
-            // Admin-specific validation
+            // Admin specific validation
             if (role == "Admin")
             {
                 if (string.IsNullOrWhiteSpace(adminId))
                     errors.Add("Admin ID is required");
 
-                // Example check (replace with real validation or DB check)
+                // Example check (replace with real DB validation)
                 if (adminId != "12345")
                     errors.Add("Invalid Admin ID");
             }
@@ -94,9 +94,9 @@ namespace CommunityClinic
 
             // Hash password
             string passwordHash = HashPassword(password);
+
             if (passwordHash != null)
             {
-                // Saves to SQL Server
                 string connectionString = "Data Source=23.95.235.16;Initial Catalog=CommunityClinicLLOMDB;User ID=vtdi_student;Password=P@ssword1;";
                 string query = "INSERT INTO Users (FullName, Email, PasswordHash, Role, AdminID) VALUES (@FullName, @Email, @PasswordHash, @Role, @AdminID)";
 
@@ -110,7 +110,6 @@ namespace CommunityClinic
                         cmd.Parameters.AddWithValue("@PasswordHash", passwordHash);
                         cmd.Parameters.AddWithValue("@Role", role);
 
-                        // AdminID only if Admin, else NULL
                         if (role == "Admin")
                             cmd.Parameters.AddWithValue("@AdminID", adminId);
                         else
@@ -121,8 +120,19 @@ namespace CommunityClinic
 
                         if (rows > 0)
                         {
-                            SuccessForm successForm = new SuccessForm();
-                            successForm.Show();
+                            // ✅ ROLE-BASED NAVIGATION FIX
+                            Form nextForm;
+
+                            if (role == "Patient")
+                            {
+                                nextForm = new SuccessForm();
+                            }
+                            else // Admin
+                            {
+                                nextForm = new MainFormMDI();
+                            }
+
+                            nextForm.Show();
                             this.Hide();
                         }
                         else
@@ -135,9 +145,10 @@ namespace CommunityClinic
                 {
                     MessageBox.Show("SQL Error: " + ex.Message);
                 }
-
             }
+
         }
+        
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
 

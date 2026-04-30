@@ -45,6 +45,7 @@
             this.radioMedicalstaff = new System.Windows.Forms.RadioButton();
             this.lblMedStaff = new System.Windows.Forms.Label();
             this.txtMedStaff = new System.Windows.Forms.TextBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
@@ -204,12 +205,21 @@
             this.txtMedStaff.TabIndex = 16;
             this.txtMedStaff.TextChanged += new System.EventHandler(this.txtMedStaff_TextChanged);
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(0, 0);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 17;
+            // 
             // RegistrationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.txtMedStaff);
             this.Controls.Add(this.lblMedStaff);
             this.Controls.Add(this.radioMedicalstaff);
@@ -253,5 +263,6 @@
         private System.Windows.Forms.RadioButton radioMedicalstaff;
         private System.Windows.Forms.Label lblMedStaff;
         private System.Windows.Forms.TextBox txtMedStaff;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
