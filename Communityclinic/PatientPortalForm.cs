@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
-using static Communityclinic.Models.PatientModels;
+using static CommunityClinic.Models.PatientModels;
 
 namespace CommunityClinic
 {
@@ -176,7 +176,7 @@ namespace CommunityClinic
         {
 
         }
-
+        //BACK BUTTON
         private void button1_Click(object sender, EventArgs e)
         {
             MainFormMDI login = new MainFormMDI();
