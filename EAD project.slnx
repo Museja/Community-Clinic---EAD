@@ -1,4 +1,5 @@
 <Solution>
   <Project Path="Communityclinic/CommunityClinic.csproj" Id="d55952e1-1fc0-48b7-94a8-463a94380481" />
+  <Project Path="CommunityClinicWeb/CommunityClinicWeb.csproj" Id="145c855b-7294-43ee-8ac2-c091cacc811f" />
   <Project Path="UserMgmt/UserMgmt.csproj" Id="a8bfd838-44ce-47b3-bfe6-25c71a8e3003" />
 </Solution>
