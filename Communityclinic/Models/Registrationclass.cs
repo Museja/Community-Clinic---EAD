@@ -12,12 +12,7 @@ namespace CommunityClinic.Models
         public string Role { get; set; } // "Patient" or "Administrator"
         public string AdminID { get; set; }
 
-        // Constructor
-        public UserRegistration()
-        {
-        }
-
-        // Optional: Constructor with parameters
+        // Constructor with parameters
         public UserRegistration(string fullName, string emailAddress, string password, string confirmPassword, string role, string adminID)
         {
             FullName = fullName;
