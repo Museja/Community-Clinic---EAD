@@ -1,0 +1,75 @@
+﻿
+@{
+    ViewBag.Title = "PatientdataView";
+}
+
+<h2>PatientdataView</h2>
+@model WebApplication2.Models.Patient
+
+<h2>Patient Data Form</h2>
+
+<!-- Success Message -->
+@if (TempData["Success"] != null)
+{
+    <p style="color:green">@TempData["Success"]</p>
+}
+
+<!-- Validation Errors -->
+@Html.ValidationSummary(true, "", new { @style = "color:red" })
+
+<form method="post">
+
+    <label>Name</label>
+    <input type="text" name="Name" value="@Model.Name" />
+    <br /><br />
+
+    <label>Age</label>
+    <input type="number" name="Age" value="@Model.Age" />
+    <br /><br />
+
+    <label>Date of Birth</label>
+    <input type="date" name="DateOfBirth"
+           value="@(Model.DateOfBirth == DateTime.MinValue ? "" : Model.DateOfBirth.ToString("yyyy-MM-dd"))" />
+    <br /><br />
+
+    <label>Address</label>
+    <input type="text" name="Address" value="@Model.Address" />
+    <br /><br />
+
+    <label>Phone Number</label>
+    <input type="text" name="PhoneNumber" value="@Model.PhoneNumber" />
+    <br /><br />
+
+    <label>Email</label>
+    <input type="email" name="EmailAddress" value="@Model.EmailAddress" />
+    <br /><br />
+
+    <label>Gender</label>
+    <input type="text" name="Gender" value="@Model.Gender" />
+    <br /><br />
+
+    <label>Allergies</label>
+    <input type="text" name="Allergies" value="@Model.Allergies" />
+    <br /><br />
+
+    <label>History</label>
+    <input type="text" name="History" value="@Model.History" />
+    <br /><br />
+
+    <label>Medications</label>
+    <input type="text" name="Medications" value="@Model.Medications" />
+    <br /><br />
+
+    <!-- BUTTONS -->
+
+    <button type="submit" formaction="/Patient/SavePatient">Save</button>
+
+    <button type="submit" formaction="/Patient/UpdatePatient">Update</button>
+
+    <button type="submit" formaction="/Patient/ClearForm">Clear</button>
+
+</form>
+
+<br />
+
+<a href="/Patient/Portal">Back to Portal</a>
