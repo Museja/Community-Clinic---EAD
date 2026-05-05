@@ -51,6 +51,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminDashboardForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminDashboardForm.Designer.cs">
+      <DependentUpon>AdminDashboardForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="CommunityClinicLLOMDBDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -61,15 +67,39 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CommunityClinicLLOMDBDataSet1.xsd</DependentUpon>
     </Compile>
+    <Compile Include="DashboardForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DashboardForm.Designer.cs">
+      <DependentUpon>DashboardForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="DatabaseHelper.cs" />
     <Compile Include="Data\InventoryDAL.cs" />
     <Compile Include="Data\RegistrationDAL.cs" />
+    <Compile Include="DoctorDashboardForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DoctorDashboardForm.Designer.cs">
+      <DependentUpon>DoctorDashboardForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DoctorPortalForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DoctorPortalForm.Designer.cs">
+      <DependentUpon>DoctorPortalForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="InventoryItem.cs" />
     <Compile Include="InventoryItemForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="InventoryItemForm.Designer.cs">
       <DependentUpon>InventoryItemForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
     <Compile Include="LogoutForm.cs">
       <SubType>Form</SubType>
@@ -78,6 +108,18 @@
       <DependentUpon>LogoutForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\AppointmentsModels.cs" />
+    <Compile Include="MainFormMDI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainFormMDI.Designer.cs">
+      <DependentUpon>MainFormMDI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MedicalNotesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MedicalNotesForm.Designer.cs">
+      <DependentUpon>MedicalNotesForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Inventoryitems.cs" />
     <Compile Include="Models\MedicalHistoryModels.cs" />
     <Compile Include="Models\PatientModels.cs" />
@@ -116,17 +158,45 @@
     <Compile Include="RegistrationForm.Designer.cs">
       <DependentUpon>RegistrationForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="SearchForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SearchForm.Designer.cs">
+      <DependentUpon>SearchForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="SuccessForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="SuccessForm.Designer.cs">
       <DependentUpon>SuccessForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserRole.cs" />
+    <EmbeddedResource Include="AdminDashboardForm.resx">
+      <DependentUpon>AdminDashboardForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DashboardForm.resx">
+      <DependentUpon>DashboardForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DoctorDashboardForm.resx">
+      <DependentUpon>DoctorDashboardForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DoctorPortalForm.resx">
+      <DependentUpon>DoctorPortalForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="InventoryItemForm.resx">
       <DependentUpon>InventoryItemForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LogoutForm.resx">
       <DependentUpon>LogoutForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainFormMDI.resx">
+      <DependentUpon>MainFormMDI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MedicalNotesForm.resx">
+      <DependentUpon>MedicalNotesForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PatientdataForm.resx">
       <DependentUpon>PatientdataForm.cs</DependentUpon>
@@ -151,6 +221,9 @@
     </Compile>
     <EmbeddedResource Include="RegistrationForm.resx">
       <DependentUpon>RegistrationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SearchForm.resx">
+      <DependentUpon>SearchForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SuccessForm.resx">
       <DependentUpon>SuccessForm.cs</DependentUpon>
