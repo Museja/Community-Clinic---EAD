@@ -12,7 +12,7 @@ namespace WebApplication2.Models
     {
         // Inserts a new inventory item into the database
         // Returns the auto-generated ID of the new item
-        public bool InsertItem(InventoryItem item)
+        public bool InsertItem(Inventoryitems item)
         {
             using (SqlConnection conn = DatabaseHelper.GetConnection())
             {
@@ -46,7 +46,7 @@ namespace WebApplication2.Models
         }
 
         // Updates an existing inventory item based on its ID
-        public void Update(InventoryItem item)
+        public void Update(Inventoryitems item)
         {
             using (SqlConnection conn = DatabaseHelper.GetConnection())
             {

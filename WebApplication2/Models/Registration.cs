@@ -16,7 +16,7 @@ namespace WebApplication2.Models
         public string AdminID { get; set; }
 
         // Constructor with parameters
-        public UserRegistration(string fullName, string emailAddress, string password, string confirmPassword, string role, string adminID)
+        public Registration(string fullName, string emailAddress, string password, string confirmPassword, string role, string adminID)
         {
             FullName = fullName;
             EmailAddress = emailAddress;

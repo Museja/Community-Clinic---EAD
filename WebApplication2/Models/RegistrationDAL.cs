@@ -10,7 +10,7 @@ namespace WebApplication2.Models
     public class RegistrationDAL
     {
         // Insert new user
-        public bool InsertUser(UserRegistration user)
+        public bool InsertUser(Registration user)
         {
             using (SqlConnection conn = DatabaseHelper.GetConnection())
             {
@@ -53,7 +53,7 @@ namespace WebApplication2.Models
         }
 
         // Updates user
-        public void UpdateUser(UserRegistration user, int id)
+        public void UpdateUser(Registration user, int id)
         {
             using (SqlConnection conn = DatabaseHelper.GetConnection())
             {

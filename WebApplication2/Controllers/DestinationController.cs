@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace WebApplication2.Controllers
 {
-    public class PatientController : Controller
+    public class DestinationController : Controller
     {
         public ActionResult PatientData()
         {
