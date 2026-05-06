@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "PatientPortalView";
+}
+
+@model WebApplication2.Models.Patient
+
+<h2>Patient Portal</h2>
+
+<form method="post" action="/Patient/UpdateProfile">
+
+    <label>Full Name</label>
+    <input type="text" name="Name" value="@Model.Name" />
+
+    <label>Phone</label>
+    <input type="text" name="PhoneNumber" value="@Model.PhoneNumber" />
+
+    <label>Email</label>
+    <input type="email" name="EmailAddress" value="@Model.EmailAddress" />
+
+    <label>Address</label>
+    <input type="text" name="Address" value="@Model.Address" />
+
+    <label>DOB</label>
+    <input type="date" name="DateOfBirth" value="@Model.DateOfBirth.ToString("yyyy-MM-dd")" />
+
+    <br /><br />
+
+    <button type="submit">Update Profile</button>
+
+</form>
+
+<hr />
+
+<h3>Other Options</h3>
+
+<a href="/Patient/Appointments">View Appointments</a>
+<br />
+<a href="/Patient/History">Medical History</a>
+<br />
+<a href="/Patient/Prescriptions">Prescriptions</a>
+<br />
+
+<br />
+
+<a href="/Patient/Logout">Logout</a>
+

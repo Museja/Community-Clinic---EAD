@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 
-namespace CommunityClinic.Models
+namespace WebApplication2.Models
 {
-    public class UserRegistration
+    public class Registration
     {
         // Properties
         public string FullName { get; set; }
@@ -11,9 +14,9 @@ namespace CommunityClinic.Models
         public string ConfirmPassword { get; set; }
         public string Role { get; set; } // "Patient" or "Administrator"
         public string AdminID { get; set; }
-        public string MedicalStaffId { get; set; }
+
         // Constructor with parameters
-        public UserRegistration(string fullName, string emailAddress, string password, string confirmPassword, string role, string adminID)
+        public Registration(string fullName, string emailAddress, string password, string confirmPassword, string role, string adminID)
         {
             FullName = fullName;
             EmailAddress = emailAddress;

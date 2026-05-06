@@ -75,7 +75,7 @@ namespace CommunityClinic
                     txtPhone.Text = reader["Phone"].ToString();
                     txtEmail.Text = reader["Email"].ToString();
                     txtAddress.Text = reader["Address"].ToString();
-                    dtDOB.Value = Convert.ToDateTime(column["DOB"]);
+                    Convert.ToDateTime(reader["DOB"]);
                 }
             }
         }
