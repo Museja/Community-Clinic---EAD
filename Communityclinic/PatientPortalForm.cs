@@ -11,7 +11,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
-using static CommunityClinic.Models.PatientModels;
+using static CommunityClinic.Models.Patient;
+using static CommunityClinic.Models.AppointmentsModels;
+using static CommunityClinic.Models.MedicalHistoryModels;
+using static CommunityClinic.Models.PrescriptionsModels;
 
 namespace CommunityClinic
 {
