@@ -22,7 +22,7 @@ namespace CommunityClinic
     {
         private int patientId;
 
-        // CONSTRUCTOR (MAIN)
+        // Constructor
         public PatientPortalForm(int id)
         {
             InitializeComponent();

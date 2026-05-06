@@ -285,10 +285,10 @@
 
         #endregion
 
-        private CommunityClinicLLOMDBDataSet communityClinicLLOMDBDataSet;
-        private System.Windows.Forms.BindingSource inventoryBindingSource;
-        private CommunityClinicLLOMDBDataSetTableAdapters.InventoryTableAdapter inventoryTableAdapter;
-        private CommunityClinicLLOMDBDataSetTableAdapters.TableAdapterManager tableAdapterManager;
+        public CommunityClinicLLOMDBDataSet CommunityClinicLLOMDBDataSet;
+        public System.Windows.Forms.BindingSource inventoryBindingSource;
+        public CommunityClinicLLOMDBDataSetTableAdapters.InventoryTableAdapter inventoryTableAdapter;
+        public CommunityClinicLLOMDBDataSetTableAdapters.TableAdapterManager tableAdapterManager;
         private System.Windows.Forms.BindingNavigator inventoryBindingNavigator;
         private System.Windows.Forms.ToolStripButton bindingNavigatorAddNewItem;
         private System.Windows.Forms.ToolStripLabel bindingNavigatorCountItem;

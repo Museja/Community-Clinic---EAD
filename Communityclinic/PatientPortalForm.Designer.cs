@@ -384,7 +384,7 @@
         private System.Windows.Forms.TabPage tabPrescriptions;
         private System.Windows.Forms.DataGridView dgvappointments1;
         private System.Windows.Forms.BindingSource communityClinicLLOMDBDataSet1BindingSource;
-        private Communityclinic.CommunityClinicLLOMDBDataSet1 communityClinicLLOMDBDataSet1;
+        private Communityclinic.CommunityClinicLLOMDBDataSet1 CommunityClinicLLOMDBDataSet1;
         private System.Windows.Forms.Button btnBookAppointment;
         private System.Windows.Forms.Button btnRefreshAppointments;
         private System.Windows.Forms.DataGridView dgvHistory1;
