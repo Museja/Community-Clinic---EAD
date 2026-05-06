@@ -4,7 +4,7 @@
 
     <h2>Registered Users</h2>
 
-    <asp:Button ID="btnRefresh" runat="server" Text="Refresh" 
+    <asp:Button ID="btnRefresh" runat="server" CssClass="btn btn-primary" Text="Refresh" 
                 OnClick="btnRefresh_Click" CausesValidation="false" />
 
     <br /><br />
@@ -35,12 +35,12 @@
             <asp:BoundField DataField="CreatedAt"    HeaderText="Date Added" DataFormatString="{0:yyyy-MM-dd}" />
             <asp:TemplateField HeaderText="Actions">
                 <ItemTemplate>
-                    <asp:LinkButton ID="btnEdit" runat="server" 
+                    <asp:LinkButton ID="btnEdit" runat="server" CssClass="btn btn-primary"
                                     CommandName="EditUser"
                                     CommandArgument='<%# Eval("UserID") %>'
                                     Text="Edit" />
                     &nbsp;|&nbsp;
-                    <asp:LinkButton ID="btnDelete" runat="server"
+                    <asp:LinkButton ID="btnDelete" runat="server" CssClass="btn btn-danger"
                                     CommandName="DeleteUser"
                                     CommandArgument='<%# Eval("UserID") %>'
                                     Text="Delete"

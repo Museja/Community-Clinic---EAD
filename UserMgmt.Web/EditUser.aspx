@@ -7,18 +7,18 @@
     <asp:Label ID="lblMessage" runat="server" ForeColor="Red" />
 
     <%-- Name --%>
-    <div>
+    <div class="form-group">
         <asp:Label runat="server" Text="First Name *" />
-        <asp:TextBox ID="txtFirstName" runat="server" />
+        <asp:TextBox ID="txtFirstName" runat="server" CssClass="form-control" />
         <asp:RequiredFieldValidator ID="rfvFirstName" runat="server"
             ControlToValidate="txtFirstName"
             ErrorMessage="First Name is required."
             ForeColor="Red" Display="Dynamic" />
     </div>
 
-    <div>
+    <div class="form-group">
         <asp:Label runat="server" Text="Last Name *" />
-        <asp:TextBox ID="txtLastName" runat="server" />
+        <asp:TextBox ID="txtLastName" runat="server" CssClass="form-control" />
         <asp:RequiredFieldValidator ID="rfvLastName" runat="server"
             ControlToValidate="txtLastName"
             ErrorMessage="Last Name is required."
@@ -26,9 +26,9 @@
     </div>
 
     <%-- Email --%>
-    <div>
+    <div class="form-group">
         <asp:Label runat="server" Text="Email *" />
-        <asp:TextBox ID="txtEmail" runat="server" />
+        <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" />
         <asp:RequiredFieldValidator ID="rfvEmail" runat="server"
             ControlToValidate="txtEmail"
             ErrorMessage="Email is required."
@@ -41,9 +41,9 @@
     </div>
 
     <%-- Date of Birth --%>
-    <div>
+    <div class="form-group">
         <asp:Label runat="server" Text="Date of Birth *" />
-        <asp:TextBox ID="txtDob" runat="server" TextMode="Date" />
+        <asp:TextBox ID="txtDob" runat="server" TextMode="Date" CssClass="form-control" />
         <asp:RequiredFieldValidator ID="rfvDob" runat="server"
             ControlToValidate="txtDob"
             ErrorMessage="Date of Birth is required."
@@ -51,12 +51,13 @@
     </div>
 
     <%-- Gender --%>
-    <div>
+    <div class="form-group">
         <asp:Label runat="server" Text="Gender *" />
-        <asp:RadioButtonList ID="rblGender" runat="server" RepeatDirection="Horizontal">
-            <asp:ListItem Text="Male" Value="Male" />
-            <asp:ListItem Text="Female" Value="Female" />
-        </asp:RadioButtonList>
+        <asp:RadioButtonList ID="rblGender" runat="server" RepeatDirection="Horizontal"
+                     RepeatLayout="Flow" CssClass="radio-group">
+    <asp:ListItem Text="Male" Value="Male" />
+    <asp:ListItem Text="Female" Value="Female" />
+</asp:RadioButtonList>
         <asp:RequiredFieldValidator ID="rfvGender" runat="server"
             ControlToValidate="rblGender"
             ErrorMessage="Please select a gender."
@@ -65,9 +66,9 @@
     </div>
 
     <%-- Phone --%>
-    <div>
+    <div class="form-group">
         <asp:Label runat="server" Text="Cell Phone" />
-        <asp:TextBox ID="txtCell" runat="server" placeholder="e.g. 8761234567" MaxLength="10" />
+        <asp:TextBox ID="txtCell" runat="server" CssClass="form-control" placeholder="e.g. 8761234567" MaxLength="10" />
         <asp:RegularExpressionValidator ID="revCell" runat="server"
             ControlToValidate="txtCell"
             ValidationExpression="^\d{10}$"
@@ -75,9 +76,9 @@
             ForeColor="Red" Display="Dynamic" />
     </div>
 
-    <div>
+    <div class="form-group">
         <asp:Label runat="server" Text="Mobile Phone" />
-        <asp:TextBox ID="txtMobile" runat="server" placeholder="e.g. 8761234567" MaxLength="10" />
+        <asp:TextBox ID="txtMobile" runat="server" CssClass="form-control" placeholder="e.g. 8761234567" MaxLength="10" />
         <asp:RegularExpressionValidator ID="revMobile" runat="server"
             ControlToValidate="txtMobile"
             ValidationExpression="^\d{10}$"
@@ -86,18 +87,18 @@
     </div>
 
     <%-- Address --%>
-    <div>
+    <div class="form-group">
         <asp:Label runat="server" Text="Address *" />
-        <asp:TextBox ID="txtAddress" runat="server" />
+        <asp:TextBox ID="txtAddress" runat="server" CssClass="form-control" />
         <asp:RequiredFieldValidator ID="rfvAddress" runat="server"
             ControlToValidate="txtAddress"
             ErrorMessage="Address is required."
             ForeColor="Red" Display="Dynamic" />
     </div>
 
-    <div>
+    <div class="form-group">
         <asp:Label runat="server" Text="Town *" />
-        <asp:TextBox ID="txtTown" runat="server" />
+        <asp:TextBox ID="txtTown" runat="server" CssClass="form-control" />
         <asp:RequiredFieldValidator ID="rfvTown" runat="server"
             ControlToValidate="txtTown"
             ErrorMessage="Town is required."
@@ -105,9 +106,9 @@
     </div>
 
     <%-- Parish --%>
-    <div>
+    <div class="form-group">
         <asp:Label runat="server" Text="Parish *" />
-        <asp:DropDownList ID="ddlParish" runat="server">
+        <asp:DropDownList ID="ddlParish" runat="server" CssClass="form-control">
             <asp:ListItem Text="Select a Parish" Value="" />
             <asp:ListItem Text="Clarendon" Value="Clarendon" />
             <asp:ListItem Text="Hanover" Value="Hanover" />
@@ -132,9 +133,9 @@
     </div>
 
     <%-- Buttons --%>
-    <div>
-        <asp:Button ID="btnSave" runat="server" Text="Save Changes" OnClick="btnSave_Click" />
-        <asp:Button ID="btnCancel" runat="server" Text="Cancel" OnClick="btnCancel_Click" CausesValidation="false" />
+    <div class="form-group">
+        <asp:Button ID="btnSave" runat="server" Text="Save Changes" OnClick="btnSave_Click" CssClass="btn btn-primary" />
+        <asp:Button ID="btnCancel" runat="server" Text="Cancel" OnClick="btnCancel_Click" CausesValidation="false" CssClass="btn btn-secondary" />
     </div>
 
 </asp:Content>

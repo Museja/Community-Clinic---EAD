@@ -6,7 +6,7 @@
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> - My ASP.NET Application</title>
+    <title><%: Page.Title %> - Community Clinic</title>
 
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
@@ -15,13 +15,194 @@
     <webopt:bundlereference runat="server" path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
+    <style>
+        /* ── General ── */
+        body {
+            background-color: #f4f6f9;
+            font-family: 'Segoe UI', sans-serif;
+            color: #333;
+        }
+
+        /* ── Navbar ── */
+        .navbar {
+            background-color: #1a6b8a !important;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: #fff !important;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-link {
+            color: #d0eaf5 !important;
+            font-size: 0.95rem;
+            padding: 0.5rem 1rem !important;
+        }
+
+        .nav-link:hover {
+            color: #fff !important;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 4px;
+        }
+
+        .dropdown-menu {
+            background-color: #1a6b8a;
+            border: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .dropdown-item {
+            color: #d0eaf5;
+            font-size: 0.9rem;
+            padding: 0.5rem 1.2rem;
+        }
+
+        .dropdown-item:hover {
+            background-color: rgba(255,255,255,0.15);
+            color: #fff;
+        }
+
+        /* ── Page content ── */
+        .container.body-content {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        h2 {
+            color: #1a6b8a;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            border-bottom: 2px solid #d0eaf5;
+            padding-bottom: 0.5rem;
+        }
+
+        /* ── Forms ── */
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            color: #444;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            max-width: 420px;
+            padding: 0.45rem 0.75rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 0.95rem;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #1a6b8a;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(26,107,138,0.2);
+        }
+
+        /* ── Buttons ── */
+        input[type="submit"],
+        .btn-primary {
+            background-color: #1a6b8a;
+            border: none;
+            color: #fff;
+            padding: 0.5rem 1.4rem;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            margin-right: 0.5rem;
+        }
+
+        input[type="submit"]:hover,
+        .btn-primary:hover {
+            background-color: #145570;
+        }
+
+        input[type="button"],
+        .btn-secondary {
+            background-color: #6c757d;
+            border: none;
+            color: #fff;
+            padding: 0.5rem 1.4rem;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            cursor: pointer;
+        }
+
+        input[type="button"]:hover,
+        .btn-secondary:hover {
+            background-color: #565e64;
+        }
+
+        .radio-group label {
+            margin-right: 1.5rem;
+            font-weight: normal;
+            cursor: pointer;
+        }
+
+        .radio-group input[type="radio"] {
+            margin-right: 0.3rem;
+        }
+
+        /* ── GridView ── */
+        .grid-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        table th {
+            background-color: #1a6b8a;
+            color: #fff;
+            padding: 0.65rem 0.75rem;
+            text-align: left;
+        }
+
+        table td {
+            padding: 0.55rem 0.75rem;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f4f8fb;
+        }
+
+        table tr:hover {
+            background-color: #e0f0f7;
+        }
+
+        /* ── Footer ── */
+        footer {
+            text-align: center;
+            color: #888;
+            font-size: 0.85rem;
+            padding-top: 1rem;
+        }
+    </style>
+
 </head>
 <body>
     <form runat="server">
         <asp:ScriptManager runat="server">
             <Scripts>
-                <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
-                <%--Framework Scripts--%>
                 <asp:ScriptReference Name="MsAjaxBundle" />
                 <asp:ScriptReference Name="jquery" />
                 <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
@@ -33,32 +214,78 @@
                 <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
                 <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
                 <asp:ScriptReference Name="WebFormsBundle" />
-                <%--Site Scripts--%>
             </Scripts>
         </asp:ScriptManager>
 
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark">
             <div class="container">
-                <a class="navbar-brand" runat="server" href="~/">Application name</a>
-                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
+                <a class="navbar-brand" runat="server" href="~/">
+                    &#9764; Community Clinic
+                </a>
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse"
+                    data-bs-target=".navbar-collapse" title="Toggle navigation"
+                    aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/About">About</a></li>
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Contact">Contact</a></li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" runat="server" href="~/">Home</a>
+                        </li>
+
+                        <%-- Users dropdown --%>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button"
+                               data-bs-toggle="dropdown" aria-expanded="false">
+                                Users
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item" runat="server" href="~/UserPortal">
+                                        &#43; New User
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" runat="server" href="~/ViewUsers">
+                                        &#128100; View Users
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <%-- Appointments dropdown --%>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button"
+                               data-bs-toggle="dropdown" aria-expanded="false">
+                                Appointments
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item" runat="server" href="~/NewAppointment">
+                                        &#43; New Appointment
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" runat="server" href="~/ViewAppointments">
+                                        &#128198; View Appointments
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
                     </ul>
                 </div>
             </div>
         </nav>
+
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
             <hr />
             <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - My ASP.NET Application</p>
+                <p>&copy; <%: DateTime.Now.Year %> Community Clinic — User Management System</p>
             </footer>
         </div>
     </form>
