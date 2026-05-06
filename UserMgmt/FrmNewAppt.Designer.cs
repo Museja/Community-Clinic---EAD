@@ -295,21 +295,6 @@
             // cmbParish
             // 
             this.cmbParish.FormattingEnabled = true;
-            this.cmbParish.Items.AddRange(new object[] {
-            "Clarendon",
-            "Hanover",
-            "Kingston",
-            "Manchester",
-            "Portland",
-            "St. Andrew",
-            "St. Ann",
-            "St. Catherine",
-            "St. Elizabeth",
-            "St. James",
-            "St. Mary",
-            "St. Thomas",
-            "Trelawny",
-            "Westmoreland"});
             this.cmbParish.Location = new System.Drawing.Point(386, 346);
             this.cmbParish.Name = "cmbParish";
             this.cmbParish.Size = new System.Drawing.Size(182, 21);
@@ -358,13 +343,6 @@
             // cmbApptType
             // 
             this.cmbApptType.FormattingEnabled = true;
-            this.cmbApptType.Items.AddRange(new object[] {
-            "General Consultation",
-            "Laboratory Work",
-            "Follow-Up",
-            "Specialist Referral",
-            "Routine Check-up",
-            "Emergency"});
             this.cmbApptType.Location = new System.Drawing.Point(194, 71);
             this.cmbApptType.Name = "cmbApptType";
             this.cmbApptType.Size = new System.Drawing.Size(182, 21);
@@ -432,9 +410,6 @@
             // cmbDocName
             // 
             this.cmbDocName.FormattingEnabled = true;
-            this.cmbDocName.Items.AddRange(new object[] {
-            "Docter Miller",
-            "Doctor Beckford"});
             this.cmbDocName.Location = new System.Drawing.Point(194, 494);
             this.cmbDocName.Name = "cmbDocName";
             this.cmbDocName.Size = new System.Drawing.Size(121, 21);

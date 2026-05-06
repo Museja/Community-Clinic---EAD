@@ -169,14 +169,6 @@ namespace UserMgmt
                 return false;
             }
 
-            if (dtpApptDate.Value.Date < DateTime.Today)
-            {
-                MessageBox.Show("Appointment date must be today or a future date.",
-                                "Invalid Date", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                dtpApptDate.Focus();
-                return false;
-            }
-
             return true; // ✅ end of validation - everything passed
 
         }
@@ -328,17 +320,35 @@ namespace UserMgmt
         // ─────────────────────────────────────────────
         private void FrmNewAppt_Load(object sender, EventArgs e)
         {
-            // ── Parish ──────────────────────────────
-            if (!cmbParish.Items.Contains("Select a Parish"))
-                cmbParish.Items.Insert(0, "Select a Parish");
-            cmbParish.SelectedIndex = 0;
+            if (cmbParish.Items.Count == 0)
+            {
+                cmbParish.Items.AddRange(new object[]
+                {
+                    "Select a Parish",
+                    "Clarendon", "Hanover", "Kingston",
+                    "Manchester", "Portland", "Saint Andrew",
+                    "Saint Ann", "Saint Catherine", "Saint Elizabeth",
+                    "Saint James", "Saint Mary", "Saint Thomas",
+                    "Trelawny", "Westmoreland"
+                });
+            }
+            cmbParish.SelectedItem = "0"; //error here - should be "Select a Parish" but it doesn't work for some reason
 
-            // ── Appointment Type ────────────────────
-            if (!cmbApptType.Items.Contains("-- Select Appointment Type --"))
-                cmbApptType.Items.Insert(0, "-- Select Appointment Type --");
-            cmbApptType.SelectedIndex = 0;
+            if (cmbApptType.Items.Count == 0)
+            {
+                cmbApptType.Items.AddRange(new object[]
+                {
+                    "-- Select Appointment Type --",
+                    "General Consultation",
+                    "Follow-up",
+                    "Lab Work",
+                    "Specialist Referral",
+                    "Routine Check-up",
+                    "Emergency"
+                });
+            }
+            cmbApptType.SelectedItem = "-- Select Appointment Type --";
 
-            // ── Time slots (8:00 AM – 5:00 PM, 30-min intervals) ──
             if (cmbTime.Items.Count == 0)
             {
                 cmbTime.Items.Add("-- Select Time --");
@@ -350,23 +360,27 @@ namespace UserMgmt
                     slot = slot.AddMinutes(30);
                 }
             }
-            cmbTime.SelectedIndex = 0;
+            cmbTime.SelectedItem = "-- Select Time --";
 
-            // ── Doctor ──────────────────────────────
-            if (!cmbDocName.Items.Contains("-- Select Doctor --"))
-                cmbDocName.Items.Insert(0, "-- Select Doctor --");
-            cmbDocName.SelectedIndex = 0;
+            if (cmbDocName.Items.Count == 0)
+            {
+                cmbDocName.Items.AddRange(new object[]
+                {
+                    "-- Select Doctor --",
+                    "Dr. Brown  —  General Practice",
+                    "Dr. Clarke  —  Cardiology",
+                    "Dr. Davis  —  Paediatrics",
+                    "Dr. Miller  —  Orthopaedics"
+                });
+            }
+            cmbDocName.SelectedItem = "-- Select Doctor --";
 
-            // ── Appointment Date ────────────────────
-            // MinDate locks the picker to today or later — past dates impossible
-            dtpApptDate.MinDate = DateTime.Today;
-            dtpApptDate.Value = DateTime.Today;
-
-            // ── Phone placeholders ──────────────────
+            // Phone placeholders
             txtCell.Text = "(876)555-5555";
             txtCell.ForeColor = Color.FromArgb(220, 220, 220);
             txtMobile.Text = "(876)555-5555";
             txtMobile.ForeColor = Color.FromArgb(220, 220, 220);
+
         }
     }
 }
