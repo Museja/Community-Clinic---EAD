@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Communityclinic.Models
+namespace CommunityClinic.Models
 {
     internal class AppointmentsModels
     {

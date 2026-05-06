@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{D55952E1-1FC0-48B7-94A8-463A94380481}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Communityclinic</RootNamespace>
-    <AssemblyName>Communityclinic</AssemblyName>
+    <RootNamespace>CommunityClinic</RootNamespace>
+    <AssemblyName>CommunityClinic</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -148,6 +148,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="RegistrationForm.resx">
       <DependentUpon>RegistrationForm.cs</DependentUpon>

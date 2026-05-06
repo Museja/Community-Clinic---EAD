@@ -2,7 +2,7 @@
 using System;
 using System.Data;
 using System.Data.SqlClient;
-using static CommunityClinic.Models.PatientModels;
+using static CommunityClinic.Models.Patient;
 
 namespace CommunityClinic
 {

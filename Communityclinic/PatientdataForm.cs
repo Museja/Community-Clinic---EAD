@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static CommunityClinic.Models.PatientModels;
+using static CommunityClinic.Models.Patient;
 
 namespace CommunityClinic
 {

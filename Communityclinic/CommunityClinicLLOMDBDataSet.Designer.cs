@@ -10,7 +10,7 @@
 
 #pragma warning disable 1591
 
-namespace Communityclinic {
+namespace CommunityClinic {
     
     
     /// <summary>
@@ -2040,7 +2040,7 @@ namespace Communityclinic {
         }
     }
 }
-namespace Communityclinic.CommunityClinicLLOMDBDataSetTableAdapters {
+namespace CommunityClinic.CommunityClinicLLOMDBDataSetTableAdapters {
     
     
     /// <summary>
@@ -2218,7 +2218,7 @@ SELECT ID, Item, Quantity, Description, Price, Expiration FROM Inventory WHERE (
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::Communityclinic.Properties.Settings.Default.CommunityClinicLLOMDBConnectionString;
+            this._connection.ConnectionString = global::CommunityClinic.Properties.Settings.Default.CommunityClinicLLOMDBConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2683,7 +2683,7 @@ SELECT ID, Name, DOB, Age, Address, Phone, Email, Gender, Allergies, History, Me
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::Communityclinic.Properties.Settings.Default.CommunityClinicLLOMDBConnectionString;
+            this._connection.ConnectionString = global::CommunityClinic.Properties.Settings.Default.CommunityClinicLLOMDBConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3310,7 +3310,7 @@ SELECT Id, Name, Email FROM Users WHERE (Id = @Id)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::Communityclinic.Properties.Settings.Default.CommunityClinicLLOMDBConnectionString;
+            this._connection.ConnectionString = global::CommunityClinic.Properties.Settings.Default.CommunityClinicLLOMDBConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

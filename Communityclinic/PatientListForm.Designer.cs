@@ -324,7 +324,7 @@
 
         #endregion
 
-        private CommunityClinicLLOMDBDataSet communityClinicLLOMDBDataSet;
+        private CommunityClinicLLOMDBDataSet CommunityClinicLLOMDBDataSet;
         private System.Windows.Forms.BindingSource patientBindingSource;
         private CommunityClinicLLOMDBDataSetTableAdapters.PatientTableAdapter patientTableAdapter;
         private CommunityClinicLLOMDBDataSetTableAdapters.TableAdapterManager tableAdapterManager;

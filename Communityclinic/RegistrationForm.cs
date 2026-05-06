@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Security.Cryptography;
 using System.Net.Mail;
+using static CommunityClinic.Models.UserRegistration;
 
 namespace CommunityClinic
 {
