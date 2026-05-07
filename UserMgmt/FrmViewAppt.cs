@@ -33,7 +33,7 @@ namespace UserMgmt
             {
                 conn.Open();
 
-                string query = @"SELECT AppointmentID, FirstName, LastName, Email, Gender,
+                string query = @"SELECT Id, FirstName, LastName, Email, Gender,
                                 CellPhone, MobilePhone, Address, Town, Parish,
                                 IsNewPatient, AppointmentType, AppointmentDate,
                                 AppointmentTime, DoctorName, Notes, CreatedAt
@@ -54,7 +54,7 @@ namespace UserMgmt
                     dgvViewAppt.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
                     // Friendly column headers
-                    dgvViewAppt.Columns["AppointmentID"].HeaderText = "ID";
+                    dgvViewAppt.Columns["Id"].HeaderText = "ID";
                     dgvViewAppt.Columns["FirstName"].HeaderText = "First Name";
                     dgvViewAppt.Columns["LastName"].HeaderText = "Last Name";
                     dgvViewAppt.Columns["CellPhone"].HeaderText = "Cell";
@@ -83,7 +83,7 @@ namespace UserMgmt
                 return;
             }
 
-            int apptID = Convert.ToInt32(dgvViewAppt.SelectedRows[0].Cells["AppointmentID"].Value);
+            int apptID = Convert.ToInt32(dgvViewAppt.SelectedRows[0].Cells["Id"].Value);
 
             FrmEditAppt editForm = new FrmEditAppt(apptID);
             editForm.ShowDialog();
@@ -102,7 +102,7 @@ namespace UserMgmt
             string firstName = dgvViewAppt.SelectedRows[0].Cells["FirstName"].Value.ToString();
             string lastName = dgvViewAppt.SelectedRows[0].Cells["LastName"].Value.ToString();
             string date = dgvViewAppt.SelectedRows[0].Cells["AppointmentDate"].Value.ToString();
-            int apptID = Convert.ToInt32(dgvViewAppt.SelectedRows[0].Cells["AppointmentID"].Value);
+            int apptID = Convert.ToInt32(dgvViewAppt.SelectedRows[0].Cells["Id"].Value);
 
             DialogResult confirm = MessageBox.Show(
                 "Are you sure you want to delete the appointment for " + firstName + " " + lastName +
@@ -137,7 +137,7 @@ namespace UserMgmt
             {
                 conn.Open();
 
-                string query = "DELETE FROM Appointments WHERE AppointmentID = @AppointmentID";
+                string query = "DELETE FROM Appointments WHERE Id = @AppointmentID";
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {

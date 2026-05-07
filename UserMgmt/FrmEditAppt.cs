@@ -99,7 +99,7 @@ namespace UserMgmt
             {
                 conn.Open();
 
-                string query = "SELECT * FROM Appointments WHERE AppointmentID = @AppointmentID";
+                string query = "SELECT * FROM Appointments WHERE Id = @AppointmentID";
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
@@ -327,7 +327,7 @@ namespace UserMgmt
                                     AppointmentTime = @AppointmentTime,
                                     DoctorName      = @DoctorName,
                                     Notes           = @Notes
-                                 WHERE AppointmentID = @AppointmentID";
+                                 WHERE Id = @AppointmentID";
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {

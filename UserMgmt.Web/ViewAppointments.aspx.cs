@@ -38,7 +38,7 @@ namespace UserMgmt.Web
             {
                 conn.Open();
 
-                string query = @"SELECT AppointmentID, FirstName, LastName, Email, Gender,
+                string query = @"SELECT Id, FirstName, LastName, Email, Gender,
                                         CellPhone, MobilePhone, Parish, IsNewPatient,
                                         AppointmentType, AppointmentDate, AppointmentTime,
                                         DoctorName, Notes, CreatedAt

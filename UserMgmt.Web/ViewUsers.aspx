@@ -12,7 +12,7 @@
     <asp:Label ID="lblMessage" runat="server" ForeColor="Red" />
 
     <asp:GridView ID="gvUsers" runat="server" AutoGenerateColumns="false"
-                  DataKeyNames="UserID" OnRowCommand="gvUsers_RowCommand"
+                  DataKeyNames="Id" OnRowCommand="gvUsers_RowCommand"
                   AllowPaging="true" PageSize="10" OnPageIndexChanging="gvUsers_PageIndexChanging"
                   Width="100%" CellPadding="6" BorderColor="#dddddd" BorderStyle="Solid" BorderWidth="1px">
 

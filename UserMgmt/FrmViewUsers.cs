@@ -32,7 +32,7 @@ namespace UserMgmt
             {
                 conn.Open();
 
-                string query = "SELECT UserID, FirstName, LastName, Email, Gender, " +
+                string query = "SELECT Id, FirstName, LastName, Email, Gender, " +
                                "DateOfBirth, CellPhone, MobilePhone, Address, Town, Parish, CreatedAt " +
                                "FROM Users ORDER BY LastName, FirstName";
 
@@ -50,7 +50,7 @@ namespace UserMgmt
                     dgvViewUsers.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
                     // Rename column headers to be friendlier
-                    dgvViewUsers.Columns["UserID"].HeaderText = "ID";
+                    dgvViewUsers.Columns["Id"].HeaderText = "ID";
                     dgvViewUsers.Columns["FirstName"].HeaderText = "First Name";
                     dgvViewUsers.Columns["LastName"].HeaderText = "Last Name";
                     dgvViewUsers.Columns["DateOfBirth"].HeaderText = "Date of Birth";
@@ -93,7 +93,7 @@ namespace UserMgmt
 
             string firstName = dgvViewUsers.SelectedRows[0].Cells["FirstName"].Value.ToString();
             string lastName = dgvViewUsers.SelectedRows[0].Cells["LastName"].Value.ToString();
-            int userID = Convert.ToInt32(dgvViewUsers.SelectedRows[0].Cells["UserID"].Value);
+            int userID = Convert.ToInt32(dgvViewUsers.SelectedRows[0].Cells["Id"].Value);
 
             // Confirm before deleting
             DialogResult confirm = MessageBox.Show(

@@ -12,7 +12,7 @@
     <asp:Label ID="lblMessage" runat="server" ForeColor="Red" />
 
     <asp:GridView ID="gvAppts" runat="server" AutoGenerateColumns="false"
-                  DataKeyNames="AppointmentID" OnRowCommand="gvAppts_RowCommand"
+                  DataKeyNames="Id" OnRowCommand="gvAppts_RowCommand"
                   AllowPaging="true" PageSize="10" OnPageIndexChanging="gvAppts_PageIndexChanging"
                   Width="100%" CellPadding="6" BorderColor="#dddddd" BorderStyle="Solid" BorderWidth="1px">
 

@@ -228,7 +228,6 @@ namespace UserMgmt
                     cmd.Parameters.AddWithValue("@Gender", radioMale.Checked ? "Male" : "Female");
                     cmd.Parameters.AddWithValue("@CellPhone", hasCell ? (object)txtCell.Text : DBNull.Value);
                     cmd.Parameters.AddWithValue("@MobilePhone", hasMobile ? (object)txtMobile.Text : DBNull.Value);
-                    cmd.Parameters.AddWithValue("@Dob", dtpDob.Value.Date);
                     cmd.Parameters.AddWithValue("@Address", txtAddress.Text.Trim());
                     cmd.Parameters.AddWithValue("@Town", txtTown.Text.Trim());
                     cmd.Parameters.AddWithValue("@Parish", cmbParish.SelectedItem.ToString());
@@ -332,7 +331,7 @@ namespace UserMgmt
                     "Trelawny", "Westmoreland"
                 });
             }
-            cmbParish.SelectedItem = "0"; //error here - should be "Select a Parish" but it doesn't work for some reason
+            cmbParish.SelectedItem = 0; //error here - should be "Select a Parish" but it doesn't work for some reason
 
             if (cmbApptType.Items.Count == 0)
             {

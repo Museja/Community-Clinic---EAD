@@ -1,0 +1,15 @@
+﻿ALTER TABLE [dbo].[Appointments]
+ADD FirstName       NVARCHAR(50)  NULL,
+    LastName        NVARCHAR(50)  NULL,
+    Email           NVARCHAR(100) NULL,
+    Gender          NVARCHAR(10)  NULL,
+    CellPhone       NVARCHAR(10)  NULL,
+    MobilePhone     NVARCHAR(10)  NULL,
+    Address         NVARCHAR(200) NULL,
+    Town            NVARCHAR(100) NULL,
+    Parish          NVARCHAR(50)  NULL,
+    IsNewPatient    NVARCHAR(3)   NULL,
+    AppointmentType NVARCHAR(100) NULL,
+    AppointmentTime NVARCHAR(20)  NULL,
+    Notes           NVARCHAR(500) NULL,
+    CreatedAt       DATETIME      DEFAULT GETDATE();

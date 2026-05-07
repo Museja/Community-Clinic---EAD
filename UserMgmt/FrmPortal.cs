@@ -237,7 +237,7 @@ namespace UserMgmt
         {
             var connSettings = ConfigurationManager.ConnectionStrings["HealthcareDB"];
             if (connSettings == null)
-            {
+            {                    //troubleshooting
                 MessageBox.Show("Connection string 'HealthcareDB' not found in App.config.", "Config Error");
                 return;
             }

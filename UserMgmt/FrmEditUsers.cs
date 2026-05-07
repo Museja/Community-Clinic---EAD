@@ -126,7 +126,7 @@ namespace UserMgmt
                             Address     = @Address,
                             Town        = @Town,
                             Parish      = @Parish
-                         WHERE UserID = @UserID";
+                         WHERE Id = @UserID";
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
