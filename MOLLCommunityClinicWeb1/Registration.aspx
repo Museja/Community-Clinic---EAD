@@ -1,58 +1,62 @@
-﻿<%@ Page Title="Registration"
-Language="C#"
-MasterPageFile="~/Site.Master"
-AutoEventWireup="true"
-CodeBehind="Registration.aspx.cs"
-Inherits="MOLLCommunityClinicWeb1.Registration" %>
+﻿<%@ Page Title="Registration" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"CodeBehind="Registration.aspx.cs" Inherits="MOLLCommunityClinicWeb1.Registration" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-    <h2>Registration</h2>
+<h2>Create Account</h2>
 
-    <asp:Label ID="lblMessage" runat="server" ForeColor="Red"></asp:Label>
+<asp:Label ID="lblMessage" runat="server" CssClass="msg-error"></asp:Label>
 
-    <br /><br />
+<div class="form-group">
+    <label>Full Name</label>
+    <asp:TextBox ID="txtFullname" runat="server" />
+</div>
 
-    Full Name:
-    <asp:TextBox ID="txtFullname" runat="server" /><br /><br />
+<div class="form-group">
+    <label>Email</label>
+    <asp:TextBox ID="txtEmail" runat="server" />
+</div>
 
-    Email:
-    <asp:TextBox ID="txtEmail" runat="server" /><br /><br />
+<div class="form-group">
+    <label>Password</label>
+    <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" />
+</div>
 
-    Password:
-    <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" /><br /><br />
+<div class="form-group">
+    <label>Confirm Password</label>
+    <asp:TextBox ID="txtConfirmpassword" runat="server" TextMode="Password" />
+</div>
 
-    Confirm Password:
-    <asp:TextBox ID="txtConfirmpassword" runat="server" TextMode="Password" /><br /><br />
+<div class="form-group">
+    <label>Select Role</label>
+    <div class="radio-group">
+        <asp:RadioButton ID="radioPatient" runat="server" GroupName="Role" Text="Patient"
+            AutoPostBack="true" OnCheckedChanged="Role_CheckedChanged" />
 
-    <h4>Select Role</h4>
+        <asp:RadioButton ID="radioAdmin" runat="server" GroupName="Role" Text="Admin"
+            AutoPostBack="true" OnCheckedChanged="Role_CheckedChanged" />
 
-    <asp:RadioButton ID="radioPatient" runat="server" GroupName="Role" Text="Patient"
-        AutoPostBack="true" OnCheckedChanged="Role_CheckedChanged" />
+        <asp:RadioButton ID="radioMedicalstaff" runat="server" GroupName="Role" Text="Medical Staff"
+            AutoPostBack="true" OnCheckedChanged="Role_CheckedChanged" />
+    </div>
+</div>
 
-    <asp:RadioButton ID="radioAdmin" runat="server" GroupName="Role" Text="Admin"
-        AutoPostBack="true" OnCheckedChanged="Role_CheckedChanged" />
-
-    <asp:RadioButton ID="radioMedicalstaff" runat="server" GroupName="Role" Text="Medical Staff"
-        AutoPostBack="true" OnCheckedChanged="Role_CheckedChanged" />
-
-    <br /><br />
-
+<div class="form-group">
     <asp:Panel ID="pnlAdmin" runat="server" Visible="false">
-        Admin ID:
+        <label>Admin ID</label>
         <asp:TextBox ID="txtAdminId" runat="server" />
     </asp:Panel>
+</div>
 
-    <br />
-
+<div class="form-group">
     <asp:Panel ID="pnlMedStaff" runat="server" Visible="false">
-        Staff ID:
+        <label>Staff ID</label>
         <asp:TextBox ID="txtMedStaff" runat="server" />
     </asp:Panel>
+</div>
 
-    <br />
-
-    <asp:Button ID="btnRegister" runat="server"
-        Text="Register"
-        OnClick="btnRegister_Click" />
+<asp:Button ID="btnRegister" runat="server"
+    Text="Create Account"
+    OnClick="btnRegister_Click"
+    CssClass="btn-primary" />
 
 </asp:Content>
