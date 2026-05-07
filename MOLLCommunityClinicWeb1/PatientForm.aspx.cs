@@ -1,23 +1,46 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+using MOLLCommunityClinicWeb1.Models;
+using MOLLCommunityClinicWeb1.Services;
 
 namespace MOLLCommunityClinicWeb1
 {
     public partial class PatientForm : System.Web.UI.Page
     {
+        private PatientService patientService = new PatientService();
+
         protected void Page_Load(object sender, EventArgs e)
         {
         }
 
-        // SAVE (DATABASE LATER)
+        // SAVE PATIENT
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            lblMessage.ForeColor = System.Drawing.Color.Green;
-            lblMessage.Text = "Patient data saved successfully (DB will be connected later).";
+            try
+            {
+                PatientWeb patient = new PatientWeb
+                {
+                    Name = txtFullName.Text,
+                    EmailAddress = txtEmail.Text,
+                    DateOfBirth = Convert.ToDateTime(txtDOB.Text),
+                    Age = Convert.ToInt32(txtAge.Text),
+                    Gender = ddlGender.SelectedValue,
+                    PhoneNumber = txtPhone.Text,
+                    Address = txtAddress.Text,
+                    Allergies = txtAllergies.Text,
+                    Medications = txtMedications.Text,
+                    History = txtHistory.Text
+                };
+
+                patientService.AddPatient(patient);
+
+                lblMessage.ForeColor = System.Drawing.Color.Green;
+                lblMessage.Text = "Patient saved successfully.";
+            }
+            catch (Exception ex)
+            {
+                lblMessage.ForeColor = System.Drawing.Color.Red;
+                lblMessage.Text = "Error saving patient: " + ex.Message;
+            }
         }
 
         // CLEAR FORM
@@ -37,13 +60,13 @@ namespace MOLLCommunityClinicWeb1
             lblMessage.Text = "";
         }
 
-        // BACK TO SUCCESS PAGE
+        // BACK
         protected void btnBack_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/Success.aspx");
         }
 
-        // EXIT BUTTON
+        // EXIT
         protected void btnExit_Click(object sender, EventArgs e)
         {
             Session.Clear();

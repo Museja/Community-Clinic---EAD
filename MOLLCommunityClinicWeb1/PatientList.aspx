@@ -8,7 +8,7 @@ Inherits="MOLLCommunityClinicWeb1.PatientList" %>
 
 <h2>Patient List</h2>
 
-<asp:Label ID="MOLL" runat="server" ForeColor="Red"></asp:Label>
+<asp:Label ID="lblMessage" runat="server" ForeColor="Red"></asp:Label>
 
 <br /><br />
 

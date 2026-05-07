@@ -1,49 +1,146 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
+using MOLLCommunityClinicWeb1.Models;
+using MOLLCommunityClinicWeb1.Services;
 
 namespace MOLLCommunityClinicWeb1
 {
     public partial class PatientPortal : System.Web.UI.Page
     {
+        private PatientService patientService = new PatientService();
+        private AppointmentsService appointmentService = new AppointmentsService();
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                LoadPatientData();
+                LoadAppointments();
+            }
         }
 
-        // LOAD DATA (DB later)
-        protected void btnLoad_Click(object sender, EventArgs e)
+        private void LoadPatientData()
         {
-            lblMessage.Text = "Patient data loaded (database will be connected later).";
+            try
+            {
+                if (Session["UserId"] == null)
+                {
+                    Response.Redirect("~/Login.aspx");
+                    return;
+                }
+
+                int patientId = Convert.ToInt32(Session["UserId"]);
+
+                var patients = patientService.GetAllPatients();
+
+                var patient = patients.FirstOrDefault(p => p.PatientID == patientId);
+
+                if (patient != null)
+                {
+                    lblMessages.Text = "";
+
+                    txtFullName.Text = patient.Name;
+                    txtEmail.Text = patient.EmailAddress;
+                    txtPhone.Text = patient.PhoneNumber;
+                    txtAddress.Text = patient.Address;
+                }
+                else
+                {
+                    lblMessages.Text = "Patient not found.";
+                }
+            }
+            catch (Exception ex)
+            {
+                lblMessages.Text = "Error loading patient: " + ex.Message;
+            }
         }
 
-        // SAVE PROFILE
+        private void LoadAppointments()
+        {
+            try
+            {
+                int patientId = Convert.ToInt32(Session["UserId"]);
+
+                var appointments = appointmentService.GetByPatientId(patientId);
+
+                gvAppointments.DataSource = appointments;
+                gvAppointments.DataBind();
+            }
+            catch (Exception ex)
+            {
+                lblMessages.Text = "Error loading appointments: " + ex.Message;
+            }
+        }
+
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            lblMessage.Text = "Profile saved successfully (DB not connected yet).";
+            try
+            {
+                int patientId = Convert.ToInt32(Session["UserId"]);
+
+                PatientWeb patient = new PatientWeb
+                {
+                    PatientID = patientId,
+                    Name = txtFullName.Text,
+                    EmailAddress = txtEmail.Text,
+                    PhoneNumber = txtPhone.Text,
+                    Address = txtAddress.Text
+                };
+
+                patientService.UpdatePatient(patient);
+
+                lblMessages.Text = "Profile updated successfully.";
+
+                LoadPatientData();
+            }
+            catch (Exception ex)
+            {
+                lblMessages.Text = "Error updating profile: " + ex.Message;
+            }
         }
 
-        // RESCHEDULE APPOINTMENT
         protected void btnReschedule_Click(object sender, EventArgs e)
         {
-            lblMessage.Text = "Appointment rescheduled successfully.";
+            try
+            {
+                int appointmentId = Convert.ToInt32(txtAppointmentId.Text);
+
+                appointmentService.UpdateStatus(appointmentId, "Rescheduled");
+
+                lblMessages.Text = "Appointment rescheduled successfully.";
+
+                LoadAppointments();
+            }
+            catch (Exception ex)
+            {
+                lblMessages.Text = "Error rescheduling: " + ex.Message;
+            }
         }
 
-        // CANCEL APPOINTMENT
         protected void btnCancelAppointment_Click(object sender, EventArgs e)
         {
-            lblMessage.Text = "Appointment cancelled successfully.";
+            try
+            {
+                int appointmentId = Convert.ToInt32(txtAppointmentId.Text);
+
+                appointmentService.UpdateStatus(appointmentId, "Cancelled");
+
+                lblMessages.Text = "Appointment cancelled successfully.";
+
+                LoadAppointments();
+            }
+            catch (Exception ex)
+            {
+                lblMessages.Text = "Error cancelling: " + ex.Message;
+            }
         }
 
-        // BACK TO MAIN MDI
         protected void btnBack_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/MainMDI.aspx");
         }
 
-        // EXIT APPLICATION
         protected void btnExit_Click(object sender, EventArgs e)
         {
             Session.Clear();

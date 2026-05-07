@@ -122,6 +122,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="InventoryAdd.aspx" />
+    <Content Include="Inventorylist.aspx" />
     <Content Include="Logout.aspx" />
     <Content Include="PatientForm.aspx" />
     <Content Include="PatientList.aspx" />
@@ -190,6 +191,7 @@
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Appointmentsweb.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>
@@ -216,6 +218,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Inventory1.cs" />
     <Compile Include="InventoryAdd.aspx.cs">
       <DependentUpon>InventoryAdd.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -223,6 +226,15 @@
     <Compile Include="InventoryAdd.aspx.designer.cs">
       <DependentUpon>InventoryAdd.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Inventorylist.aspx.cs">
+      <DependentUpon>Inventorylist.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Inventorylist.aspx.designer.cs">
+      <DependentUpon>Inventorylist.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Services\AppointmentsService.cs" />
+    <Compile Include="Services\InventoryService.cs" />
     <Compile Include="Logout.aspx.cs">
       <DependentUpon>Logout.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -230,6 +242,7 @@
     <Compile Include="Logout.aspx.designer.cs">
       <DependentUpon>Logout.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Models\MedicalHistoryWeb.cs" />
     <Compile Include="PatientForm.aspx.cs">
       <DependentUpon>PatientForm.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -251,6 +264,8 @@
     <Compile Include="PatientPortal.aspx.designer.cs">
       <DependentUpon>PatientPortal.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Models\PatientWeb.cs" />
+    <Compile Include="Models\PrescriptionsWeb.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Registration.aspx.cs">
       <DependentUpon>Registration.aspx</DependentUpon>
@@ -259,6 +274,10 @@
     <Compile Include="Registration.aspx.designer.cs">
       <DependentUpon>Registration.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Services\MedicalHistoryService.cs" />
+    <Compile Include="Services\PatientService.cs" />
+    <Compile Include="Services\PrescriptionService.cs" />
+    <Compile Include="Services\Userservice.cs" />
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -280,6 +299,7 @@
     <Compile Include="Success.aspx.designer.cs">
       <DependentUpon>Success.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Models\User.cs" />
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

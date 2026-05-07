@@ -1,28 +1,18 @@
 ﻿using System;
-using System.Configuration;
-using System.Data.SqlClient;
-using System.Security.Cryptography;
 using System.Text;
+using System.Security.Cryptography;
+using MOLLCommunityClinicWeb1.Models;
+using MOLLCommunityClinicWeb1.Services;
 
 namespace MOLLCommunityClinicWeb1
 {
     public partial class Registration : System.Web.UI.Page
     {
-        string connectionString =
-            ConfigurationManager.ConnectionStrings["CommunityClinicLLOMDB"].ConnectionString;
+        private Userservice userService = new Userservice();
 
         protected void Page_Load(object sender, EventArgs e)
         {
             lblMessage.Text = "";
-        }
-
-        private string HashPassword(string password)
-        {
-            using (SHA256 sha = SHA256.Create())
-            {
-                byte[] bytes = sha.ComputeHash(Encoding.UTF8.GetBytes(password));
-                return Convert.ToBase64String(bytes);
-            }
         }
 
         protected void Role_CheckedChanged(object sender, EventArgs e)
@@ -33,34 +23,47 @@ namespace MOLLCommunityClinicWeb1
 
         protected void btnRegister_Click(object sender, EventArgs e)
         {
-            string role = GetRole();
-
-            string hashed = HashPassword(txtPassword.Text);
-
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            //  Validate password match
+            if (txtPassword.Text != txtConfirmpassword.Text)
             {
-                string query = @"INSERT INTO Users
-                (FullName, Email, PasswordHash, Role, AdminID, MedStaffID)
-                VALUES (@FullName, @Email, @PasswordHash, @Role, @AdminID, @MedStaffID)";
-
-                SqlCommand cmd = new SqlCommand(query, conn);
-
-                cmd.Parameters.AddWithValue("@FullName", txtFullname.Text);
-                cmd.Parameters.AddWithValue("@Email", txtEmail.Text);
-                cmd.Parameters.AddWithValue("@PasswordHash", hashed);
-                cmd.Parameters.AddWithValue("@Role", role);
-
-                cmd.Parameters.AddWithValue("@AdminID",
-                    role == "Admin" ? txtAdminId.Text : (object)DBNull.Value);
-
-                cmd.Parameters.AddWithValue("@MedStaffID",
-                    role == "Medical Staff" ? txtMedStaff.Text : (object)DBNull.Value);
-
-                conn.Open();
-                cmd.ExecuteNonQuery();
+                lblMessage.Text = "Passwords do not match.";
+                return;
             }
 
+            string role = GetRole();
+
+            if (string.IsNullOrEmpty(role))
+            {
+                lblMessage.Text = "Please select a role.";
+                return;
+            }
+
+            // Build User model
+            User user = new User
+            {
+                FullName = txtFullname.Text,
+                Email = txtEmail.Text,
+                PasswordHash = HashPassword(txtPassword.Text),
+                Role = role,
+                AdminID = role == "Admin" ? txtAdminId.Text : null,
+                MedStaffID = role == "Medical Staff" ? txtMedStaff.Text : null
+            };
+
+            //  Call SERVICE LAYER 
+            userService.RegisterUser(user);
+
+
+            // REDIRECT TO SUCCESS PAGE
             Response.Redirect("~/Success.aspx");
+        }
+
+        private string HashPassword(string password)
+        {
+            using (SHA256 sha = SHA256.Create())
+            {
+                byte[] bytes = sha.ComputeHash(Encoding.UTF8.GetBytes(password));
+                return Convert.ToBase64String(bytes);
+            }
         }
 
         private string GetRole()
