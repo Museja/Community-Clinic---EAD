@@ -1,4 +1,6 @@
 ﻿using CommunityClinic;
+using CommunityClinic.Data;
+using CommunityClinic.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,9 +13,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
-using static CommunityClinic.Models.Patient;
 using static CommunityClinic.Models.AppointmentsModels;
 using static CommunityClinic.Models.MedicalHistoryModels;
+using static CommunityClinic.Models.Patient;
 using static CommunityClinic.Models.PrescriptionsModels;
 
 namespace CommunityClinic
@@ -22,30 +24,29 @@ namespace CommunityClinic
     {
         private int patientId;
 
-        // Constructor
+        // DAL INSTANCES (LINKED LAYERS)
+        private PatientDAL patientDAL = new PatientDAL();
+        private AppointmentsDAL appointmentDAL = new AppointmentsDAL();
+        private MedicalHistoryDAL historyDAL = new MedicalHistoryDAL();
+        private PrescriptionsDAL prescriptionDAL = new PrescriptionsDAL();
+
+        // Constructor with ID
         public PatientPortalForm(int id)
         {
             InitializeComponent();
-
             patientId = id;
-
-            // Ensure Load event always runs
             this.Load += PatientPortalForm_Load;
         }
 
-        //DEFAULT CONSTRUCTOR 
+        // Default constructor
         public PatientPortalForm()
         {
             InitializeComponent();
-
             patientId = -1;
-
             this.Load += PatientPortalForm_Load;
         }
 
-
         // FORM LOAD
-
         private void PatientPortalForm_Load(object sender, EventArgs e)
         {
             if (patientId > 0)
@@ -54,77 +55,69 @@ namespace CommunityClinic
             }
         }
 
-        // LOAD PROFILE
+        // PATIENT PROFILE (DAL LINK)
+
         private void LoadPatientProfile()
         {
-            using (SqlConnection conn = DatabaseHelper.GetConnection())
+            try
             {
-                string query = @"SELECT FullName, Phone, Email, Address, DOB 
-                                 FROM Patients 
-                                 WHERE Id = @Id";
+                Patient patient = patientDAL.GetPatientByEmail(txtEmail.Text);
 
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@Id", patientId);
-
-                conn.Open();
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                if (reader.Read())
+                if (patient != null)
                 {
-                    txtFullName.Text = reader["FullName"].ToString();
-                    txtPhone.Text = reader["Phone"].ToString();
-                    txtEmail.Text = reader["Email"].ToString();
-                    txtAddress.Text = reader["Address"].ToString();
-                    Convert.ToDateTime(reader["DOB"]);
+                    txtFullName.Text = patient.Name;
+                    txtPhone.Text = patient.PhoneNumber;
+                    txtEmail.Text = patient.EmailAddress;
+                    txtAddress.Text = patient.Address;
+                    dtDOB.Value = patient.DateOfBirth;
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading profile: " + ex.Message);
+            }
         }
-
-        // UPDATE PROFILE
-
 
         private void btnUpdateProfile_Click(object sender, EventArgs e)
         {
-            using (SqlConnection conn = DatabaseHelper.GetConnection())
+            try
             {
-                string query = @"UPDATE Patients 
-                                 SET FullName=@FullName,
-                                     Phone=@Phone,
-                                     Email=@Email,
-                                     Address=@Address,
-                                     DOB=@DOB
-                                 WHERE Id=@Id";
+                Patient patient = new Patient
+                {
+                    Id = patientId,
+                    Name = txtFullName.Text.Trim(),
+                    PhoneNumber = txtPhone.Text.Trim(),
+                    EmailAddress = txtEmail.Text.Trim(),
+                    Address = txtAddress.Text.Trim(),
+                    DateOfBirth = dtDOB.Value
+                };
 
-                SqlCommand cmd = new SqlCommand(query, conn);
+                bool success = patientDAL.UpdatePatient(patient);
 
-                cmd.Parameters.AddWithValue("@FullName", txtFullName.Text);
-                cmd.Parameters.AddWithValue("@Phone", txtPhone.Text);
-                cmd.Parameters.AddWithValue("@Email", txtEmail.Text);
-                cmd.Parameters.AddWithValue("@Address", txtAddress.Text);
-                DateTime dob = dtDOB.Value;
-                cmd.Parameters.AddWithValue("@Id", patientId);
-
-                conn.Open();
-                cmd.ExecuteNonQuery();
-
-                MessageBox.Show("Profile updated successfully!");
+                MessageBox.Show(success
+                    ? "Profile updated successfully!"
+                    : "Update failed.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error updating profile: " + ex.Message);
             }
         }
 
-        // APPOINTMENTS TAB
+        // APPOINTMENTS (DAL LINK)
+
         private void btnRefreshAppointments_Click(object sender, EventArgs e)
         {
-            using (SqlConnection conn = DatabaseHelper.GetConnection())
+            try
             {
-                string query = "SELECT * FROM Appointments WHERE PatientId=@Id";
+                DataTable dt =
+                    appointmentDAL.GetAppointmentsByPatient(patientId);
 
-                SqlDataAdapter da = new SqlDataAdapter(query, conn);
-                da.SelectCommand.Parameters.AddWithValue("@Id", patientId);
-
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-
-              dgvappointments1.DataSource = dt;
+                dgvappointments1.DataSource = dt;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading appointments: " + ex.Message);
             }
         }
 
@@ -133,58 +126,60 @@ namespace CommunityClinic
             MessageBox.Show("Booking feature will be implemented here.");
         }
 
-        // MEDICAL HISTORY TAB
+        // MEDICAL HISTORY (DAL LINK)
+
         private void btnLoadHistory_Click(object sender, EventArgs e)
         {
-            using (SqlConnection conn = DatabaseHelper.GetConnection())
+            try
             {
-                string query = "SELECT * FROM MedicalHistory WHERE PatientId=@Id";
+                DataTable dt =
+                    historyDAL.GetHistoryByPatient(patientId);
 
-                SqlDataAdapter da = new SqlDataAdapter(query, conn);
-                da.SelectCommand.Parameters.AddWithValue("@Id", patientId);
-
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-
-               dgvHistory1.DataSource = dt;
+                dgvHistory1.DataSource = dt;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading history: " + ex.Message);
             }
         }
 
-        // PRESCRIPTIONS TAB
+        // PRESCRIPTIONS (DAL LINK)
+     
+
         private void btnLoadPrescriptions_Click(object sender, EventArgs e)
         {
-            using (SqlConnection conn = DatabaseHelper.GetConnection())
+            try
             {
-                string query = "SELECT * FROM Prescriptions WHERE PatientId=@Id";
+                DataTable dt =
+                    prescriptionDAL.GetPrescriptionsByPatient(patientId);
 
-                SqlDataAdapter da = new SqlDataAdapter(query, conn);
-                da.SelectCommand.Parameters.AddWithValue("@Id", patientId);
-
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-
-               dgvPrescriptions1.DataSource = dt;
+                dgvPrescriptions1.DataSource = dt;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading prescriptions: " + ex.Message);
             }
         }
 
-        // LOGOUT
+        // NAVIGATION
+
         private void Logout_Click(object sender, EventArgs e)
         {
-          LogoutForm form = new LogoutForm();
+            LogoutForm form = new LogoutForm();
+            form.Show();
+            this.Close();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            MainFormMDI form = new MainFormMDI();
             form.Show();
             this.Close();
         }
 
         private void btnLoadProfile_Click(object sender, EventArgs e)
         {
-
-        }
-        //BACK BUTTON
-        private void button1_Click(object sender, EventArgs e)
-        {
-            MainFormMDI login = new MainFormMDI();
-            login.Show();
-            this.Close();
+            LoadPatientProfile();
         }
     }
 }

@@ -25,6 +25,13 @@ namespace CommunityClinic
 
             this.Hide(); 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            LogoutForm login = new LogoutForm();
+            login.Show();
+            this.Close();
+        }
     }
     
 }

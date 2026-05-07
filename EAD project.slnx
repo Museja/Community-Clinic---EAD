@@ -1,3 +1,4 @@
 <Solution>
-  <Project Path="Communityclinic/CommunityClinic.csproj" Id="d55952e1-1fc0-48b7-94a8-463a94380481" DisplayName="Communityclinic" />
+  <Project Path="Communityclinic/CommunityClinic.csproj" Id="d55952e1-1fc0-48b7-94a8-463a94380481" />
+  <Project Path="MOLLCommunityClinicWeb/MOLLCommunityClinicWeb.csproj" Id="2bf19b9d-1acb-481a-8c5e-c3b61900138f" />
 </Solution>

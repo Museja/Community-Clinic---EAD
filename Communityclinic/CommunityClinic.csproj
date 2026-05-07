@@ -62,7 +62,10 @@
       <DependentUpon>CommunityClinicLLOMDBDataSet1.xsd</DependentUpon>
     </Compile>
     <Compile Include="DatabaseHelper.cs" />
+    <Compile Include="Data\AppointmentsDAL.cs" />
     <Compile Include="Data\InventoryDAL.cs" />
+    <Compile Include="Data\MedicalHistoryDAL.cs" />
+    <Compile Include="Data\PrescriptionsDAL.cs" />
     <Compile Include="Data\RegistrationDAL.cs" />
     <Compile Include="InventoryItem.cs" />
     <Compile Include="InventoryItemForm.cs">
@@ -70,6 +73,10 @@
     </Compile>
     <Compile Include="InventoryItemForm.Designer.cs">
       <DependentUpon>InventoryItemForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Inventorylist.cs" />
+    <Compile Include="Inventorylist.Designer.cs">
+      <DependentUpon>Inventorylist.cs</DependentUpon>
     </Compile>
     <Compile Include="LogoutForm.cs">
       <SubType>Form</SubType>
@@ -90,11 +97,11 @@
     <Compile Include="PatientdataForm.Designer.cs">
       <DependentUpon>PatientdataForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="InventoryListForm.cs">
+    <Compile Include="Patientlist.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InventoryListForm.Designer.cs">
-      <DependentUpon>InventoryListForm.cs</DependentUpon>
+    <Compile Include="Patientlist.Designer.cs">
+      <DependentUpon>Patientlist.cs</DependentUpon>
     </Compile>
     <Compile Include="PatientListForm.cs">
       <SubType>Form</SubType>
@@ -122,8 +129,12 @@
     <Compile Include="SuccessForm.Designer.cs">
       <DependentUpon>SuccessForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="txtPrice\Text.cs" />
     <EmbeddedResource Include="InventoryItemForm.resx">
       <DependentUpon>InventoryItemForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Inventorylist.resx">
+      <DependentUpon>Inventorylist.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LogoutForm.resx">
       <DependentUpon>LogoutForm.cs</DependentUpon>
@@ -131,8 +142,8 @@
     <EmbeddedResource Include="PatientdataForm.resx">
       <DependentUpon>PatientdataForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InventoryListForm.resx">
-      <DependentUpon>InventoryListForm.cs</DependentUpon>
+    <EmbeddedResource Include="Patientlist.resx">
+      <DependentUpon>Patientlist.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PatientListForm.resx">
       <DependentUpon>PatientListForm.cs</DependentUpon>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CommunityClinic.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -21,15 +22,15 @@ namespace CommunityClinic
 
         private void PatientdataForm_Load(object sender, EventArgs e)
         {
-            // Loads initial data if needed
+            // optional: load data if needed
         }
 
-        // Save button
+        // SAVE (INSERT via DAL)
         private void Save_Click(object sender, EventArgs e)
         {
             try
             {
-                // Validation
+                // VALIDATION
                 if (string.IsNullOrWhiteSpace(txtName.Text))
                 {
                     MessageBox.Show("Name is required");
@@ -65,7 +66,7 @@ namespace CommunityClinic
                     return;
                 }
 
-                // Create patient object
+                // CREATE MODEL
                 Patient patient = new Patient
                 {
                     Name = txtName.Text.Trim(),
@@ -80,13 +81,19 @@ namespace CommunityClinic
                     Medications = txtMedications.Text.Trim()
                 };
 
-                // Save to database
+                // CALL DAL (INSERT)
                 PatientDAL dal = new PatientDAL();
-                dal.UpdatePatient(patient); // or AddPatient depending on use
+                bool success = dal.AddPatient(patient);
 
-                MessageBox.Show("Patient saved successfully!");
+                MessageBox.Show(
+                    success ? "Patient saved successfully!" : "Save failed.",
+                    success ? "Success" : "Error",
+                    MessageBoxButtons.OK,
+                    success ? MessageBoxIcon.Information : MessageBoxIcon.Error
+                );
 
-                ClearForm();
+                if (success)
+                    ClearForm();
             }
             catch (Exception ex)
             {
@@ -94,31 +101,47 @@ namespace CommunityClinic
             }
         }
 
-        // Update button click
+        // UPDATE (UPDATE via DAL)
         private void Update_Click(object sender, EventArgs e)
         {
-            Save_Click(sender, e); // reuse of  save logic
+            try
+            {
+                Patient patient = new Patient
+                {
+                    Name = txtName.Text.Trim(),
+                    DateOfBirth = DateTime.Parse(txtDOB.Text),
+                    Age = int.Parse(txtAge.Text),
+                    Address = txtAddress.Text.Trim(),
+                    PhoneNumber = txtPhonenumber.Text.Trim(),
+                    EmailAddress = txtEmail.Text.Trim(),
+                    Gender = txtGender.Text.Trim(),
+                    Allergies = txtAllergies.Text.Trim(),
+                    History = txtHistory.Text.Trim(),
+                    Medications = txtMedications.Text.Trim()
+                };
+
+                PatientDAL dal = new PatientDAL();
+                bool success = dal.UpdatePatient(patient);
+
+                MessageBox.Show(
+                    success ? "Patient updated successfully!" : "Update failed.",
+                    success ? "Success" : "Error",
+                    MessageBoxButtons.OK,
+                    success ? MessageBoxIcon.Information : MessageBoxIcon.Error
+                );
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
         }
 
-        // Name textbox change event
-        private void txtName_TextChanged(object sender, EventArgs e)
-        {
-           
-        }
-
-        // Label click (prevents error)
-        private void label1_Click(object sender, EventArgs e)
-        {
-            // Does nothing
-        }
-
-        // Clear button click
+        // CLEAR FORM
         private void Clear_Click(object sender, EventArgs e)
         {
             ClearForm();
         }
 
-        // Helper method to clear all form fields
         private void ClearForm()
         {
             txtName.Clear();
@@ -133,9 +156,20 @@ namespace CommunityClinic
             txtMedications.Clear();
         }
 
+        // NAVIGATION
         private void button1_Click(object sender, EventArgs e)
         {
-            MainFormMDI login = new MainFormMDI();
+            MainFormMDI form = new MainFormMDI();
+            form.Show();
+            this.Close();
+        }
+
+        private void txtName_TextChanged(object sender, EventArgs e) { }
+        private void label1_Click(object sender, EventArgs e) { }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            LogoutForm login = new LogoutForm();
             login.Show();
             this.Close();
         }

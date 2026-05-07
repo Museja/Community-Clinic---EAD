@@ -21,14 +21,14 @@ namespace CommunityClinic
         {
             this.Validate();
             this.patientBindingSource.EndEdit();
-            this.tableAdapterManager.UpdateAll(this.communityClinicLLOMDBDataSet);
+            this.tableAdapterManager.UpdateAll(this.CommunityClinicLLOMDBDataSet);
 
         }
 
         private void PatientListForm_Load(object sender, EventArgs e)
         {
             //This line of code loads data into the 'communityClinicLLOMDBDataSet.Patient' table. You can move, or remove it, as needed.
-            this.patientTableAdapter.Fill(this.communityClinicLLOMDBDataSet.Patient);
+            this.patientTableAdapter.Fill(this.CommunityClinicLLOMDBDataSet.Patient);
 
         }
     }
