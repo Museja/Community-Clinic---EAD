@@ -9,10 +9,16 @@ namespace CommunityClinic.Models
         public string EmailAddress { get; set; }
         public string Password { get; set; }
         public string ConfirmPassword { get; set; }
-        public string Role { get; set; } // "Patient" or "Administrator"
+        public string Role { get; set; }
         public string AdminID { get; set; }
         public string MedicalStaffId { get; set; }
-        // Constructor with parameters
+
+        // ADD THIS (fixes your error)
+        public UserRegistration()
+        {
+        }
+
+        // Constructor with parameters 
         public UserRegistration(string fullName, string emailAddress, string password, string confirmPassword, string role, string adminID)
         {
             FullName = fullName;
@@ -23,7 +29,6 @@ namespace CommunityClinic.Models
             AdminID = adminID;
         }
 
-        // Validation Method (optional but VERY useful)
         public bool IsValid(out string message)
         {
             if (string.IsNullOrWhiteSpace(FullName))
