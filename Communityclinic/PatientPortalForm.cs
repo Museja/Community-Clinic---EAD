@@ -74,7 +74,7 @@ namespace CommunityClinic
             {
                 Patient patient = new Patient
                 {
-                    Id = patientId,
+                    PatientID = patientId,
                     Name = txtFullName.Text.Trim(),
                     PhoneNumber = txtPhone.Text.Trim(),
                     EmailAddress = txtEmail.Text.Trim(),

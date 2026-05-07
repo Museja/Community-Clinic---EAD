@@ -1,17 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Data.SqlClient;
 using System.Security.Cryptography;
-using System.Net.Mail;
-using static CommunityClinic.Models.Patient;
-using static CommunityClinic.Models.UserRegistration;
+using System.Text;
+using System.Windows.Forms;
+using CommunityClinic.Models;
 
 namespace CommunityClinic
 {
@@ -58,17 +50,6 @@ namespace CommunityClinic
 
             if (string.IsNullOrWhiteSpace(email))
                 errors.Add("Email is required");
-            else
-            {
-                try
-                {
-                    var addr = new System.Net.Mail.MailAddress(email);
-                }
-                catch
-                {
-                    errors.Add("Enter a valid email address");
-                }
-            }
 
             if (string.IsNullOrWhiteSpace(password))
                 errors.Add("Password is required");
@@ -81,7 +62,6 @@ namespace CommunityClinic
             if (string.IsNullOrEmpty(role))
                 errors.Add("Please select a role");
 
-            // ADMIN VALIDATION
             if (role == "Admin")
             {
                 if (string.IsNullOrWhiteSpace(adminId))
@@ -97,34 +77,29 @@ namespace CommunityClinic
                 return;
             }
 
-            // HASH PASSWORD
-            string passwordHash = HashPassword(password);
-
             try
             {
-                // CALL DAL (THIS IS THE LINK)
-                PatientDAL1 dal = new PatientDAL1();
+                string passwordHash = HashPassword(password);
 
-                bool success = dal.RegisterUser(
-                    fullName,
-                    email,
-                    passwordHash,
-                    role,
-                    role == "Admin" ? adminId : null
-                );
+                // FIXED DAL USAGE
+                RegistrationDAL dal = new RegistrationDAL();
+
+                UserRegistration user = new UserRegistration
+                {
+                    FullName = fullName,
+                    EmailAddress = email,
+                    Password = passwordHash,
+                    Role = role,
+                    AdminID = role == "Admin" ? adminId : null
+                };
+
+                bool success = dal.InsertUser(user);
 
                 if (success)
                 {
-                    Form nextForm;
-
-                    if (role == "Patient")
-                    {
-                        nextForm = new SuccessForm();
-                    }
-                    else
-                    {
-                        nextForm = new MainFormMDI();
-                    }
+                    Form nextForm = (role == "Patient")
+                        ? new SuccessForm()
+                        : new MainFormMDI();
 
                     nextForm.Show();
                     this.Hide();
@@ -140,72 +115,14 @@ namespace CommunityClinic
             }
         }
 
-        // UI EVENTS (UNCHANGED)
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-            lblAdminId.Visible = false;
-        }
-
-        private void AdminID_TextChanged(object sender, EventArgs e)
-        {
-            txtAdminId.Visible = false;
-        }
-
-        private void radioPatient_CheckedChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void radioAdmin_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radioAdmin.Checked)
-            {
-                lblAdminId.Visible = true;
-                txtAdminId.Visible = true;
-            }
-            else
-            {
-                lblAdminId.Visible = false;
-                txtAdminId.Visible = false;
-                txtAdminId.Clear();
-            }
-        }
-
-        private void lblMedStaff_Click(object sender, EventArgs e)
-        {
-            lblMedStaff.Visible = false;
-        }
-
-        private void txtMedStaff_TextChanged(object sender, EventArgs e)
-        {
-            txtMedStaff.Visible = false;
-        }
-
-        private void radioMedicalstaff_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radioMedicalstaff.Checked)
-            {
-                lblMedStaff.Visible = true;
-                txtMedStaff.Visible = true;
-            }
-            else
-            {
-                lblMedStaff.Visible = false;
-                txtMedStaff.Visible = false;
-                txtMedStaff.Clear();
-            }
-        }
-
+        // EXIT
         private void button1_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show(
-          "Are you sure you want to exit the application?",
-          "Exit Application",
-          MessageBoxButtons.YesNo,
-          MessageBoxIcon.Question);
+                "Are you sure you want to exit?",
+                "Exit Application",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes)
             {
@@ -214,4 +131,3 @@ namespace CommunityClinic
         }
     }
 }
-

@@ -1,44 +1,56 @@
 ﻿using System;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
+using System.Windows.Forms;
 
-public partial class InventoryItem
+namespace CommunityClinic
 {
-    protected void Page_Load(object sender, EventArgs e)
+    public partial class InventorylistForm : Form
     {
+        private InventoryDAL dal = new InventoryDAL();
 
-    }
+        public InventorylistForm()
+        {
+            InitializeComponent();
+        }
 
-    protected void btnSave_Click(object sender, EventArgs e)
-    {
-        lblMessage.Text = "Saved successfully!";
-    }
+        // FORM LOAD
+        private void InventorylistForm_Load(object sender, EventArgs e)
+        {
+            LoadGrid();
+        }
 
-    protected void btnUpdate_Click(object sender, EventArgs e)
-    {
-        lblMessage.Text = "Updated successfully!";
-    }
+        // LOAD DATA INTO GRID
+        private void LoadGrid()
+        {
+            try
+            {
+                dataGridView1.DataSource = dal.GetItems();
 
-    protected void btnClear_Click(object sender, EventArgs e)
-    {
-        txtItem.Text = "";
-        txtDateAdded.Text = "";
-        txtQuantity.Text = "";
-        txtDescription.Text = "";
-        txtPrice.Text = "";
-        txtExpiration.Text = "";
-        txtCategory.Text = "";
-        txtUnit.Text = "";
-        txtBatchNumber.Text = "";
-        txtManufacturer.Text = "";
-        txtSupplier.Text = "";
-        txtStatus.Text = "";
-        txtNotes.Text = "";
 
-        lblMessage.Text = "";
-    }
+                dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                dataGridView1.ReadOnly = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading data: " + ex.Message);
+            }
+        }
 
-    protected void btnBack_Click(object sender, EventArgs e)
-    {
-        Response.Redirect("Default.aspx");
+        // EXIT BUTTON
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        //REFRESH BUTTON 
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            LoadGrid();
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // You can later fill textboxes here if needed
+        }
     }
 }

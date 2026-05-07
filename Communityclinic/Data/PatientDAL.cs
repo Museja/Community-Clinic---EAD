@@ -2,15 +2,12 @@
 using System;
 using System.Data;
 using System.Data.SqlClient;
-using static CommunityClinic.Models.Patient;
 
 namespace CommunityClinic
 {
     public class PatientDAL
     {
-        /// <summary>
-        /// Add a new patient to the database.
-        /// </summary>
+        // Add a new patient to the database.
         public bool AddPatient(Patient patient)
         {
             using (SqlConnection conn = DatabaseHelper.GetConnection())
@@ -29,22 +26,20 @@ namespace CommunityClinic
                 cmd.Parameters.AddWithValue("@PhoneNumber", patient.PhoneNumber);
                 cmd.Parameters.AddWithValue("@EmailAddress", patient.EmailAddress);
                 cmd.Parameters.AddWithValue("@Gender", patient.Gender);
-                cmd.Parameters.AddWithValue("@Allergies", patient.Allergies);
-                cmd.Parameters.AddWithValue("@History", patient.History);
-                cmd.Parameters.AddWithValue("@Medications", patient.Medications);
+                cmd.Parameters.AddWithValue("@Allergies", patient.Allergies ?? string.Empty);
+                cmd.Parameters.AddWithValue("@History", patient.History ?? string.Empty);
+                cmd.Parameters.AddWithValue("@Medications", patient.Medications ?? string.Empty);
 
                 conn.Open();
-                return cmd.ExecuteNonQuery() > 0; // returns true if inserted
+                return cmd.ExecuteNonQuery() > 0;
             }
         }
 
-        
-        /// Update an existing patient. Returns true if updated successfully.
-       
+        // Update an existing patient.
         public bool UpdatePatient(Patient patient)
         {
-           // if patient.EmailAddress
-               // throw new ArgumentException("Patient ID is required for update.");
+            if (patient.PatientID <= 0)
+                throw new ArgumentException("PatientID is required for update.");
 
             using (SqlConnection conn = DatabaseHelper.GetConnection())
             {
@@ -59,11 +54,11 @@ namespace CommunityClinic
                                     Allergies=@Allergies,
                                     History=@History,
                                     Medications=@Medications
-                                 WHERE Id=@Id";
+                                 WHERE PatientID=@PatientID";
 
                 SqlCommand cmd = new SqlCommand(query, conn);
 
-                //cmd.Parameters.AddWithValue("@Id", patient.Id);
+                cmd.Parameters.AddWithValue("@PatientID", patient.PatientID);
                 cmd.Parameters.AddWithValue("@Name", patient.Name);
                 cmd.Parameters.AddWithValue("@DateOfBirth", patient.DateOfBirth);
                 cmd.Parameters.AddWithValue("@Age", patient.Age);
@@ -71,17 +66,16 @@ namespace CommunityClinic
                 cmd.Parameters.AddWithValue("@PhoneNumber", patient.PhoneNumber);
                 cmd.Parameters.AddWithValue("@EmailAddress", patient.EmailAddress);
                 cmd.Parameters.AddWithValue("@Gender", patient.Gender);
-                cmd.Parameters.AddWithValue("@Allergies", patient.Allergies);
-                cmd.Parameters.AddWithValue("@History", patient.History);
-                cmd.Parameters.AddWithValue("@Medications", patient.Medications);
+                cmd.Parameters.AddWithValue("@Allergies", patient.Allergies ?? string.Empty);
+                cmd.Parameters.AddWithValue("@History", patient.History ?? string.Empty);
+                cmd.Parameters.AddWithValue("@Medications", patient.Medications ?? string.Empty);
 
                 conn.Open();
-                return cmd.ExecuteNonQuery() > 0; // returns true if rows were affected
+                return cmd.ExecuteNonQuery() > 0;
             }
         }
 
-        
-        /// Get a patient by email
+        // Get a patient by email.
         public Patient GetPatientByEmail(string email)
         {
             using (SqlConnection conn = DatabaseHelper.GetConnection())
@@ -89,8 +83,8 @@ namespace CommunityClinic
                 string query = "SELECT * FROM Patient WHERE EmailAddress=@Email";
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@Email", email);
-                conn.Open();
 
+                conn.Open();
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
                     if (reader.Read())
@@ -101,9 +95,27 @@ namespace CommunityClinic
             }
         }
 
-        /// <summary>
-        /// Retrieve all patients (optional)
-        /// </summary>
+        /// Get a patient by ID.
+        public Patient GetPatientById(int id)
+        {
+            using (SqlConnection conn = DatabaseHelper.GetConnection())
+            {
+                string query = "SELECT * FROM Patient WHERE PatientID=@PatientID";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@PatientID", id);
+
+                conn.Open();
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                        return MapReaderToPatient(reader);
+                    else
+                        return null;
+                }
+            }
+        }
+
+        /// Retrieve all patients.
         public DataTable GetPatients()
         {
             using (SqlConnection conn = DatabaseHelper.GetConnection())
@@ -116,14 +128,12 @@ namespace CommunityClinic
             }
         }
 
-        
-        // Helper: maps SqlDataReader row to Patient object
-     
+        // Maps a SQL row to Patient object.
         private Patient MapReaderToPatient(SqlDataReader reader)
         {
             return new Patient
             {
-               // Id = (int)reader["Id"],
+                PatientID = (int)reader["PatientID"],
                 Name = reader["Name"].ToString(),
                 DateOfBirth = (DateTime)reader["DateOfBirth"],
                 Age = (int)reader["Age"],

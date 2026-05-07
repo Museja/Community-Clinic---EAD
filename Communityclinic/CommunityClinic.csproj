@@ -73,7 +73,9 @@
     <Compile Include="InventoryItemForm.Designer.cs">
       <DependentUpon>InventoryItemForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Inventorylist.cs" />
+    <Compile Include="Inventorylist.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Inventorylist.Designer.cs">
       <DependentUpon>Inventorylist.cs</DependentUpon>
     </Compile>
@@ -101,12 +103,6 @@
     </Compile>
     <Compile Include="Patientlist.Designer.cs">
       <DependentUpon>Patientlist.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PatientListForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PatientListForm.Designer.cs">
-      <DependentUpon>PatientListForm.cs</DependentUpon>
     </Compile>
     <Compile Include="PatientPortalForm.cs">
       <SubType>Form</SubType>
@@ -143,9 +139,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Patientlist.resx">
       <DependentUpon>Patientlist.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PatientListForm.resx">
-      <DependentUpon>PatientListForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PatientPortalForm.resx">
       <DependentUpon>PatientPortalForm.cs</DependentUpon>

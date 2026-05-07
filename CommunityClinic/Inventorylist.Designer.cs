@@ -87,10 +87,6 @@ namespace CommunityClinic
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridView inventorylistdgv;
-        private System.Windows.Forms.BindingSource CommunityClinicLLOMDBDataSetBindingSource;
-        private CommunityClinicLLOMDBDataSet CommunityClinicLLOMDBDataSet;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.BindingSource communityClinicLLOMDBDataSet1BindingSource;

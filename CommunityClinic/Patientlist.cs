@@ -1,38 +1,59 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static CommunityClinic.Models.Patient;
 
 namespace CommunityClinic
 {
     public partial class Patientlist : Form
     {
+        // DAL CONNECTION
+        private PatientDAL dal = new PatientDAL();
+
         public Patientlist()
         {
             InitializeComponent();
+            this.Load += Patientlist_Load; 
+        }
+
+        // LOAD DATA WHEN FORM OPENS
+        private void Patientlist_Load(object sender, EventArgs e)
+        {
+            LoadPatients();
+        }
+
+        // CALL DAL AND BIND TO GRID
+        private void LoadPatients()
+        {
+            try
+            {
+                DataTable dt = dal.GetPatients();
+                Patientlistdgv.DataSource = dt;
+
+                Patientlistdgv.ReadOnly = true;
+                Patientlistdgv.AllowUserToAddRows = false;
+                Patientlistdgv.AllowUserToDeleteRows = false;
+                Patientlistdgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                Patientlistdgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading patients: " + ex.Message);
+            }
         }
 
         private void Patientlistdgv_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            Patientlistdgv.ReadOnly = true;
-            Patientlistdgv.AllowUserToAddRows = false;
-            Patientlistdgv.AllowUserToDeleteRows = false;
-            Patientlistdgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+          
         }
 
+        // EXIT BUTTON
         private void button1_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show(
-           "Are you sure you want to exit the application?",
-           "Exit Application",
-            MessageBoxButtons.YesNo,
-            MessageBoxIcon.Question);
+                "Are you sure you want to exit the application?",
+                "Exit Application",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes)
             {
