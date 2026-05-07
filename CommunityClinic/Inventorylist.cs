@@ -1,7 +1,7 @@
 ﻿using System;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 
-public partial class InventoryItem : System.Web.UI.Page
+public partial class InventoryItem
 {
     protected void Page_Load(object sender, EventArgs e)
     {

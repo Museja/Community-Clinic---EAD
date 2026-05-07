@@ -28,7 +28,7 @@ namespace CommunityClinic
             }
 
             // INSERT ITEM
-            public bool InsertItem(InventoryItem item)
+            public bool InsertItem(Inventoryitems item)
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
@@ -62,7 +62,7 @@ namespace CommunityClinic
 
             // UPDATE ITEM
          
-            public bool Update(InventoryItem item)
+            public bool Update(Inventoryitems item)
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {

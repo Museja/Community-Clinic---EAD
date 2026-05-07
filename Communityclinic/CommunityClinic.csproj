@@ -67,7 +67,6 @@
     <Compile Include="Data\MedicalHistoryDAL.cs" />
     <Compile Include="Data\PrescriptionsDAL.cs" />
     <Compile Include="Data\RegistrationDAL.cs" />
-    <Compile Include="InventoryItem.cs" />
     <Compile Include="InventoryItemForm.cs">
       <SubType>Form</SubType>
     </Compile>

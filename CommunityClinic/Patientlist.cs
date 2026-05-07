@@ -28,9 +28,16 @@ namespace CommunityClinic
 
         private void button1_Click(object sender, EventArgs e)
         {
-            LogoutForm login = new LogoutForm();
-            login.Show();
-            this.Close();
+            DialogResult result = MessageBox.Show(
+           "Are you sure you want to exit the application?",
+           "Exit Application",
+            MessageBoxButtons.YesNo,
+            MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
         }
     }
 }

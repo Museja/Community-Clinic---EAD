@@ -5,7 +5,7 @@ using System.Web.UI;
 
 namespace MOLLCommunityClinicWeb
 {
-    public partial class inventoryitemsModels1 : System.Web.UI.Page
+    public partial class Inventory : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

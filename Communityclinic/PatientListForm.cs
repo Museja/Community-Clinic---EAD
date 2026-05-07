@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CommunityClinic
@@ -17,19 +10,54 @@ namespace CommunityClinic
             InitializeComponent();
         }
 
-        private void patientBindingNavigatorSaveItem_Click(object sender, EventArgs e)
+        // SAVE BUTTON
+        private void patientBindingNavigatorSaveItem_Click(
+            object sender,
+            EventArgs e)
         {
-            this.Validate();
-            this.patientBindingSource.EndEdit();
-            this.tableAdapterManager.UpdateAll(this.CommunityClinicLLOMDBDataSet);
+            try
+            {
+                this.Validate();
 
+                this.patientBindingSource.EndEdit();
+
+                this.tableAdapterManager.UpdateAll(
+                    this.communityClinicLLOMDBDataSet);
+
+                MessageBox.Show(
+                    "Patient records saved successfully.",
+                    "Success",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Error saving data: " + ex.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
         }
 
-        private void PatientListForm_Load(object sender, EventArgs e)
+        // FORM LOAD
+        private void PatientListForm_Load(
+            object sender,
+            EventArgs e)
         {
-            //This line of code loads data into the 'communityClinicLLOMDBDataSet.Patient' table. You can move, or remove it, as needed.
-            this.patientTableAdapter.Fill(this.CommunityClinicLLOMDBDataSet.Patient);
-
+            try
+            {
+                this.patientTableAdapter.Fill(
+                    this.communityClinicLLOMDBDataSet.Patient);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Error loading patients: " + ex.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
         }
     }
 }

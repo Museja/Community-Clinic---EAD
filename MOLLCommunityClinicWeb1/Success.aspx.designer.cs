@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MOLLCommunityClinicWeb
+namespace MOLLCommunityClinicWeb1
 {
 
 
-    public partial class Registration
+    public partial class Success
     {
 
         /// <summary>

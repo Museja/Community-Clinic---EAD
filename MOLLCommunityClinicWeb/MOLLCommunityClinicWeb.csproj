@@ -224,9 +224,7 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="InventoryDAL1.cs" />
-    <Compile Include="inventoryitemsModels1.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
+    <Compile Include="inventoryitemsModels1.cs" />
     <Compile Include="InventoryList.aspx.cs">
       <DependentUpon>InventoryList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -265,9 +263,6 @@
     <Compile Include="Registration.aspx.cs">
       <DependentUpon>Registration.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Registration.aspx.designer.cs">
-      <DependentUpon>Registration.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>

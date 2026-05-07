@@ -1,22 +1,8 @@
-﻿using CommunityClinic;
-using CommunityClinic.Data;
+﻿using CommunityClinic.Data;
 using CommunityClinic.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Linq;
-using static CommunityClinic.Models.AppointmentsModels;
-using static CommunityClinic.Models.MedicalHistoryModels;
-using static CommunityClinic.Models.Patient;
-using static CommunityClinic.Models.PrescriptionsModels;
 
 namespace CommunityClinic
 {
@@ -24,26 +10,24 @@ namespace CommunityClinic
     {
         private int patientId;
 
-        // DAL INSTANCES (LINKED LAYERS)
+        // DAL OBJECTS
         private PatientDAL patientDAL = new PatientDAL();
         private AppointmentsDAL appointmentDAL = new AppointmentsDAL();
         private MedicalHistoryDAL historyDAL = new MedicalHistoryDAL();
         private PrescriptionsDAL prescriptionDAL = new PrescriptionsDAL();
 
-        // Constructor with ID
+        // CONSTRUCTOR WITH PATIENT ID
         public PatientPortalForm(int id)
         {
             InitializeComponent();
             patientId = id;
-            this.Load += PatientPortalForm_Load;
         }
 
-        // Default constructor
+        // DEFAULT CONSTRUCTOR
         public PatientPortalForm()
         {
             InitializeComponent();
             patientId = -1;
-            this.Load += PatientPortalForm_Load;
         }
 
         // FORM LOAD
@@ -55,13 +39,13 @@ namespace CommunityClinic
             }
         }
 
-        // PATIENT PROFILE (DAL LINK)
-
+        // LOAD PROFILE
         private void LoadPatientProfile()
         {
             try
             {
-                Patient patient = patientDAL.GetPatientByEmail(txtEmail.Text);
+                Patient patient =
+                    patientDAL.GetPatientById(patientId);
 
                 if (patient != null)
                 {
@@ -71,13 +55,19 @@ namespace CommunityClinic
                     txtAddress.Text = patient.Address;
                     dtDOB.Value = patient.DateOfBirth;
                 }
+                else
+                {
+                    MessageBox.Show("Patient not found.");
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error loading profile: " + ex.Message);
+                MessageBox.Show(
+                    "Error loading profile: " + ex.Message);
             }
         }
 
+        // UPDATE PROFILE
         private void btnUpdateProfile_Click(object sender, EventArgs e)
         {
             try
@@ -92,21 +82,30 @@ namespace CommunityClinic
                     DateOfBirth = dtDOB.Value
                 };
 
-                bool success = patientDAL.UpdatePatient(patient);
+                bool success =
+                    patientDAL.UpdatePatient(patient);
 
-                MessageBox.Show(success
-                    ? "Profile updated successfully!"
-                    : "Update failed.");
+                if (success)
+                {
+                    MessageBox.Show(
+                        "Profile updated successfully!");
+                }
+                else
+                {
+                    MessageBox.Show("Update failed.");
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error updating profile: " + ex.Message);
+                MessageBox.Show(
+                    "Error updating profile: " + ex.Message);
             }
         }
 
-        // APPOINTMENTS (DAL LINK)
-
-        private void btnRefreshAppointments_Click(object sender, EventArgs e)
+        // LOAD APPOINTMENTS
+        private void btnRefreshAppointments_Click(
+            object sender,
+            EventArgs e)
         {
             try
             {
@@ -117,18 +116,24 @@ namespace CommunityClinic
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error loading appointments: " + ex.Message);
+                MessageBox.Show(
+                    "Error loading appointments: " + ex.Message);
             }
         }
 
-        private void btnBookAppointment_Click(object sender, EventArgs e)
+        // BOOK APPOINTMENT
+        private void btnBookAppointment_Click(
+            object sender,
+            EventArgs e)
         {
-            MessageBox.Show("Booking feature will be implemented here.");
+            MessageBox.Show(
+                "Booking feature coming soon.");
         }
 
-        // MEDICAL HISTORY (DAL LINK)
-
-        private void btnLoadHistory_Click(object sender, EventArgs e)
+        // LOAD HISTORY
+        private void btnLoadHistory_Click(
+            object sender,
+            EventArgs e)
         {
             try
             {
@@ -139,14 +144,15 @@ namespace CommunityClinic
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error loading history: " + ex.Message);
+                MessageBox.Show(
+                    "Error loading history: " + ex.Message);
             }
         }
 
-        // PRESCRIPTIONS (DAL LINK)
-     
-
-        private void btnLoadPrescriptions_Click(object sender, EventArgs e)
+        // LOAD PRESCRIPTIONS
+        private void btnLoadPrescriptions_Click(
+            object sender,
+            EventArgs e)
         {
             try
             {
@@ -157,29 +163,53 @@ namespace CommunityClinic
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error loading prescriptions: " + ex.Message);
+                MessageBox.Show(
+                    "Error loading prescriptions: " + ex.Message);
             }
         }
 
-        // NAVIGATION
+        // LOAD PROFILE BUTTON
+        private void btnLoadProfile_Click(
+            object sender,
+            EventArgs e)
+        {
+            LoadPatientProfile();
+        }
 
-        private void Logout_Click(object sender, EventArgs e)
+        // LOGOUT
+        private void Logout_Click(
+            object sender,
+            EventArgs e)
         {
             LogoutForm form = new LogoutForm();
             form.Show();
+
             this.Close();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        // BACK
+        private void button1_Click(
+            object sender,
+            EventArgs e)
         {
             MainFormMDI form = new MainFormMDI();
             form.Show();
+
             this.Close();
         }
 
-        private void btnLoadProfile_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e)
         {
-            LoadPatientProfile();
+            DialogResult result = MessageBox.Show(
+           "Are you sure you want to exit the application?",
+           "Exit Application",
+            MessageBoxButtons.YesNo,
+            MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
         }
     }
 }

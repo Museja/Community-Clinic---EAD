@@ -1,6 +1,8 @@
-﻿namespace CommunityClinic
+﻿using System.Windows.Forms;
+
+namespace CommunityClinic
 {
-    partial class InventoryItem
+    public partial class InventorylistForm : Form
     {
         /// <summary>
         /// Required designer variable.

@@ -1,0 +1,76 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="MOLLCommunityClinicWeb1.SiteMaster" %>
+
+<!DOCTYPE html>
+<html>
+<head runat="server">
+    <title>MOLL Community Clinic System</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial;
+            background-color: #f4f8fc;
+        }
+
+        .header {
+            background-color: #0d6efd;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 20px;
+        }
+
+        .nav {
+            background: #1e3a8a;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .nav a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .footer {
+            background: #e5e7eb;
+            text-align: center;
+            padding: 10px;
+            margin-top: 30px;
+        }
+    </style>
+
+    <asp:ContentPlaceHolder ID="head" runat="server" />
+
+</head>
+
+<body>
+
+    <form id="form1" runat="server">
+
+        <div class="header">
+            Community Clinic System
+        </div>
+
+        <div class="nav">
+            <a href="Registration.aspx">Register</a>
+            <a href="Login.aspx">Login</a>
+        </div>
+
+        <div class="content">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+        </div>
+
+        <div class="footer">
+            © 2026 Community Clinic System
+        </div>
+
+    </form>
+
+</body>
+</html>

@@ -69,7 +69,6 @@
             this.label1.Size = new System.Drawing.Size(27, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Item";
-           // this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -115,7 +114,6 @@
             this.label6.Size = new System.Drawing.Size(49, 13);
             this.label6.TabIndex = 5;
             this.label6.Text = "Category";
-            // this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // label7
             // 
@@ -143,7 +141,6 @@
             this.label9.Size = new System.Drawing.Size(70, 13);
             this.label9.TabIndex = 8;
             this.label9.Text = "Manufacturer";
-            // this.label9.Click += new System.EventHandler(this.label9_Click);
             // 
             // label10
             // 

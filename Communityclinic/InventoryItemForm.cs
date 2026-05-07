@@ -2,7 +2,6 @@
 using System;
 using System.Text;
 using System.Windows.Forms;
-using static CommunityClinic.Models.Inventoryitems;
 
 namespace CommunityClinic
 {
@@ -18,9 +17,9 @@ namespace CommunityClinic
         }
 
         // GET FORM DATA
-        private InventoryItem GetFormData()
+        private Inventoryitems GetFormData()
         {
-            InventoryItem item = new InventoryItem();
+            Inventoryitems item = new Inventoryitems();
 
             item.Item = txtItem.Text.Trim();
 
@@ -48,7 +47,8 @@ namespace CommunityClinic
 
             return item;
         }
-        // VALIDATION (SHARED)
+
+        // VALIDATION
         private bool ValidateForm()
         {
             StringBuilder errors = new StringBuilder();
@@ -85,13 +85,18 @@ namespace CommunityClinic
 
             if (errors.Length > 0)
             {
-                MessageBox.Show(errors.ToString(), "Validation Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(
+                    errors.ToString(),
+                    "Validation Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
                 return false;
             }
 
             return true;
         }
+
         // SAVE BUTTON
         private void Save_Click(object sender, EventArgs e)
         {
@@ -100,24 +105,37 @@ namespace CommunityClinic
 
             try
             {
-                InventoryItem item = GetFormData();
+                Inventoryitems item = GetFormData();
                 InventoryDAL dal = new InventoryDAL();
 
                 bool success = dal.InsertItem(item);
 
                 if (success)
                 {
-                    MessageBox.Show("Item saved successfully!");
+                    MessageBox.Show(
+                        "Item saved successfully!",
+                        "Success",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+
                     ClearForm();
                 }
                 else
                 {
-                    MessageBox.Show("Error saving item.");
+                    MessageBox.Show(
+                        "Error saving item.",
+                        "Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Unexpected error: " + ex.Message);
+                MessageBox.Show(
+                    "Unexpected error: " + ex.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
 
@@ -129,26 +147,40 @@ namespace CommunityClinic
 
             try
             {
-                InventoryItem item = GetFormData();
+                Inventoryitems item = GetFormData();
                 InventoryDAL dal = new InventoryDAL();
 
                 bool success = dal.Update(item);
 
                 if (success)
                 {
-                    MessageBox.Show("Item updated successfully!");
+                    MessageBox.Show(
+                        "Item updated successfully!",
+                        "Success",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+
                     ClearForm();
                 }
                 else
                 {
-                    MessageBox.Show("Update failed. Item may not exist.");
+                    MessageBox.Show(
+                        "Update failed. Item may not exist.",
+                        "Warning",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message);
+                MessageBox.Show(
+                    "Error: " + ex.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
+
         // CLEAR BUTTON
         private void Clear_Click(object sender, EventArgs e)
         {
@@ -182,11 +214,26 @@ namespace CommunityClinic
             txtNotes.Clear();
         }
 
+        // BACK BUTTON
         private void button1_Click(object sender, EventArgs e)
         {
             MainFormMDI form = new MainFormMDI();
             form.Show();
             this.Close();
+        }
+
+        private void Exit_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show(
+          "Are you sure you want to exit the application?",
+           "Exit Application",
+           MessageBoxButtons.YesNo,
+           MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
         }
     }
 }
