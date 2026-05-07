@@ -75,7 +75,7 @@ namespace UserMgmt
                 return;
             }
 
-            int userID = Convert.ToInt32(dgvViewUsers.SelectedRows[0].Cells["UserID"].Value);
+            int userID = Convert.ToInt32(dgvViewUsers.SelectedRows[0].Cells["Id"].Value);
 
             FrmEditUsers editForm = new FrmEditUsers(userID);
             editForm.ShowDialog();

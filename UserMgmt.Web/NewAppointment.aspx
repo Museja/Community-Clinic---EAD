@@ -204,8 +204,12 @@
 
     <%-- Buttons --%>
     <div class="form-group">
-        <asp:Button ID="btnSave" runat="server" Text="Create Appointment" OnClick="btnSave_Click" CssClass="btn btn-primary" />
-        <asp:Button ID="btnClear" runat="server" Text="Clear" OnClick="btnClear_Click" CausesValidation="false" CssClass="btn btn-secondary" />
-    </div>
+    <asp:Button ID="btnSave" runat="server" Text="Create Appointment"
+                OnClick="btnSave_Click" CssClass="btn btn-primary" />
+    <asp:Button ID="btnClear" runat="server" Text="Clear"
+                OnClick="btnClear_Click" CausesValidation="false"
+                CssClass="btn btn-secondary" />
+    <a href="ViewAppointments.aspx" class="btn btn-secondary">View Appointments →</a>
+</div>
 
 </asp:Content>

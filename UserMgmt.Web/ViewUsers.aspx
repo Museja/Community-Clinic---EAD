@@ -11,6 +11,11 @@
 
     <asp:Label ID="lblMessage" runat="server" ForeColor="Red" />
 
+    <a href="UserPortal.aspx" class="btn btn-primary">+ New User</a>
+<asp:Button ID="Button1" runat="server" Text="Refresh"
+            OnClick="btnRefresh_Click" CausesValidation="false"
+            CssClass="btn btn-secondary" />
+
     <asp:GridView ID="gvUsers" runat="server" AutoGenerateColumns="false"
                   DataKeyNames="Id" OnRowCommand="gvUsers_RowCommand"
                   AllowPaging="true" PageSize="10" OnPageIndexChanging="gvUsers_PageIndexChanging"
@@ -21,7 +26,7 @@
         <SelectedRowStyle BackColor="#cce5ff" />
 
         <Columns>
-            <asp:BoundField DataField="UserID"    HeaderText="ID" />
+            <asp:BoundField DataField="Id"    HeaderText="ID" />
             <asp:BoundField DataField="FirstName" HeaderText="First Name" />
             <asp:BoundField DataField="LastName"  HeaderText="Last Name" />
             <asp:BoundField DataField="Email"     HeaderText="Email" />
@@ -37,12 +42,12 @@
                 <ItemTemplate>
                     <asp:LinkButton ID="btnEdit" runat="server" CssClass="btn btn-primary"
                                     CommandName="EditUser"
-                                    CommandArgument='<%# Eval("UserID") %>'
+                                    CommandArgument='<%# Eval("Id") %>'
                                     Text="Edit" />
                     &nbsp;|&nbsp;
                     <asp:LinkButton ID="btnDelete" runat="server" CssClass="btn btn-danger"
                                     CommandName="DeleteUser"
-                                    CommandArgument='<%# Eval("UserID") %>'
+                                    CommandArgument='<%# Eval("Id") %>'
                                     Text="Delete"
                                     OnClientClick="return confirm('Are you sure you want to delete this user? This cannot be undone.');" />
                 </ItemTemplate>

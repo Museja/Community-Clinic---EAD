@@ -54,11 +54,11 @@ namespace UserMgmt
             {
                 conn.Open();
 
-                string query = "SELECT * FROM Users WHERE UserID = @UserID";
+                string query = "SELECT * FROM Users WHERE Id = @Id";
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
-                    cmd.Parameters.AddWithValue("@UserID", _userID);
+                    cmd.Parameters.AddWithValue("@Id", _userID);
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {

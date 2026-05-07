@@ -136,11 +136,12 @@
     </div>
 
     <div class="form-group">
-        <asp:Button ID="btnSave" runat="server" Text="Create User"
-                    OnClick="btnSave_Click" CssClass="btn btn-primary" />
-        <asp:Button ID="btnClear" runat="server" Text="Clear"
-                    OnClick="btnClear_Click" CausesValidation="false"
-                    CssClass="btn btn-secondary" />
-    </div>
+    <asp:Button ID="btnSave" runat="server" Text="Create User"
+                OnClick="btnSave_Click" CssClass="btn btn-primary" />
+    <asp:Button ID="btnClear" runat="server" Text="Clear"
+                OnClick="btnClear_Click" CausesValidation="false"
+                CssClass="btn btn-secondary" />
+    <a href="ViewUsers.aspx" class="btn btn-secondary">View Users →</a>
+</div>
 
 </asp:Content>

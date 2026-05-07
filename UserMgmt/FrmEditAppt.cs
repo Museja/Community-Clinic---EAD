@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Configuration;
+using System.Data.SqlClient;
 
 namespace UserMgmt
 {
@@ -99,13 +99,21 @@ namespace UserMgmt
             {
                 conn.Open();
 
-                string query = "SELECT * FROM Appointments WHERE Id = @AppointmentID";
+                // Select explicit columns and use the actual primary key column name `Id`.
+                string query = @"SELECT FirstName, LastName, Email, Address, Town,
+                                        Notes, Gender, IsNewPatient, CellPhone,
+                                        MobilePhone, Parish, AppointmentType,
+                                        DoctorName, AppointmentTime
+                                 FROM Appointments
+                                 WHERE Id = @AppointmentID";
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
-                    cmd.Parameters.AddWithValue("@AppointmentID", _apptID);
+                    // Use a typed parameter instead of AddWithValue for reliability
+                    cmd.Parameters.Add("@AppointmentID", System.Data.SqlDbType.Int).Value = _apptID;
 
-                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    // Only expect a single row
+                    using (SqlDataReader reader = cmd.ExecuteReader(System.Data.CommandBehavior.SingleRow))
                     {
                         if (reader.Read())
                         {
@@ -160,6 +168,12 @@ namespace UserMgmt
                             // Time
                             int timeIdx = cmbTime.FindStringExact(reader["AppointmentTime"].ToString());
                             cmbTime.SelectedIndex = timeIdx >= 0 ? timeIdx : 0;
+                        }
+                        else
+                        {
+                            // No record found - inform user and close
+                            MessageBox.Show("Appointment not found.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            this.Close();
                         }
                     }
                 }

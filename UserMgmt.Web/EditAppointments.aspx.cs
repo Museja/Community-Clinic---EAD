@@ -6,6 +6,7 @@ using System.Web.UI.WebControls;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Web.UI;
+using UserMgmt.Web.Helpers;
 
 namespace UserMgmt.Web
 {
@@ -17,7 +18,7 @@ namespace UserMgmt.Web
         {
             if (!int.TryParse(Request.QueryString["id"], out _apptID))
             {
-                lblMessage.ForeColor = System.Drawing.Color.Red;
+                lblMessage.CssClass = "msg-error";
                 lblMessage.Text = "Invalid appointment ID.";
                 return;
             }
@@ -53,11 +54,11 @@ namespace UserMgmt.Web
             {
                 conn.Open();
 
-                string query = "SELECT * FROM Appointments WHERE AppointmentID = @AppointmentID";
+                string query = "SELECT * FROM Appointments WHERE Id = @Id";
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
-                    cmd.Parameters.AddWithValue("@AppointmentID", _apptID);
+                    cmd.Parameters.AddWithValue("@Id", _apptID);
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
@@ -89,7 +90,7 @@ namespace UserMgmt.Web
                         }
                         else
                         {
-                            lblMessage.ForeColor = System.Drawing.Color.Red;
+                            lblMessage.CssClass = "msg-error";
                             lblMessage.Text = "Appointment not found.";
                         }
                     }
@@ -124,7 +125,7 @@ namespace UserMgmt.Web
                                     AppointmentTime = @AppointmentTime,
                                     DoctorName      = @DoctorName,
                                     Notes           = @Notes
-                                 WHERE AppointmentID = @AppointmentID";
+                                 WHERE Id = @Id";
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
@@ -145,7 +146,7 @@ namespace UserMgmt.Web
                     cmd.Parameters.AddWithValue("@Notes", string.IsNullOrWhiteSpace(txtNotes.Text)
                                                                         ? (object)DBNull.Value
                                                                         : txtNotes.Text.Trim());
-                    cmd.Parameters.AddWithValue("@AppointmentID", _apptID);
+                    cmd.Parameters.AddWithValue("@Id", _apptID);
 
                     cmd.ExecuteNonQuery();
                 }
@@ -158,7 +159,7 @@ namespace UserMgmt.Web
 
             if (string.IsNullOrWhiteSpace(txtCell.Text) && string.IsNullOrWhiteSpace(txtMobile.Text))
             {
-                lblMessage.ForeColor = System.Drawing.Color.Red;
+                lblMessage.CssClass = "msg-error";
                 lblMessage.Text = "Please enter at least one phone number (Cell or Mobile).";
                 return;
             }
@@ -168,7 +169,7 @@ namespace UserMgmt.Web
                 DateTime apptDate = DateTime.Parse(txtApptDate.Text);
                 if (apptDate.Date < DateTime.Today)
                 {
-                    lblMessage.ForeColor = System.Drawing.Color.Red;
+                    lblMessage.CssClass = "msg-error";
                     lblMessage.Text = "Appointment date must be today or a future date.";
                     return;
                 }
@@ -177,11 +178,12 @@ namespace UserMgmt.Web
             try
             {
                 SaveChanges();
+                NotificationHelper.Set(this.Page, "Appointment updated successfully.", "success");
                 Response.Redirect("ViewAppointments.aspx");
             }
             catch (Exception ex)
             {
-                lblMessage.ForeColor = System.Drawing.Color.Red;
+                lblMessage.CssClass = "msg-error";
                 lblMessage.Text = "Error updating appointment: " + ex.Message;
             }
         }

@@ -91,11 +91,11 @@ namespace UserMgmt.Web
             {
                 conn.Open();
 
-                string query = "DELETE FROM Appointments WHERE AppointmentID = @AppointmentID";
+                string query = "DELETE FROM Appointments WHERE Id = @Id";
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
-                    cmd.Parameters.AddWithValue("@AppointmentID", apptID);
+                    cmd.Parameters.AddWithValue("@Id", apptID);
                     cmd.ExecuteNonQuery();
                 }
             }

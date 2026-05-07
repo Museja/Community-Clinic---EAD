@@ -11,6 +11,11 @@
 
     <asp:Label ID="lblMessage" runat="server" ForeColor="Red" />
 
+    <a href="NewAppointment.aspx" class="btn btn-primary">+ New Appointment</a>
+<asp:Button ID="Button1" runat="server" Text="Refresh"
+            OnClick="btnRefresh_Click" CausesValidation="false"
+            CssClass="btn btn-secondary" />
+
     <asp:GridView ID="gvAppts" runat="server" AutoGenerateColumns="false"
                   DataKeyNames="Id" OnRowCommand="gvAppts_RowCommand"
                   AllowPaging="true" PageSize="10" OnPageIndexChanging="gvAppts_PageIndexChanging"
@@ -21,7 +26,7 @@
         <SelectedRowStyle BackColor="#cce5ff" />
 
         <Columns>
-            <asp:BoundField DataField="AppointmentID"   HeaderText="ID" />
+            <asp:BoundField DataField="Id"   HeaderText="ID" />
             <asp:BoundField DataField="FirstName"       HeaderText="First Name" />
             <asp:BoundField DataField="LastName"        HeaderText="Last Name" />
             <asp:BoundField DataField="Email"           HeaderText="Email" />
@@ -40,12 +45,12 @@
                 <ItemTemplate>
                     <asp:LinkButton ID="btnEdit" runat="server" CssClass="btn btn-primary"
                         CommandName="EditAppt"
-                        CommandArgument='<%# Eval("AppointmentID") %>'
+                        CommandArgument='<%# Eval("Id") %>'
                         Text="Edit" />
                     &nbsp;|&nbsp;
                     <asp:LinkButton ID="btnDelete" runat="server"
                                     CommandName="DeleteAppt"
-                                    CommandArgument='<%# Eval("AppointmentID") %>'
+                                    CommandArgument='<%# Eval("Id") %>'
                                     Text="Delete"
                                     OnClientClick="return confirm('Are you sure you want to delete this appointment? This cannot be undone.');" />
                 </ItemTemplate>

@@ -57,7 +57,7 @@ namespace UserMgmt.Web
             // Phone check
             if (string.IsNullOrWhiteSpace(txtCell.Text) && string.IsNullOrWhiteSpace(txtMobile.Text))
             {
-                lblMessage.ForeColor = System.Drawing.Color.Red;
+                lblMessage.CssClass = "msg-error";
                 lblMessage.Text = "Please enter at least one phone number (Cell or Mobile).";
                 return;
             }
@@ -68,7 +68,7 @@ namespace UserMgmt.Web
                 DateTime dob = DateTime.Parse(txtDob.Text);
                 if (dob >= DateTime.Today)
                 {
-                    lblMessage.ForeColor = System.Drawing.Color.Red;
+                    lblMessage.CssClass = "msg-error";
                     lblMessage.Text = "Date of Birth must be in the past.";
                     return;
                 }
@@ -77,13 +77,13 @@ namespace UserMgmt.Web
             try
             {
                 SaveUser();
-                lblMessage.ForeColor = System.Drawing.Color.Green;
+                lblMessage.CssClass = "msg-success";
                 lblMessage.Text = "User created successfully!";
                 ClearForm();
             }
             catch (Exception ex)
             {
-                lblMessage.ForeColor = System.Drawing.Color.Red;
+                lblMessage.CssClass = "msg-error";
                 lblMessage.Text = "Error creating user: " + ex.Message;
             }
         }

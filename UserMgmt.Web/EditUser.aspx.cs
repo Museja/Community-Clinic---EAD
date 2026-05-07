@@ -18,7 +18,7 @@ namespace UserMgmt.Web
             // Get the UserID from the URL e.g. EditUser.aspx?id=5
             if (!int.TryParse(Request.QueryString["id"], out _userID))
             {
-                lblMessage.ForeColor = System.Drawing.Color.Red;
+                lblMessage.CssClass = "msg-error";
                 lblMessage.Text = "Invalid user ID.";
                 return;
             }
@@ -35,11 +35,11 @@ namespace UserMgmt.Web
             {
                 conn.Open();
 
-                string query = "SELECT * FROM Users WHERE UserID = @UserID";
+                string query = "SELECT * FROM Users WHERE Id = @Id";
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
-                    cmd.Parameters.AddWithValue("@UserID", _userID);
+                    cmd.Parameters.AddWithValue("@Id", _userID);
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
@@ -64,7 +64,7 @@ namespace UserMgmt.Web
                         }
                         else
                         {
-                            lblMessage.ForeColor = System.Drawing.Color.Red;
+                            lblMessage.CssClass = "msg-error";
                             lblMessage.Text = "User not found.";
                         }
                     }
@@ -94,7 +94,7 @@ namespace UserMgmt.Web
                                     Address     = @Address,
                                     Town        = @Town,
                                     Parish      = @Parish
-                                 WHERE UserID = @UserID";
+                                 WHERE Id = @Id";
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
@@ -108,7 +108,7 @@ namespace UserMgmt.Web
                     cmd.Parameters.AddWithValue("@Address", txtAddress.Text.Trim());
                     cmd.Parameters.AddWithValue("@Town", txtTown.Text.Trim());
                     cmd.Parameters.AddWithValue("@Parish", ddlParish.SelectedValue);
-                    cmd.Parameters.AddWithValue("@UserID", _userID);
+                    cmd.Parameters.AddWithValue("@Id", _userID);
 
                     cmd.ExecuteNonQuery();
                 }
@@ -117,12 +117,12 @@ namespace UserMgmt.Web
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            // Re-read userID on postback
+            // Re-read id on postback(changed from UserID)
             int.TryParse(Request.QueryString["id"], out _userID);
 
             if (string.IsNullOrWhiteSpace(txtCell.Text) && string.IsNullOrWhiteSpace(txtMobile.Text))
             {
-                lblMessage.ForeColor = System.Drawing.Color.Red;
+                lblMessage.CssClass = "msg-error";
                 lblMessage.Text = "Please enter at least one phone number (Cell or Mobile).";
                 return;
             }
@@ -132,7 +132,7 @@ namespace UserMgmt.Web
                 DateTime dob = DateTime.Parse(txtDob.Text);
                 if (dob >= DateTime.Today)
                 {
-                    lblMessage.ForeColor = System.Drawing.Color.Red;
+                    lblMessage.CssClass = "msg-error";
                     lblMessage.Text = "Date of Birth must be in the past.";
                     return;
                 }
@@ -145,7 +145,7 @@ namespace UserMgmt.Web
             }
             catch (Exception ex)
             {
-                lblMessage.ForeColor = System.Drawing.Color.Red;
+                lblMessage.CssClass = "msg-error";
                 lblMessage.Text = "Error updating user: " + ex.Message;
             }
         }

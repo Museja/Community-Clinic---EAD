@@ -59,6 +59,9 @@ namespace UserMgmt
                     dgvViewAppt.Columns["LastName"].HeaderText = "Last Name";
                     dgvViewAppt.Columns["CellPhone"].HeaderText = "Cell";
                     dgvViewAppt.Columns["MobilePhone"].HeaderText = "Mobile";
+                    dgvViewAppt.Columns["Address"].HeaderText = "Address";
+                    dgvViewAppt.Columns["Town"].HeaderText = "Town";
+                    dgvViewAppt.Columns["Parish"].HeaderText = "Parish";
                     dgvViewAppt.Columns["IsNewPatient"].HeaderText = "New Patient?";
                     dgvViewAppt.Columns["AppointmentType"].HeaderText = "Type";
                     dgvViewAppt.Columns["AppointmentDate"].HeaderText = "Date";

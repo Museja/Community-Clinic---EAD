@@ -6,6 +6,7 @@ using System.Web.UI.WebControls;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Web.UI;
+using UserMgmt.Web.Helpers;
 
 namespace UserMgmt.Web
 {
@@ -85,7 +86,7 @@ namespace UserMgmt.Web
             // Phone — at least one required
             if (string.IsNullOrWhiteSpace(txtCell.Text) && string.IsNullOrWhiteSpace(txtMobile.Text))
             {
-                lblMessage.ForeColor = System.Drawing.Color.Red;
+                lblMessage.CssClass = "msg-error";
                 lblMessage.Text = "Please enter at least one phone number (Cell or Mobile).";
                 return;
             }
@@ -96,7 +97,7 @@ namespace UserMgmt.Web
                 DateTime apptDate = DateTime.Parse(txtApptDate.Text);
                 if (apptDate.Date < DateTime.Today)
                 {
-                    lblMessage.ForeColor = System.Drawing.Color.Red;
+                    lblMessage.CssClass = "msg-error";
                     lblMessage.Text = "Appointment date must be today or a future date.";
                     return;
                 }
@@ -105,13 +106,12 @@ namespace UserMgmt.Web
             try
             {
                 SaveAppointment();
-                lblMessage.ForeColor = System.Drawing.Color.Green;
-                lblMessage.Text = "Appointment created successfully!";
-                ClearForm();
+                NotificationHelper.Set(this.Page, "Appointment created successfully.", "success");
+                Response.Redirect("ViewAppointments.aspx");
             }
             catch (Exception ex)
             {
-                lblMessage.ForeColor = System.Drawing.Color.Red;
+                lblMessage.CssClass = "msg-error";
                 lblMessage.Text = "Error creating appointment: " + ex.Message;
             }
         }

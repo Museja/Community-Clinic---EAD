@@ -90,11 +90,11 @@ namespace UserMgmt.Web
             {
                 conn.Open();
 
-                string query = "DELETE FROM Users WHERE UserID = @UserID";
+                string query = "DELETE FROM Users WHERE Id = @Id";
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
-                    cmd.Parameters.AddWithValue("@UserID", userID);
+                    cmd.Parameters.AddWithValue("@Id", userID);
                     cmd.ExecuteNonQuery();
                 }
             }

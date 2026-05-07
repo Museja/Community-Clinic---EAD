@@ -8,12 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%: Page.Title %> - Community Clinic</title>
 
-    <asp:PlaceHolder runat="server">
-        <%: Scripts.Render("~/bundles/modernizr") %>
-    </asp:PlaceHolder>
-
-    <webopt:bundlereference runat="server" path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+    <%-- Bootstrap 4 from CDN --%>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" />
 
     <style>
         /* ── General ── */
@@ -115,47 +113,64 @@
         }
 
         /* ── Buttons ── */
-        input[type="submit"],
         .btn-primary {
-            background-color: #1a6b8a;
-            border: none;
-            color: #fff;
-            padding: 0.5rem 1.4rem;
-            border-radius: 4px;
-            font-size: 0.95rem;
-            cursor: pointer;
-            margin-right: 0.5rem;
+            background-color: #1a6b8a !important;
+            border-color: #1a6b8a !important;
         }
 
-        input[type="submit"]:hover,
         .btn-primary:hover {
-            background-color: #145570;
+            background-color: #145570 !important;
+            border-color: #145570 !important;
         }
 
-        input[type="button"],
         .btn-secondary {
-            background-color: #6c757d;
-            border: none;
-            color: #fff;
-            padding: 0.5rem 1.4rem;
+            background-color: #6c757d !important;
+            border-color: #6c757d !important;
+        }
+
+        /* ── Radio buttons ── */
+        .radio-inline-group {
+            display: flex;
+            flex-direction: row;
+            gap: 1.5rem;
+            padding-top: 0.3rem;
+        }
+
+        .radio-inline-group label {
+            display: inline-flex !important;
+            align-items: center;
+            gap: 0.4rem;
+            font-weight: normal !important;
+            cursor: pointer;
+            margin-bottom: 0 !important;
+        }
+
+        .radio-inline-group input[type="radio"] {
+            width: auto !important;
+            margin: 0 !important;
+        }
+
+        /* ── Messages ── */
+        .msg-success {
+            display: block;
+            color: #155724;
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
             border-radius: 4px;
-            font-size: 0.95rem;
-            cursor: pointer;
+            padding: 0.75rem 1rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
         }
 
-        input[type="button"]:hover,
-        .btn-secondary:hover {
-            background-color: #565e64;
-        }
-
-        .radio-group label {
-            margin-right: 1.5rem;
-            font-weight: normal;
-            cursor: pointer;
-        }
-
-        .radio-group input[type="radio"] {
-            margin-right: 0.3rem;
+        .msg-error {
+            display: block;
+            color: #721c24;
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 4px;
+            padding: 0.75rem 1rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
         }
 
         /* ── GridView ── */
@@ -196,8 +211,22 @@
             font-size: 0.85rem;
             padding-top: 1rem;
         }
-    </style>
 
+        /* Add this to your Site.Master styles */
+        .radio-inline-group span label {
+            display: inline-flex !important;
+            align-items: center !important;
+            margin-right: 1.5rem !important;
+            font-weight: normal !important;
+        }
+
+        .radio-inline-group span input[type="radio"] {
+            width: auto !important;
+            max-width: none !important;
+            display: inline !important;
+            margin-right: 0.3rem !important;
+        }
+    </style>
 </head>
 <body>
     <form runat="server">
@@ -217,19 +246,19 @@
             </Scripts>
         </asp:ScriptManager>
 
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark">
+        <nav class="navbar navbar-expand-sm navbar-dark">
             <div class="container">
                 <a class="navbar-brand" runat="server" href="~/">
                     &#9764; Community Clinic
                 </a>
-                <button type="button" class="navbar-toggler" data-bs-toggle="collapse"
-                    data-bs-target=".navbar-collapse" title="Toggle navigation"
+                <button type="button" class="navbar-toggler" data-toggle="collapse"
+                    data-target=".navbar-collapse" title="Toggle navigation"
                     aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                <div class="collapse navbar-collapse">
+                    <ul class="navbar-nav ml-auto">
 
                         <li class="nav-item">
                             <a class="nav-link" runat="server" href="~/">Home</a>
@@ -238,41 +267,33 @@
                         <%-- Users dropdown --%>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button"
-                               data-bs-toggle="dropdown" aria-expanded="false">
+                               data-toggle="dropdown" aria-expanded="false">
                                 Users
                             </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a class="dropdown-item" runat="server" href="~/UserPortal">
-                                        &#43; New User
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" runat="server" href="~/ViewUsers">
-                                        &#128100; View Users
-                                    </a>
-                                </li>
-                            </ul>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" runat="server" href="~/UserPortal">
+                                    &#43; New User
+                                </a>
+                                <a class="dropdown-item" runat="server" href="~/ViewUsers">
+                                    &#128100; View Users
+                                </a>
+                            </div>
                         </li>
 
                         <%-- Appointments dropdown --%>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button"
-                               data-bs-toggle="dropdown" aria-expanded="false">
+                               data-toggle="dropdown" aria-expanded="false">
                                 Appointments
                             </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a class="dropdown-item" runat="server" href="~/NewAppointment">
-                                        &#43; New Appointment
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" runat="server" href="~/ViewAppointments">
-                                        &#128198; View Appointments
-                                    </a>
-                                </li>
-                            </ul>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" runat="server" href="~/NewAppointment">
+                                    &#43; New Appointment
+                                </a>
+                                <a class="dropdown-item" runat="server" href="~/ViewAppointments">
+                                    &#128198; View Appointments
+                                </a>
+                            </div>
                         </li>
 
                     </ul>
@@ -289,8 +310,8 @@
             </footer>
         </div>
     </form>
-    <asp:PlaceHolder runat="server">
-        <%: Scripts.Render("~/Scripts/bootstrap.js") %>
-    </asp:PlaceHolder>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
