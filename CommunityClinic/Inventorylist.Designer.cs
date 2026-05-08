@@ -78,7 +78,7 @@ namespace CommunityClinic
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.button1);
             this.Name = "Inventorylist";
-            this.Load += new System.EventHandler(this.Inventorylist_Load_1);
+            this.Load += new System.EventHandler(this.InventorylistForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.communityClinicLLOMDBDataSet1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.communityClinicLLOMDBDataSet1BindingSource)).EndInit();

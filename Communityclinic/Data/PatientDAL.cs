@@ -13,7 +13,7 @@ namespace CommunityClinic
             using (SqlConnection conn = DatabaseHelper.GetConnection())
             {
                 string query = @"INSERT INTO Patient 
-                                (Name, DateOfBirth, Age, Address, PhoneNumber, EmailAddress, Gender, Allergies, History, Medications)
+                                (Name, DOB, Age, Address, Phone, Email, Gender, Allergies, History, Medications)
                                 VALUES 
                                 (@Name, @DateOfBirth, @Age, @Address, @PhoneNumber, @EmailAddress, @Gender, @Allergies, @History, @Medications)";
 
@@ -45,16 +45,16 @@ namespace CommunityClinic
             {
                 string query = @"UPDATE Patient SET
                                     Name=@Name,
-                                    DateOfBirth=@DateOfBirth,
+                                    DOB=@DateOfBirth,
                                     Age=@Age,
                                     Address=@Address,
-                                    PhoneNumber=@PhoneNumber,
-                                    EmailAddress=@EmailAddress,
+                                    Phone=@PhoneNumber,
+                                    Email=@EmailAddress,
                                     Gender=@Gender,
                                     Allergies=@Allergies,
                                     History=@History,
                                     Medications=@Medications
-                                 WHERE PatientID=@PatientID";
+                                 WHERE ID=@PatientID";
 
                 SqlCommand cmd = new SqlCommand(query, conn);
 
@@ -80,7 +80,7 @@ namespace CommunityClinic
         {
             using (SqlConnection conn = DatabaseHelper.GetConnection())
             {
-                string query = "SELECT * FROM Patient WHERE EmailAddress=@Email";
+                string query = "SELECT * FROM Patient WHERE Email=@Email";
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@Email", email);
 
@@ -100,7 +100,7 @@ namespace CommunityClinic
         {
             using (SqlConnection conn = DatabaseHelper.GetConnection())
             {
-                string query = "SELECT * FROM Patient WHERE PatientID=@PatientID";
+                string query = "SELECT * FROM Patient WHERE ID=@PatientID";
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@PatientID", id);
 
@@ -133,13 +133,13 @@ namespace CommunityClinic
         {
             return new Patient
             {
-                PatientID = (int)reader["PatientID"],
+                PatientID = (int)reader["ID"],
                 Name = reader["Name"].ToString(),
-                DateOfBirth = (DateTime)reader["DateOfBirth"],
+                DateOfBirth = (DateTime)reader["DOB"],
                 Age = (int)reader["Age"],
                 Address = reader["Address"].ToString(),
-                PhoneNumber = reader["PhoneNumber"].ToString(),
-                EmailAddress = reader["EmailAddress"].ToString(),
+                PhoneNumber = reader["Phone"].ToString(),
+                EmailAddress = reader["Email"].ToString(),
                 Gender = reader["Gender"].ToString(),
                 Allergies = reader["Allergies"].ToString(),
                 History = reader["History"].ToString(),

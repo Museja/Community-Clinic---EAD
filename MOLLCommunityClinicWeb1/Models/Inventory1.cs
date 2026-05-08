@@ -23,4 +23,3 @@ namespace MOLLCommunityClinicWeb1.Models
         public string Notes { get; set; }
     }
 }
-}

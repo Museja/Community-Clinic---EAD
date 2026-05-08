@@ -97,12 +97,16 @@ namespace CommunityClinic
 
                 if (success)
                 {
-                    Form nextForm = (role == "Patient")
-                        ? new SuccessForm()
-                        : new MainFormMDI();
+                    //Form nextForm = (role == "Patient")
+                    //    ? new SuccessForm()
+                    //    : new MainFormMDI();
+                    //nextForm.Show();
+                    //this.Hide();
 
-                    nextForm.Show();
+                    SuccessForm f = new SuccessForm();
+                    f.Show();
                     this.Hide();
+                    
                 }
                 else
                 {

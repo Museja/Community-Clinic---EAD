@@ -192,10 +192,10 @@ namespace CommunityClinic
             object sender,
             EventArgs e)
         {
-            MainFormMDI form = new MainFormMDI();
-            form.Show();
+            //MainFormMDI form = new MainFormMDI();
+            //form.Show();
 
-            this.Close();
+            //this.Close();
         }
 
         private void button3_Click(object sender, EventArgs e)

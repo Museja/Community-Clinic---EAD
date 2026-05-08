@@ -13,7 +13,7 @@ namespace CommunityClinic
                     "Data Source=23.95.235.16;Initial Catalog=CommunityClinicLLOMDB;User ID=vtdi_student;Password=P@ssword1;TrustServerCertificate=True"
                 );
 
-                conn.Open();
+                //conn.Open();
                 return conn;
             }
             catch (Exception ex)

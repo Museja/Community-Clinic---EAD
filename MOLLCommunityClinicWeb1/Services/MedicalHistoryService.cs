@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MOLLCommunityClinicWeb1.Models;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;

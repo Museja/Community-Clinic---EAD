@@ -159,9 +159,9 @@ namespace CommunityClinic
         // NAVIGATION
         private void button1_Click(object sender, EventArgs e)
         {
-            MainFormMDI form = new MainFormMDI();
-            form.Show();
-            this.Close();
+            //MainFormMDI form = new MainFormMDI();
+            //form.Show();
+            //this.Close();
         }
 
         private void txtName_TextChanged(object sender, EventArgs e) { }

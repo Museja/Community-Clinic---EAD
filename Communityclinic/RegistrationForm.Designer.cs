@@ -144,7 +144,7 @@
             this.radioPatient.TabStop = true;
             this.radioPatient.Text = "Patient";
             this.radioPatient.UseVisualStyleBackColor = true;
-            this.radioPatient.CheckedChanged += new System.EventHandler(this.radioPatient_CheckedChanged);
+            //this.radioPatient.CheckedChanged += new System.EventHandler(this.radioPatient_CheckedChanged);
             // 
             // radioAdmin
             // 
@@ -156,7 +156,7 @@
             this.radioAdmin.TabStop = true;
             this.radioAdmin.Text = "Admnistrator";
             this.radioAdmin.UseVisualStyleBackColor = true;
-            this.radioAdmin.CheckedChanged += new System.EventHandler(this.radioAdmin_CheckedChanged);
+            //this.radioAdmin.CheckedChanged += new System.EventHandler(this.radioAdmin_CheckedChanged);
             // 
             // lblAdminId
             // 
@@ -166,7 +166,7 @@
             this.lblAdminId.Size = new System.Drawing.Size(84, 13);
             this.lblAdminId.TabIndex = 12;
             this.lblAdminId.Text = "Administrator ID:";
-            this.lblAdminId.Click += new System.EventHandler(this.label6_Click);
+            //this.lblAdminId.Click += new System.EventHandler(this.label6_Click);
             // 
             // txtAdminId
             // 
@@ -174,7 +174,7 @@
             this.txtAdminId.Name = "txtAdminId";
             this.txtAdminId.Size = new System.Drawing.Size(100, 20);
             this.txtAdminId.TabIndex = 13;
-            this.txtAdminId.TextChanged += new System.EventHandler(this.AdminID_TextChanged);
+            //this.txtAdminId.TextChanged += new System.EventHandler(this.AdminID_TextChanged);
             // 
             // radioMedicalstaff
             // 
@@ -186,7 +186,7 @@
             this.radioMedicalstaff.TabStop = true;
             this.radioMedicalstaff.Text = "Medical Staff";
             this.radioMedicalstaff.UseVisualStyleBackColor = true;
-            this.radioMedicalstaff.CheckedChanged += new System.EventHandler(this.radioMedicalstaff_CheckedChanged);
+            //this.radioMedicalstaff.CheckedChanged += new System.EventHandler(this.radioMedicalstaff_CheckedChanged);
             // 
             // lblMedStaff
             // 
@@ -196,7 +196,7 @@
             this.lblMedStaff.Size = new System.Drawing.Size(86, 13);
             this.lblMedStaff.TabIndex = 15;
             this.lblMedStaff.Text = "Medical Staff ID:";
-            this.lblMedStaff.Click += new System.EventHandler(this.lblMedStaff_Click);
+            //this.lblMedStaff.Click += new System.EventHandler(this.lblMedStaff_Click);
             // 
             // txtMedStaff
             // 
@@ -204,7 +204,7 @@
             this.txtMedStaff.Name = "txtMedStaff";
             this.txtMedStaff.Size = new System.Drawing.Size(100, 20);
             this.txtMedStaff.TabIndex = 16;
-            this.txtMedStaff.TextChanged += new System.EventHandler(this.txtMedStaff_TextChanged);
+            //this.txtMedStaff.TextChanged += new System.EventHandler(this.txtMedStaff_TextChanged);
             // 
             // button1
             // 
@@ -244,7 +244,7 @@
             this.Controls.Add(this.label1);
             this.Name = "RegistrationForm";
             this.Text = "RegistrationForm";
-            this.Load += new System.EventHandler(this.RegistrationForm_Load);
+            //this.Load += new System.EventHandler(this.RegistrationForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

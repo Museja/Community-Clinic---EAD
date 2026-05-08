@@ -19,10 +19,10 @@ namespace CommunityClinic
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            LoginForm login = new LoginForm();
-            login.Show();
+            //LoginForm login = new LoginForm();
+            //login.Show();
 
-            this.Hide();
+            //this.Hide();
         }
 
         private void button1_Click(object sender, EventArgs e)

@@ -217,9 +217,9 @@ namespace CommunityClinic
         // BACK BUTTON
         private void button1_Click(object sender, EventArgs e)
         {
-            MainFormMDI form = new MainFormMDI();
-            form.Show();
-            this.Close();
+            //MainFormMDI form = new MainFormMDI();
+            //form.Show();
+            //this.Close();
         }
 
         private void Exit_Click(object sender, EventArgs e)
