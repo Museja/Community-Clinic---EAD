@@ -4,17 +4,14 @@
 
     <h2>Appointments</h2>
 
-    <asp:Button ID="btnRefresh" runat="server" CssClass="btn btn-primary" Text="Refresh"
-                OnClick="btnRefresh_Click" CausesValidation="false" />
+    <a href="NewAppointment.aspx" class="btn btn-primary">+ New Appointment</a>
+    <asp:Button ID="Button1" runat="server" Text="Refresh"
+            OnClick="btnRefresh_Click" CausesValidation="false"
+            CssClass="btn btn-secondary" />
 
     <br /><br />
 
     <asp:Label ID="lblMessage" runat="server" ForeColor="Red" />
-
-    <a href="NewAppointment.aspx" class="btn btn-primary">+ New Appointment</a>
-<asp:Button ID="Button1" runat="server" Text="Refresh"
-            OnClick="btnRefresh_Click" CausesValidation="false"
-            CssClass="btn btn-secondary" />
 
     <asp:GridView ID="gvAppts" runat="server" AutoGenerateColumns="false"
                   DataKeyNames="Id" OnRowCommand="gvAppts_RowCommand"
@@ -48,7 +45,7 @@
                         CommandArgument='<%# Eval("Id") %>'
                         Text="Edit" />
                     &nbsp;|&nbsp;
-                    <asp:LinkButton ID="btnDelete" runat="server"
+                    <asp:LinkButton ID="btnDelete" runat="server" CssClass="btn btn-danger"
                                     CommandName="DeleteAppt"
                                     CommandArgument='<%# Eval("Id") %>'
                                     Text="Delete"

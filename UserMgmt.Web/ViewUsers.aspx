@@ -4,22 +4,19 @@
 
     <h2>Registered Users</h2>
 
-    <asp:Button ID="btnRefresh" runat="server" CssClass="btn btn-primary" Text="Refresh" 
-                OnClick="btnRefresh_Click" CausesValidation="false" />
+    <a href="NewUser.aspx" class="btn btn-primary">+ New User</a>
+    <asp:Button ID="Button1" runat="server" Text="Refresh"
+            OnClick="btnRefresh_Click" CausesValidation="false"
+            CssClass="btn btn-secondary" />
 
     <br /><br />
 
     <asp:Label ID="lblMessage" runat="server" ForeColor="Red" />
 
-    <a href="UserPortal.aspx" class="btn btn-primary">+ New User</a>
-<asp:Button ID="Button1" runat="server" Text="Refresh"
-            OnClick="btnRefresh_Click" CausesValidation="false"
-            CssClass="btn btn-secondary" />
-
     <asp:GridView ID="gvUsers" runat="server" AutoGenerateColumns="false"
                   DataKeyNames="Id" OnRowCommand="gvUsers_RowCommand"
                   AllowPaging="true" PageSize="10" OnPageIndexChanging="gvUsers_PageIndexChanging"
-                  Width="100%" CellPadding="6" BorderColor="#dddddd" BorderStyle="Solid" BorderWidth="1px">
+                  Width="100%" CellPadding="6" BorderColor="#dddddd" BorderStyle="Solid" BorderWidth="1px" OnSelectedIndexChanged="gvUsers_SelectedIndexChanged">
 
         <HeaderStyle BackColor="#4a90d9" ForeColor="White" Font-Bold="true" />
         <AlternatingRowStyle BackColor="#f9f9f9" />

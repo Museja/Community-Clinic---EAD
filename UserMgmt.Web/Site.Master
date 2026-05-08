@@ -66,7 +66,7 @@
         /* ── Page content ── */
         .container.body-content {
             background-color: #fff;
-            border-radius: 8px;
+            border-radius: 10px;
             padding: 2rem;
             margin-top: 2rem;
             margin-bottom: 2rem;
@@ -129,25 +129,18 @@
         }
 
         /* ── Radio buttons ── */
-        .radio-inline-group {
-            display: flex;
-            flex-direction: row;
-            gap: 1.5rem;
-            padding-top: 0.3rem;
-        }
-
-        .radio-inline-group label {
+        .radio-inline-group span label {
             display: inline-flex !important;
-            align-items: center;
-            gap: 0.4rem;
+            align-items: center !important;
+            margin-right: 1.5rem !important;
             font-weight: normal !important;
-            cursor: pointer;
-            margin-bottom: 0 !important;
         }
 
-        .radio-inline-group input[type="radio"] {
+        .radio-inline-group span input[type="radio"] {
             width: auto !important;
-            margin: 0 !important;
+            max-width: none !important;
+            display: inline !important;
+            margin-right: 0.3rem !important;
         }
 
         /* ── Messages ── */
@@ -212,20 +205,6 @@
             padding-top: 1rem;
         }
 
-        /* Add this to your Site.Master styles */
-        .radio-inline-group span label {
-            display: inline-flex !important;
-            align-items: center !important;
-            margin-right: 1.5rem !important;
-            font-weight: normal !important;
-        }
-
-        .radio-inline-group span input[type="radio"] {
-            width: auto !important;
-            max-width: none !important;
-            display: inline !important;
-            margin-right: 0.3rem !important;
-        }
     </style>
 </head>
 <body>

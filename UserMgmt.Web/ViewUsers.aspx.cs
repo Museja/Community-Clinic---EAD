@@ -15,19 +15,7 @@ namespace UserMgmt.Web
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-            {
-                try
-                {
-                    LoadUsers();
-                    lblMessage.ForeColor = System.Drawing.Color.Green;
-                    lblMessage.Text = "Load attempted. Row count: " + gvUsers.Rows.Count;
-                }
-                catch (Exception ex)
-                {
-                    lblMessage.ForeColor = System.Drawing.Color.Red;
-                    lblMessage.Text = "Error: " + ex.Message;
-                }
-            }
+                LoadUsers();
         }
 
         private void LoadUsers()
