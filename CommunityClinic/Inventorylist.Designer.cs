@@ -30,14 +30,9 @@ namespace CommunityClinic
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.button1 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.communityClinicLLOMDBDataSet1 = new CommunityClinic.CommunityClinicLLOMDBDataSet();
-            this.communityClinicLLOMDBDataSet1BindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.communityClinicLLOMDBDataSet1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.communityClinicLLOMDBDataSet1BindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -53,35 +48,21 @@ namespace CommunityClinic
             // 
             // dataGridView1
             // 
-            this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.DataSource = this.communityClinicLLOMDBDataSet1BindingSource;
             this.dataGridView1.Location = new System.Drawing.Point(13, 34);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(758, 405);
+            this.dataGridView1.Size = new System.Drawing.Size(758, 482);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
-            // communityClinicLLOMDBDataSet1
-            // 
-            this.communityClinicLLOMDBDataSet1.DataSetName = "CommunityClinicLLOMDBDataSet";
-            this.communityClinicLLOMDBDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // communityClinicLLOMDBDataSet1BindingSource
-            // 
-            this.communityClinicLLOMDBDataSet1BindingSource.DataSource = this.communityClinicLLOMDBDataSet1;
-            this.communityClinicLLOMDBDataSet1BindingSource.Position = 0;
-            // 
-            // Inventorylist
+            // InventorylistForm
             // 
             this.ClientSize = new System.Drawing.Size(783, 528);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.button1);
-            this.Name = "Inventorylist";
+            this.Name = "InventorylistForm";
             this.Load += new System.EventHandler(this.InventorylistForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.communityClinicLLOMDBDataSet1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.communityClinicLLOMDBDataSet1BindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -89,7 +70,5 @@ namespace CommunityClinic
         #endregion
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.BindingSource communityClinicLLOMDBDataSet1BindingSource;
-        private CommunityClinicLLOMDBDataSet communityClinicLLOMDBDataSet1;
     }
 }

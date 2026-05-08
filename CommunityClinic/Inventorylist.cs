@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Windows.Forms;
 
 namespace CommunityClinic
@@ -24,8 +25,6 @@ namespace CommunityClinic
             try
             {
                 dataGridView1.DataSource = dal.GetItems();
-
-
                 dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                 dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
                 dataGridView1.ReadOnly = true;

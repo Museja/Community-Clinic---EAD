@@ -28,36 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.Patientlistdgv = new System.Windows.Forms.DataGridView();
-            this.communityClinicLLOMDBDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.communityClinicLLOMDBDataSet = new CommunityClinic.CommunityClinicLLOMDBDataSet();
             this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Patientlistdgv)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.communityClinicLLOMDBDataSetBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.communityClinicLLOMDBDataSet)).BeginInit();
             this.SuspendLayout();
             // 
             // Patientlistdgv
             // 
-            this.Patientlistdgv.AutoGenerateColumns = false;
             this.Patientlistdgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.Patientlistdgv.DataSource = this.communityClinicLLOMDBDataSetBindingSource;
             this.Patientlistdgv.Location = new System.Drawing.Point(13, 33);
             this.Patientlistdgv.Name = "Patientlistdgv";
             this.Patientlistdgv.Size = new System.Drawing.Size(756, 405);
             this.Patientlistdgv.TabIndex = 0;
             this.Patientlistdgv.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Patientlistdgv_CellContentClick);
-            // 
-            // communityClinicLLOMDBDataSetBindingSource
-            // 
-            this.communityClinicLLOMDBDataSetBindingSource.DataSource = this.communityClinicLLOMDBDataSet;
-            this.communityClinicLLOMDBDataSetBindingSource.Position = 0;
-            // 
-            // communityClinicLLOMDBDataSet
-            // 
-            this.communityClinicLLOMDBDataSet.DataSetName = "CommunityClinicLLOMDBDataSet";
-            this.communityClinicLLOMDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // button1
             // 
@@ -79,9 +62,8 @@
             this.Controls.Add(this.Patientlistdgv);
             this.Name = "Patientlist";
             this.Text = "Patientlist";
+            //this.Load += new System.EventHandler(this.Patientlist_Load_1);
             ((System.ComponentModel.ISupportInitialize)(this.Patientlistdgv)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.communityClinicLLOMDBDataSetBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.communityClinicLLOMDBDataSet)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -89,8 +71,6 @@
         #endregion
 
         private System.Windows.Forms.DataGridView Patientlistdgv;
-        private System.Windows.Forms.BindingSource communityClinicLLOMDBDataSetBindingSource;
-        private CommunityClinicLLOMDBDataSet communityClinicLLOMDBDataSet;
         private System.Windows.Forms.Button button1;
     }
 }
