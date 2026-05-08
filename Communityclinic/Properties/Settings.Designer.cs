@@ -33,5 +33,16 @@ namespace CommunityClinic.Properties {
                 return ((string)(this["CommunityClinicLLOMDBConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=TEEN-HUB-LAP-03\\SQLEXPRESS;Initial Catalog=CommunityClinicLLOMDB;Inte" +
+            "grated Security=True;TrustServerCertificate=True")]
+        public string CommunityClinicLLOMDBConnectionString1 {
+            get {
+                return ((string)(this["CommunityClinicLLOMDBConnectionString1"]));
+            }
+        }
     }
 }

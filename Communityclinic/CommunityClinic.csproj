@@ -51,6 +51,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommunityClinicLLOMDBDataSet.cs">
+      <DependentUpon>CommunityClinicLLOMDBDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="CommunityClinicLLOMDBDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -61,7 +64,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CommunityClinicLLOMDBDataSet1.xsd</DependentUpon>
     </Compile>
-    <Compile Include="DatabaseHelper.cs" />
+    <Compile Include="Models\DatabaseHelper.cs" />
     <Compile Include="Data\AppointmentsDAL.cs" />
     <Compile Include="Data\InventoryDAL.cs" />
     <Compile Include="Data\MedicalHistoryDAL.cs" />

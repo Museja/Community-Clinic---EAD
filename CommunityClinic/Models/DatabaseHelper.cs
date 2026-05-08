@@ -10,10 +10,13 @@ namespace CommunityClinic
             try
             {
                 SqlConnection conn = new SqlConnection(
-                    "Data Source=23.95.235.16;Initial Catalog=CommunityClinicLLOMDB;User ID=vtdi_student;Password=P@ssword1;TrustServerCertificate=True"
+                    @"Data Source=TEEN-HUB-LAP-03\SQLEXPRESS;
+                      Initial Catalog=CommunityClinicLLOMDB;
+                      Integrated Security=True;
+                      TrustServerCertificate=True"
                 );
 
-                //conn.Open();
+                // conn.Open();
                 return conn;
             }
             catch (Exception ex)

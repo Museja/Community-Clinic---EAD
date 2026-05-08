@@ -9,8 +9,11 @@ namespace CommunityClinic
 {
         public class InventoryDAL
         {
-            private string connectionString =
-                "Data Source=23.95.235.16;Initial Catalog=CommunityClinicLLOMDB;User ID=vtdi_student;Password=P@ssword1;";
+        private string connectionString =
+     @"Data Source=TEEN-HUB-LAP-03\SQLEXPRESS;
+      Initial Catalog=CommunityClinicLLOMDB;
+      Integrated Security=True;
+      TrustServerCertificate=True;";
 
         // GET ALL ITEMS (FOR GRIDVIEW)
         //public DataTable GetItems()
