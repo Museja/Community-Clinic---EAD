@@ -1,17 +1,8 @@
-﻿using CommunityClinic;
+﻿using CommunityClinic.Data;
+using CommunityClinic.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Linq;
-using static CommunityClinic.Models.PatientModels;
 
 namespace CommunityClinic
 {
@@ -19,30 +10,27 @@ namespace CommunityClinic
     {
         private int patientId;
 
-        // CONSTRUCTOR (MAIN)
+        // DAL OBJECTS
+        private PatientDAL patientDAL = new PatientDAL();
+        private AppointmentsDAL appointmentDAL = new AppointmentsDAL();
+        private MedicalHistoryDAL historyDAL = new MedicalHistoryDAL();
+        private PrescriptionsDAL prescriptionDAL = new PrescriptionsDAL();
+
+        // CONSTRUCTOR WITH PATIENT ID
         public PatientPortalForm(int id)
         {
             InitializeComponent();
-
             patientId = id;
-
-            // Ensure Load event always runs
-            this.Load += PatientPortalForm_Load;
         }
 
-        //DEFAULT CONSTRUCTOR 
+        // DEFAULT CONSTRUCTOR
         public PatientPortalForm()
         {
             InitializeComponent();
-
             patientId = -1;
-
-            this.Load += PatientPortalForm_Load;
         }
 
-
         // FORM LOAD
-
         private void PatientPortalForm_Load(object sender, EventArgs e)
         {
             if (patientId > 0)
@@ -54,134 +42,174 @@ namespace CommunityClinic
         // LOAD PROFILE
         private void LoadPatientProfile()
         {
-            using (SqlConnection conn = DatabaseHelper.GetConnection())
+            try
             {
-                string query = @"SELECT FullName, Phone, Email, Address, DOB 
-                                 FROM Patients 
-                                 WHERE Id = @Id";
+                Patient patient =
+                    patientDAL.GetPatientById(patientId);
 
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@Id", patientId);
-
-                conn.Open();
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                if (reader.Read())
+                if (patient != null)
                 {
-                    txtFullName.Text = reader["FullName"].ToString();
-                    txtPhone.Text = reader["Phone"].ToString();
-                    txtEmail.Text = reader["Email"].ToString();
-                    txtAddress.Text = reader["Address"].ToString();
-                    Convert.ToDateTime(reader["DOB"]);
+                    txtFullName.Text = patient.Name;
+                    txtPhone.Text = patient.PhoneNumber;
+                    txtEmail.Text = patient.EmailAddress;
+                    txtAddress.Text = patient.Address;
+                    dtDOB.Value = patient.DateOfBirth;
                 }
+                else
+                {
+                    MessageBox.Show("Patient not found.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Error loading profile: " + ex.Message);
             }
         }
 
         // UPDATE PROFILE
-
-
         private void btnUpdateProfile_Click(object sender, EventArgs e)
         {
-            using (SqlConnection conn = DatabaseHelper.GetConnection())
+            try
             {
-                string query = @"UPDATE Patients 
-                                 SET FullName=@FullName,
-                                     Phone=@Phone,
-                                     Email=@Email,
-                                     Address=@Address,
-                                     DOB=@DOB
-                                 WHERE Id=@Id";
+                Patient patient = new Patient
+                {
+                    PatientID = patientId,
+                    Name = txtFullName.Text.Trim(),
+                    PhoneNumber = txtPhone.Text.Trim(),
+                    EmailAddress = txtEmail.Text.Trim(),
+                    Address = txtAddress.Text.Trim(),
+                    DateOfBirth = dtDOB.Value
+                };
 
-                SqlCommand cmd = new SqlCommand(query, conn);
+                bool success =
+                    patientDAL.UpdatePatient(patient);
 
-                cmd.Parameters.AddWithValue("@FullName", txtFullName.Text);
-                cmd.Parameters.AddWithValue("@Phone", txtPhone.Text);
-                cmd.Parameters.AddWithValue("@Email", txtEmail.Text);
-                cmd.Parameters.AddWithValue("@Address", txtAddress.Text);
-                DateTime dob = dtDOB.Value;
-                cmd.Parameters.AddWithValue("@Id", patientId);
-
-                conn.Open();
-                cmd.ExecuteNonQuery();
-
-                MessageBox.Show("Profile updated successfully!");
+                if (success)
+                {
+                    MessageBox.Show(
+                        "Profile updated successfully!");
+                }
+                else
+                {
+                    MessageBox.Show("Update failed.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Error updating profile: " + ex.Message);
             }
         }
 
-        // APPOINTMENTS TAB
-        private void btnRefreshAppointments_Click(object sender, EventArgs e)
+        // LOAD APPOINTMENTS
+        private void btnRefreshAppointments_Click(
+            object sender,
+            EventArgs e)
         {
-            using (SqlConnection conn = DatabaseHelper.GetConnection())
+            try
             {
-                string query = "SELECT * FROM Appointments WHERE PatientId=@Id";
+                DataTable dt =
+                    appointmentDAL.GetAppointmentsByPatient(patientId);
 
-                SqlDataAdapter da = new SqlDataAdapter(query, conn);
-                da.SelectCommand.Parameters.AddWithValue("@Id", patientId);
-
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-
-              dgvappointments1.DataSource = dt;
+                dgvappointments1.DataSource = dt;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Error loading appointments: " + ex.Message);
             }
         }
 
-        private void btnBookAppointment_Click(object sender, EventArgs e)
+        // BOOK APPOINTMENT
+        private void btnBookAppointment_Click(
+            object sender,
+            EventArgs e)
         {
-            MessageBox.Show("Booking feature will be implemented here.");
+            MessageBox.Show(
+                "Booking feature coming soon.");
         }
 
-        // MEDICAL HISTORY TAB
-        private void btnLoadHistory_Click(object sender, EventArgs e)
+        // LOAD HISTORY
+        private void btnLoadHistory_Click(
+            object sender,
+            EventArgs e)
         {
-            using (SqlConnection conn = DatabaseHelper.GetConnection())
+            try
             {
-                string query = "SELECT * FROM MedicalHistory WHERE PatientId=@Id";
+                DataTable dt =
+                    historyDAL.GetHistoryByPatient(patientId);
 
-                SqlDataAdapter da = new SqlDataAdapter(query, conn);
-                da.SelectCommand.Parameters.AddWithValue("@Id", patientId);
-
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-
-               dgvHistory1.DataSource = dt;
+                dgvHistory1.DataSource = dt;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Error loading history: " + ex.Message);
             }
         }
 
-        // PRESCRIPTIONS TAB
-        private void btnLoadPrescriptions_Click(object sender, EventArgs e)
+        // LOAD PRESCRIPTIONS
+        private void btnLoadPrescriptions_Click(
+            object sender,
+            EventArgs e)
         {
-            using (SqlConnection conn = DatabaseHelper.GetConnection())
+            try
             {
-                string query = "SELECT * FROM Prescriptions WHERE PatientId=@Id";
+                DataTable dt =
+                    prescriptionDAL.GetPrescriptionsByPatient(patientId);
 
-                SqlDataAdapter da = new SqlDataAdapter(query, conn);
-                da.SelectCommand.Parameters.AddWithValue("@Id", patientId);
-
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-
-               dgvPrescriptions1.DataSource = dt;
+                dgvPrescriptions1.DataSource = dt;
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Error loading prescriptions: " + ex.Message);
+            }
+        }
+
+        // LOAD PROFILE BUTTON
+        private void btnLoadProfile_Click(
+            object sender,
+            EventArgs e)
+        {
+            LoadPatientProfile();
         }
 
         // LOGOUT
-        private void Logout_Click(object sender, EventArgs e)
+        private void Logout_Click(
+            object sender,
+            EventArgs e)
         {
-          LogoutForm form = new LogoutForm();
+            LogoutForm form = new LogoutForm();
             form.Show();
+
             this.Close();
         }
 
-        private void btnLoadProfile_Click(object sender, EventArgs e)
+        // BACK
+        private void button1_Click(
+            object sender,
+            EventArgs e)
         {
+            //MainFormMDI form = new MainFormMDI();
+            //form.Show();
 
+            //this.Close();
         }
-        //BACK BUTTON
-        private void button1_Click(object sender, EventArgs e)
+
+        private void button3_Click(object sender, EventArgs e)
         {
-            MainFormMDI login = new MainFormMDI();
-            login.Show();
-            this.Close();
+            DialogResult result = MessageBox.Show(
+           "Are you sure you want to exit the application?",
+           "Exit Application",
+            MessageBoxButtons.YesNo,
+            MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
         }
     }
 }

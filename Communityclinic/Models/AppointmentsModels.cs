@@ -4,12 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Communityclinic.Models
+namespace CommunityClinic.Models
 {
-    internal class AppointmentsModels
+    public class AppointmentsModels
     {
-            public int Id { get; set; }
-            public DateTime Date { get; set; }
-        
+        public int Id { get; set; }
+
+        public int PatientId { get; set; }
+
+        public DateTime AppointmentDate { get; set; }
+
+        public string Reason { get; set; }
+
+        public string Status { get; set; }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CommunityClinic.Models
 {
-    internal class Inventoryitems
+    public class Inventoryitems
     {
         public int Id { get; set; }
         public string Item { get; set; }

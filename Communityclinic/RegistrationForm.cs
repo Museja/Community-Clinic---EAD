@@ -1,15 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Data.SqlClient;
 using System.Security.Cryptography;
-using System.Net.Mail;
+using System.Text;
+using System.Windows.Forms;
+using CommunityClinic.Models;
 
 namespace CommunityClinic
 {
@@ -19,6 +13,8 @@ namespace CommunityClinic
         {
             InitializeComponent();
         }
+
+        // HASH PASSWORD
         private string HashPassword(string password)
         {
             using (SHA256 sha = SHA256.Create())
@@ -27,41 +23,33 @@ namespace CommunityClinic
                 return Convert.ToBase64String(bytes);
             }
         }
+
+        // REGISTER BUTTON
         private void btnRegister_Click(object sender, EventArgs e)
         {
-            // trims input
             string fullName = txtFullname.Text.Trim();
             string email = txtEmail.Text.Trim();
             string password = txtPassword.Text;
             string confirmPassword = txtConfirmpassword.Text;
-            string adminId = txtAdminId.Text.Trim(); // new field
+            string adminId = txtAdminId.Text.Trim();
 
-            // Determines role
             string role = "";
+
             if (radioPatient.Checked)
                 role = "Patient";
             else if (radioAdmin.Checked)
                 role = "Admin";
+            else if (radioMedicalstaff.Checked)
+                role = "Medical Staff";
 
-            // Validation
             List<string> errors = new List<string>();
 
+            // VALIDATION
             if (string.IsNullOrWhiteSpace(fullName))
                 errors.Add("Full Name is required");
 
             if (string.IsNullOrWhiteSpace(email))
                 errors.Add("Email is required");
-            else
-            {
-                try
-                {
-                    var addr = new System.Net.Mail.MailAddress(email);
-                }
-                catch
-                {
-                    errors.Add("Enter a valid email address");
-                }
-            }
 
             if (string.IsNullOrWhiteSpace(password))
                 errors.Add("Password is required");
@@ -71,17 +59,14 @@ namespace CommunityClinic
             if (password != confirmPassword)
                 errors.Add("Passwords do not match");
 
-            // Role validation
             if (string.IsNullOrEmpty(role))
-                errors.Add("Please select Patient or Admin");
+                errors.Add("Please select a role");
 
-            // Admin specific validation
             if (role == "Admin")
             {
                 if (string.IsNullOrWhiteSpace(adminId))
                     errors.Add("Admin ID is required");
 
-                // Example check (replace with real DB validation)
                 if (adminId != "12345")
                     errors.Add("Invalid Admin ID");
             }
@@ -92,121 +77,60 @@ namespace CommunityClinic
                 return;
             }
 
-            // Hash password
-            string passwordHash = HashPassword(password);
-
-            if (passwordHash != null)
+            try
             {
-                string connectionString = "Data Source=23.95.235.16;Initial Catalog=CommunityClinicLLOMDB;User ID=vtdi_student;Password=P@ssword1;";
-                string query = "INSERT INTO Users (FullName, Email, PasswordHash, Role, AdminID) VALUES (@FullName, @Email, @PasswordHash, @Role, @AdminID)";
+                string passwordHash = HashPassword(password);
 
-                try
+                // FIXED DAL USAGE
+                RegistrationDAL dal = new RegistrationDAL();
+
+                UserRegistration user = new UserRegistration
                 {
-                    using (SqlConnection conn = new SqlConnection(connectionString))
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
-                    {
-                        cmd.Parameters.AddWithValue("@FullName", fullName);
-                        cmd.Parameters.AddWithValue("@Email", email);
-                        cmd.Parameters.AddWithValue("@PasswordHash", passwordHash);
-                        cmd.Parameters.AddWithValue("@Role", role);
+                    FullName = fullName,
+                    EmailAddress = email,
+                    Password = passwordHash,
+                    Role = role,
+                    AdminID = role == "Admin" ? adminId : null
+                };
 
-                        if (role == "Admin")
-                            cmd.Parameters.AddWithValue("@AdminID", adminId);
-                        else
-                            cmd.Parameters.AddWithValue("@AdminID", DBNull.Value);
+                bool success = dal.InsertUser(user);
 
-                        conn.Open();
-                        int rows = cmd.ExecuteNonQuery();
+                if (success)
+                {
+                    //Form nextForm = (role == "Patient")
+                    //    ? new SuccessForm()
+                    //    : new MainFormMDI();
+                    //nextForm.Show();
+                    //this.Hide();
 
-                        if (rows > 0)
-                        {
-                            // ✅ ROLE-BASED NAVIGATION FIX
-                            Form nextForm;
-
-                            if (role == "Patient")
-                            {
-                                nextForm = new SuccessForm();
-                            }
-                            else // Admin
-                            {
-                                nextForm = new MainFormMDI();
-                            }
-
-                            nextForm.Show();
-                            this.Hide();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Error saving registration.");
-                        }
-                    }
+                    SuccessForm f = new SuccessForm();
+                    f.Show();
+                    this.Hide();
+                    
                 }
-                catch (SqlException ex)
+                else
                 {
-                    MessageBox.Show("SQL Error: " + ex.Message);
+                    MessageBox.Show("Error saving registration.");
                 }
             }
-
-        }
-        
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-            lblAdminId.Visible = false;
-        }
-
-        private void AdminID_TextChanged(object sender, EventArgs e)
-        {
-            txtAdminId.Visible = false;
-        }
-
-        private void radioPatient_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void radioAdmin_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radioAdmin.Checked)
+            catch (Exception ex)
             {
-                lblAdminId.Visible = true;
-                txtAdminId.Visible = true;
-            }
-            else
-            {
-                lblAdminId.Visible = false;
-                txtAdminId.Visible = false;
-                txtAdminId.Clear();
+                MessageBox.Show("Unexpected error: " + ex.Message);
             }
         }
 
-        private void lblMedStaff_Click(object sender, EventArgs e)
+        // EXIT
+        private void button1_Click(object sender, EventArgs e)
         {
-            lblMedStaff.Visible = false;
+            DialogResult result = MessageBox.Show(
+                "Are you sure you want to exit?",
+                "Exit Application",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
 
-        }
-
-        private void txtMedStaff_TextChanged(object sender, EventArgs e)
-        {
-            txtMedStaff.Visible = false;
-        }
-
-        private void radioMedicalstaff_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radioMedicalstaff.Checked)
+            if (result == DialogResult.Yes)
             {
-                lblMedStaff.Visible = true;
-                txtAdminId.Visible = true;
-            }
-            else
-            {
-                lblMedStaff.Visible = false;
-                txtMedStaff.Visible = false;
-                txtMedStaff.Clear();
+                Application.Exit();
             }
         }
     }

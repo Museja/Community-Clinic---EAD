@@ -58,6 +58,7 @@
             this.txtNotes = new System.Windows.Forms.TextBox();
             this.txtItem = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.Exit = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -68,7 +69,6 @@
             this.label1.Size = new System.Drawing.Size(27, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Item";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -114,7 +114,6 @@
             this.label6.Size = new System.Drawing.Size(49, 13);
             this.label6.TabIndex = 5;
             this.label6.Text = "Category";
-            this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // label7
             // 
@@ -142,7 +141,6 @@
             this.label9.Size = new System.Drawing.Size(70, 13);
             this.label9.TabIndex = 8;
             this.label9.Text = "Manufacturer";
-            this.label9.Click += new System.EventHandler(this.label9_Click);
             // 
             // label10
             // 
@@ -189,6 +187,7 @@
             this.Save.TabIndex = 13;
             this.Save.Text = "Save";
             this.Save.UseVisualStyleBackColor = false;
+            this.Save.Click += new System.EventHandler(this.Save_Click);
             // 
             // Clear
             // 
@@ -199,6 +198,7 @@
             this.Clear.TabIndex = 14;
             this.Clear.Text = "Clear";
             this.Clear.UseVisualStyleBackColor = false;
+            this.Clear.Click += new System.EventHandler(this.Clear_Click);
             // 
             // Update
             // 
@@ -209,6 +209,7 @@
             this.Update.TabIndex = 15;
             this.Update.Text = "Update";
             this.Update.UseVisualStyleBackColor = false;
+            this.Update.Click += new System.EventHandler(this.Update_Click);
             // 
             // txtDateAdded
             // 
@@ -313,12 +314,24 @@
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // Exit
+            // 
+            this.Exit.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.Exit.Location = new System.Drawing.Point(713, 3);
+            this.Exit.Name = "Exit";
+            this.Exit.Size = new System.Drawing.Size(75, 23);
+            this.Exit.TabIndex = 30;
+            this.Exit.Text = "Exit";
+            this.Exit.UseVisualStyleBackColor = false;
+            this.Exit.Click += new System.EventHandler(this.Exit_Click);
+            // 
             // InventoryItemForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.Exit);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.txtItem);
             this.Controls.Add(this.txtNotes);
@@ -388,5 +401,6 @@
         private System.Windows.Forms.TextBox txtNotes;
         private System.Windows.Forms.TextBox txtItem;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button Exit;
     }
 }

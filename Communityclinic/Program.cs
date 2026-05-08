@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Communityclinic
+namespace CommunityClinic
 {
     internal static class Program
     {
@@ -16,7 +16,7 @@ namespace Communityclinic
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new InventoryItemForm()); // open the input form directly        }
+            Application.Run(new PatientdataForm()); // open the input form directly  
         }
     }
 }

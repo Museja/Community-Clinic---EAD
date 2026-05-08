@@ -12,7 +12,7 @@ namespace CommunityClinic
         {
             using (SqlConnection conn = DatabaseHelper.GetConnection())
             {
-                string query = @"INSERT INTO Users
+                string query = @"INSERT INTO Registration
                 (FullName, EmailAddress, Password, Role, AdminID)
                 VALUES
                 (@FullName, @EmailAddress, @Password, @Role, @AdminID)";
@@ -31,8 +31,12 @@ namespace CommunityClinic
                     cmd.Parameters.AddWithValue("@AdminID", user.AdminID);
 
                 conn.Open();
-                return cmd.ExecuteNonQuery() > 0;
+                //return cmd.ExecuteNonQuery() > 0;
+                cmd.ExecuteNonQuery();
+                
             }
+
+            return true;
         }
 
         // Get all users
@@ -40,7 +44,7 @@ namespace CommunityClinic
         {
             using (SqlConnection conn = DatabaseHelper.GetConnection())
             {
-                string query = "SELECT * FROM Users";
+                string query = "SELECT * FROM Registration";
                 SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
 
                 DataTable dt = new DataTable();
@@ -55,7 +59,7 @@ namespace CommunityClinic
         {
             using (SqlConnection conn = DatabaseHelper.GetConnection())
             {
-                string query = @"UPDATE Users SET
+                string query = @"UPDATE Registration SET
                     FullName=@FullName,
                     EmailAddress=@EmailAddress,
                     Password=@Password,
@@ -79,6 +83,7 @@ namespace CommunityClinic
 
                 conn.Open();
                 cmd.ExecuteNonQuery();
+             
             }
         }
 
@@ -87,7 +92,7 @@ namespace CommunityClinic
         {
             using (SqlConnection conn = DatabaseHelper.GetConnection())
             {
-                string query = "DELETE FROM Users WHERE Id=@Id";
+                string query = "DELETE FROM Registration WHERE Id=@Id";
 
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@Id", id);
@@ -101,7 +106,7 @@ namespace CommunityClinic
         {
             using (SqlConnection conn = DatabaseHelper.GetConnection())
             {
-                string query = "SELECT COUNT(*) FROM Users WHERE EmailAddress=@Email";
+                string query = "SELECT COUNT(*) FROM Registration WHERE EmailAddress=@Email";
 
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@Email", email);
