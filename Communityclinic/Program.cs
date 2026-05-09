@@ -16,7 +16,7 @@ namespace CommunityClinic
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new RegistrationForm()); // open the input form directly  
+            Application.Run(new Patientlist()); // open the input form directly  
         }
     }
 }

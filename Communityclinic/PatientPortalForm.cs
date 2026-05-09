@@ -211,5 +211,10 @@ namespace CommunityClinic
                 Application.Exit();
             }
         }
+
+        private void txtFullName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

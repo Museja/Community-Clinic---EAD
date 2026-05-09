@@ -133,6 +133,7 @@
             this.txtFullName.Name = "txtFullName";
             this.txtFullName.Size = new System.Drawing.Size(250, 20);
             this.txtFullName.TabIndex = 5;
+            this.txtFullName.TextChanged += new System.EventHandler(this.txtFullName_TextChanged);
             // 
             // txtPhone
             // 
@@ -315,6 +316,7 @@
             // 
             // PatientPortalForm
             // 
+            this.BackgroundImage = global::CommunityClinic.Properties.Resources.image0;
             this.ClientSize = new System.Drawing.Size(1000, 600);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.tabControl1);

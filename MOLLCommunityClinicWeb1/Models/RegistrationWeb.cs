@@ -5,16 +5,16 @@ using System.Web;
 
 namespace MOLLCommunityClinicWeb1.Models
 {
-    public class User
+    public class RegistrationWeb
     {
-        public int Id { get; set; }
+        public int PatientID { get; set; }
 
         public string FullName { get; set; }
 
-        public string Email { get; set; }
+        public string EmailAddress { get; set; }
 
         // Store hashed password (NEVER plain text)
-        public string PasswordHash { get; set; }
+        public string Password { get; set; }
 
         public string Role { get; set; }
 
@@ -23,6 +23,5 @@ namespace MOLLCommunityClinicWeb1.Models
 
         public string MedStaffID { get; set; }
 
-        public DateTime DateCreated { get; set; }
     }
 }

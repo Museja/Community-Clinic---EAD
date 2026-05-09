@@ -8,26 +8,26 @@ using MOLLCommunityClinicWeb1.Models;
 
 namespace MOLLCommunityClinicWeb1.Services
 {
-    public class Userservice
+    public class RegistrationService
     {
         private readonly string connectionString =
             ConfigurationManager.ConnectionStrings["CommunityClinicLLOMDB"].ConnectionString;
 
         // CREATE / REGISTER USER
-        public void RegisterUser(User user)
+        public void RegisterUser(RegistrationWeb user)
         {
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 string query = @"INSERT INTO Users
-                (FullName, Email, PasswordHash, Role, AdminID, MedStaffID)
+                (FullName, EmailAddress, Password, Role, AdminID, MedStaffID)
                 VALUES
-                (@FullName, @Email, @PasswordHash, @Role, @AdminID, @MedStaffID)";
+                (@FullName, @EmailAddress, @Password, @Role, @AdminID, @MedStaffID)";
 
                 SqlCommand cmd = new SqlCommand(query, conn);
 
                 cmd.Parameters.AddWithValue("@FullName", user.FullName);
-                cmd.Parameters.AddWithValue("@Email", user.Email);
-                cmd.Parameters.AddWithValue("@PasswordHash", user.PasswordHash);
+                cmd.Parameters.AddWithValue("@EmailAddress", user.EmailAddress);
+                cmd.Parameters.AddWithValue("@Password", user.Password);
                 cmd.Parameters.AddWithValue("@Role", user.Role);
 
                 cmd.Parameters.AddWithValue("@AdminID",
@@ -42,11 +42,11 @@ namespace MOLLCommunityClinicWeb1.Services
         }
 
         // GET USER BY EMAIL (for login later)
-        public User GetUserByEmail(string email)
+        public RegistrationWeb GetUserByEmail(string email)
         {
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                string query = "SELECT * FROM Users WHERE Email = @Email";
+                string query = "SELECT * FROM Users WHERE EmailAddress = @Email";
 
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@Email", email);
@@ -56,12 +56,12 @@ namespace MOLLCommunityClinicWeb1.Services
 
                 if (reader.Read())
                 {
-                    return new User
+                    return new RegistrationWeb
                     {
-                        Id = Convert.ToInt32(reader["Id"]),
+                        PatientID = Convert.ToInt32(reader["PatientID"]),
                         FullName = reader["FullName"].ToString(),
-                        Email = reader["Email"].ToString(),
-                        PasswordHash = reader["PasswordHash"].ToString(),
+                        EmailAddress = reader["EmailAddress"].ToString(),
+                        Password = reader["Password"].ToString(),
                         Role = reader["Role"].ToString(),
                         AdminID = reader["AdminID"].ToString(),
                         MedStaffID = reader["MedStaffID"].ToString()

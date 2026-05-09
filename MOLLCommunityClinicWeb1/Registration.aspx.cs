@@ -8,7 +8,7 @@ namespace MOLLCommunityClinicWeb1
 {
     public partial class Registration : System.Web.UI.Page
     {
-        private Userservice userService = new Userservice();
+        private RegistrationService userService = new RegistrationService();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -39,19 +39,21 @@ namespace MOLLCommunityClinicWeb1
             }
 
             // Build User model
-            User user = new User
+            RegistrationWeb user = new RegistrationWeb
             {
                 FullName = txtFullname.Text,
-                Email = txtEmail.Text,
-                PasswordHash = HashPassword(txtPassword.Text),
+                EmailAddress = txtEmail.Text,
+                Password = HashPassword(txtPassword.Text),
                 Role = role,
                 AdminID = role == "Admin" ? txtAdminId.Text : null,
                 MedStaffID = role == "Medical Staff" ? txtMedStaff.Text : null
             };
 
             //  Call SERVICE LAYER 
-            userService.RegisterUser(user);
+            RegistrationService service = new RegistrationService();
 
+            // CALL METHOD HERE
+            service.RegisterUser(user);
 
             // REDIRECT TO SUCCESS PAGE
             Response.Redirect("~/Success.aspx");
